@@ -5,12 +5,18 @@ import { ChevronRight, Search, Target, Code } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react"
 import NumberFlow from '@number-flow/react'
+import { useInView } from 'react-intersection-observer';
+import CountUp from 'react-countup';
 
 interface ProcedureStep {
   id: string
   title: string
   description: string
   icon: React.ReactNode
+}
+
+interface LazyNumberFlowProps {
+  targetValue: number;
 }
 
 const steps: ProcedureStep[] = [
@@ -37,6 +43,17 @@ const steps: ProcedureStep[] = [
   },
 ]
 
+function LazyNumberFlow({ targetValue }: LazyNumberFlowProps) {
+  const { ref, inView } = useInView({ triggerOnce: true });
+  const valueToRender = inView ? targetValue : 0;
+
+  return (
+    <span ref={ref} className="hero-title-h2 font-bold text-white">
+      + <CountUp start={0} end={valueToRender} duration={4} /> 
+    </span>
+  );
+}
+
 export default function Home() {
 
   {/* Services Boxes */}
@@ -55,6 +72,8 @@ export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0)
   const sectionRef = useRef<HTMLDivElement>(null)
   const stepRefs = useRef<(HTMLDivElement | null)[]>([])
+
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -294,7 +313,7 @@ export default function Home() {
         <div className="flex items-center w-full flex-row max-w-[1440px]">
             <div className="w-[45%] flex flex-col justify-center items-center py-20 md:py-30 Riosark">
               <div className="flex flex-col items-center">
-                <h2 className="hero-title-h2 font-bold text-white">+<NumberFlow value={45} /></h2>
+                <h2 className="hero-title-h2 font-bold text-white"><LazyNumberFlow targetValue={45} /></h2>
                 <p className="text-gray-300 max-w-[544px] text-center md:text-left">
                   Active programers
                 </p>
@@ -303,7 +322,7 @@ export default function Home() {
             <div className="w-[55%] flex flex-row justify-center items-center border-l-1 border-[var(--secondary-border-color)] Riosark">
               <div className="w-full flex flex-row">
                 <div className="w-[75%] flex flex-col items-center py-20 md:py-30">
-                  <h2 className="hero-title-h2 font-bold text-white">+<NumberFlow value={120} /></h2>
+                  <h2 className="hero-title-h2 font-bold text-white"><LazyNumberFlow targetValue={120} /></h2>
                   <p className="text-gray-300 max-w-[544px] text-center md:text-left">
                     Completed projects
                   </p>
@@ -324,7 +343,7 @@ export default function Home() {
               <div className="w-full flex flex-row">
                 <div className=" w-[25%] diagonal-pattern-box"></div>
                 <div className="w-[75%] flex flex-col items-center py-20 md:py-30">
-                  <h2 className="hero-title-h2 font-bold text-white">+<NumberFlow value={95} /></h2>
+                  <h2 className="hero-title-h2 font-bold text-white"><LazyNumberFlow targetValue={95} /></h2>
                   <p className="text-gray-300 max-w-[544px] text-center md:text-left">
                     Satisfied customers
                   </p>
@@ -333,7 +352,7 @@ export default function Home() {
             </div>
             <div className="w-[45%] flex flex-col justify-center items-center py-20 md:py-30 Riosark">
               <div className="flex flex-col items-center">
-                <h2 className="hero-title-h2 font-bold text-white">+<NumberFlow value={83} /></h2>
+                <h2 className="hero-title-h2 font-bold text-white"><LazyNumberFlow targetValue={83} /></h2>
                 <p className="text-gray-300 max-w-[544px] text-center md:text-left">
                   Solutions implemented
                 </p>
