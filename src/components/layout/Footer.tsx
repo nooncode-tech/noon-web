@@ -7,9 +7,9 @@ import { FaXTwitter } from "react-icons/fa6"
 
 const Footer: React.FC = () => {
   return (
-    <footer className="text-gray-300 py-12 border-t border-gray-700">
+    <footer className="text-gray-300 py-12 border-t border-[var(--secondary-border-color)]">
       <div className="max-w-[1440px] mx-auto px-8 md:px-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-5 border-b border-gray-700 pb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-5 border-b border-[var(--secondary-border-color)] pb-8">
             
           {/* Column 1: Logo and description*/}
           <div className="flex flex-col justify-center space-y-4 sm:col-span-2 lg:col-span-1">
@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Column 2: Accesses */}
-          <div className="px-0 sm:px-6 lg:px-12 pt-4 pb-1 lg:col-span-1 sm:border-l-0 lg:border-l lg:border-gray-600">
+          <div className="px-0 sm:px-6 lg:px-12 pt-4 pb-1 lg:col-span-1 sm:border-l-0 lg:border-l lg:border-[var(--secondary-border-color)]">
             <h3 className="text-lg font-semibold text-white mb-4 Riosark">Accesses</h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Column 3: Legal */}
-          <div className="px-0 sm:px-6 lg:px-12 pt-4 pb-1 lg:col-span-1 sm:border-l-0 lg:border-l lg:border-gray-600">
+          <div className="px-0 sm:px-6 lg:px-12 pt-4 pb-1 lg:col-span-1 sm:border-l-0 lg:border-l lg:border-[var(--secondary-border-color)]">
             <h3 className="text-lg font-semibold text-white mb-4 Riosark">Legal</h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -108,7 +108,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Column 4: Phone and email */}
-          <div className="flex flex-col justify-center lg:col-span-1 px-0 sm:px-6 lg:pl-6 gap-4 sm:border-l-0 lg:border-l lg:border-gray-600">
+          <div className="flex flex-col justify-center lg:col-span-1 px-0 sm:px-6 lg:pl-6 gap-4 sm:border-l-0 lg:border-l lg:border-[var(--secondary-border-color)]">
             <div className="flex items-center space-x-3">
               <Link
                 href="tel:+0001238426000"
@@ -130,7 +130,7 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Column 5: Social media */}
-          <div className="flex flex-col justify-center lg:col-span-1 px-0 sm:px-6 sm:border-l-0 lg:border-l lg:border-gray-600">
+          <div className="flex flex-col justify-center lg:col-span-1 px-0 sm:px-6 sm:border-l-0 lg:border-l lg:border-[var(--secondary-border-color)]">
             <div className="flex space-x-6 justify-start lg:justify-end">
               <Link
                 href="#"

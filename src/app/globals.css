@@ -38,12 +38,16 @@
   --sidebar-ring: oklch(0.708 0 0);
   --principal-title-color: #FFF;
   --principal-border-button: #3B2EB9;
+  --secondary-border-color: #4D4B7B;
   --principal-button-color: #3B2EB9;
   --principal-background-color: #0F0E2B;
   --footer-border-gradient: linear-gradient(to bottom, #364153, rgba(0, 0, 0, 0)) 1;
   --footer-color-text: #848484;
   --elipse-color-start: #FFFFFF;
   --elipse-color-end: rgba(255, 255, 255, 0);
+  --background-gradient-secondary: linear-gradient(to top, rgba(15, 14, 43, 0.70) 5.56%, rgba(34, 33, 63, 0.70) 72.12%);
+  --background-gradient-circular: radial-gradient(circle at 35%, #272656 0%, #080719 100%);
+  --secondary-border-box: #4D4B7B;
 }
 
 @theme inline {
@@ -107,7 +111,6 @@ body {
 h1 {
   color: var(--principal-title-color);
   text-align: center;
-  font-size: 72px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -142,21 +145,115 @@ h1 {
   transform: scale(1.05);
 }
 
-.elipse-hero {
+.hero-title-h1 {
+  font-size: 72px;
+}
+
+.hero-title-h2 {
+  font-size: 60px;
+}
+
+
+.boxes-services-style {
+  position: relative;
+  background: var(--background-gradient-secondary);
+}
+
+.boxes-services-style::before {
+  content: "";
   position: absolute;
-  width: 100%;
-  max-width: 1440px;
-  height: 400px;
-  top: 20px;
+  top: 0; left: 0; right: 0; bottom: 0;
+  padding: 1px; /* grosor del borde */
+  background: linear-gradient(to bottom, var(--secondary-border-box) 5.56%, #4D4B7B00 90.12%);
+  border-radius: calc(var(--radius) + 4px); /* si quieres bordes redondeados */
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
 
-  border-bottom: none;
-  border-left: none;
-  border-right: none;
+.profesor-style {
+  width: 508px;
+  max-width: 508px;
+  height: auto;
+}
 
-  border-top: 5px solid var(--elipse-color-start);
+.diagonal-pattern-box {  
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--principal-background-color),
+    var(--principal-background-color) 20px,
+    var(--secondary-border-color) 20px,
+    var(--secondary-border-color) 21px  
+  );
+  
+  border-left: 1px solid var(--secondary-border-color);
+  border-right: 1px solid var(--secondary-border-color);
+  
+  box-sizing: border-box;
+}
 
-  border-image: linear-gradient(to bottom, 0% var(--elipse-color-start), 50% var(--elipse-color-end)) border-box;
-  border-radius: 50%;
+.boxes-tecnologies-style {
+  position: relative;
+  background: var(--background-gradient-circular);
+  background-size: 150%;
+}
 
+.boxes-tecnologies-style::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  padding: 1px; /* grosor del borde */
+  background: linear-gradient(to bottom, var(--secondary-border-box) 5.56%, #4D4B7B00 90.12%);
+  border-radius: calc(var(--radius) + 4px); /* si quieres bordes redondeados */
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
 
+.tecnologies-img {
+  width: auto;
+  max-height: 50px;
+  height: 50px;
+}
+
+@media screen and (max-width: 1380px) {
+  .hero-title-h1 {
+    font-size: 56px;
+  }
+  .hero-title-h2 {
+  font-size: 40px;
+  }
+  .profesor-style {
+    width: 340px;
+    max-width: 340px;
+    height: 340px;
+  }
+  .tecnologies-img {
+  width: auto;
+  max-height: 35px;
+  height: 35px;
+}
+}
+
+@media screen and (max-width: 768px) {
+  .hero-title-h1 {
+    font-size: 36px;
+  }
+  .hero-title-h2 {
+    font-size: 30px;
+  }
+  .profesor-style {
+    width: 240px;
+    max-width: 240px;
+    height: 240px;
+  }
+  .tecnologies-img {
+  width: auto;
+  max-height: 20px;
+  height: 20px;
+}
 }
