@@ -10,7 +10,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 // Array de los items del menú
 const menuItems = [
     { label: "Home", path: "/" },
-    { label: "Services", path: "/service" },
+    { label: "Services", path: "/services" },
     { label: "About", path: "/about" },
     { label: "Contact", path: "/contact", className: "border rounded-4xl border-[var(--principal-border-button)] px-5 py-2" },
 ]

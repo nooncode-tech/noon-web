@@ -41,6 +41,7 @@
   --secondary-border-color: #4D4B7B;
   --principal-button-color: #3B2EB9;
   --principal-background-color: #0F0E2B;
+  --secondary-background-color: #2C2C31;
   --footer-border-gradient: linear-gradient(to bottom, #364153, rgba(0, 0, 0, 0)) 1;
   --footer-color-text: #848484;
   --elipse-color-start: #FFFFFF;
@@ -145,8 +146,29 @@ h1 {
   transform: scale(1.05);
 }
 
+.secondary-button {
+  background-color: var(--principal-title-color);
+  border-radius: 10px;
+  color: var(--principal-background-color);
+  font-family: 'Riosark', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  letter-spacing: 1.2px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.secondary-button:hover {
+  box-shadow: 0 0 10px #3b3b3bba;
+  transform: scale(1.05);
+}
+
 .hero-title-h1 {
-  font-size: 72px;
+  font-size: 60px;
 }
 
 .hero-title-h2 {
