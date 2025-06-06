@@ -212,6 +212,7 @@ export default function Home() {
                 width={508}
                 height={508}
                 className="profesor-style"
+                unoptimized
               />
             </div>
         </div>

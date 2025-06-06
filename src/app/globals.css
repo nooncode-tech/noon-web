@@ -242,6 +242,90 @@ h1 {
   height: 50px;
 }
 
+.background-about {
+  position: relative;
+  background-image: url('/about-hero.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  isolation: isolate;
+}
+
+/* 2. La capa de superposición (el pseudo-elemento) */
+.background-about::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  /* Aquí aplicamos el gradiente que actuará como filtro de color */
+  background: linear-gradient( 270deg, rgba(15, 14, 43, 1), rgba(15, 14, 43, 0.95));
+
+  /* Esto asegura que la superposición esté por encima del fondo del padre, pero por debajo de su contenido. */
+  z-index: -1; 
+}
+
+.swiper {
+  overflow: visible !important;
+}
+
+@media  screen and (max-width: 768px) {
+  .swiper {
+    overflow: hidden !important;
+  } 
+}
+
+/* Estilos para el contenedor principal del Swiper */
+.team-slider-swiper .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 12px; /* Simula el `gap-6` (24px de gap total, 12px por lado) */
+}
+
+/* Estilos para la tarjeta de cada miembro */
+.team-slider-swiper .swiper-slide .team-member-card {
+    transition: transform 0.3s ease-in-out;
+    transform: translateY(0);
+    height: 100%; /* Asegura que las tarjetas ocupen toda la altura del slide */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Estilo para el slide central elevado (solo en pantallas grandes) */
+@media (min-width: 1024px) { /* Corresponde al breakpoint `lg` de Tailwind */
+    .team-slider-swiper .swiper-slide-active .team-member-card {
+        transform: translateY(-2rem); /* Equivalente a -translate-y-8 (32px) */
+    }
+}
+
+/* Limpieza de los iconos por defecto de Swiper (¡Importante!) */
+/* Asegura que los iconos de Swiper no se muestren encima de tus iconos de Lucide */
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    content: '';
+    display: none;
+}
+
+/* Estilos de paginación (dots) */
+.team-slider-swiper .swiper-pagination-bullet {
+    background: #6b7280; /* bg-gray-600 */
+    opacity: 1; /* Asegurar visibilidad */
+    width: 8px; /* h-2 w-2 */
+    height: 8px; /* h-2 w-2 */
+    margin: 0 4px; /* mx-1 */
+    transition: all 0.3s ease-in-out;
+}
+
+.team-slider-swiper .swiper-pagination-bullet-active {
+    background: white; /* bg-white */
+    width: 24px; /* w-6 */
+    border-radius: 9999px; /* rounded-full */
+}
+
 @media screen and (max-width: 1380px) {
   .hero-title-h1 {
     font-size: 56px;

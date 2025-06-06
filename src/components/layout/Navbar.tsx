@@ -19,8 +19,8 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
 
     return (
-        <div className="flex align-center absolute top-0 z-50 w-full">
-            <nav className="max-w-[1440px] mx-auto py-4 px-8 md:py-8 md:px-16 flex justify-between items-center w-full">
+        <div className="flex align-center justify-center absolute top-0 z-50 w-full px-8 md:px-16 ">
+            <nav className="max-w-[1440px]  py-4 md:py-8 flex justify-between items-center w-full">
                 {/* Logo */}
                 <div>
                     <Link href="/" className="block">
