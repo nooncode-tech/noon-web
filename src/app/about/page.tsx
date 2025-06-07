@@ -3,6 +3,8 @@
 import React from "react";
 import Image from "next/image";
 import TeamSlider from "../../components/layout/SliderTeams"
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
 export default function About() {
 
@@ -10,7 +12,7 @@ export default function About() {
         <main className="min-h-screen text-white">
 
             {/* Hero Section */}
-            <section className="h-auto md:h-screen w-full flex flex-col md:flex-row items-center md:items-center justify-end md:justify-center pt-40 md:pt-0 px-6 md:px-16 background-about relative overflow-hidden gap-8">
+            <section className="h-auto md:h-screen w-full flex flex-col md:flex-row items-center md:items-center justify-end md:justify-center pt-40 md:pt-0 px-6 md:px-16 background-about relative overflow-hidden gap-8 border-b border-[var(--secondary-border-color)]">
 
                 <div className="w-full md:w-[50%] flex flex-col items-center md:items-end justify-center relative text-center md:text-right px-4 md:px-0">
                     <h1 className="hero-title-h1 font-bold Riosark text-white max-w-[900px]">
@@ -39,44 +41,34 @@ export default function About() {
                 </div>
             </section>
 
-            {/* Mision Vision */}
-            <section className="w-full flex justify-center items-center flex-col px-8 md:px-16 mt-20">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1440px] w-[70%] mt-10">
-                
-                    <div className="flex flex-col justify-center items-center py-10 md:py-20 rounded-xl boxes-services-style">
-                        <div className="flex flex-col items-center text-center px-12">
-                        <h2 className="hero-title-h2 font-bold text-white Riosark">
-                            Mision
-                        </h2>
-                        <p className="text-gray-300 max-w-[544px] text-center">
-                            Lorem ipsum dolor sit amet consectetur. Volutpat in risus sit vulputate penatibus. Urna nisi sollicitudin imperdiet vel commodo ultricies vitae velit varius. Non suspendisse consequat vulputate in.
+            {/* Work Team Section */}
+            <section className="relative pt-16 md:pt-20 overflow-hidden px-4 md:px-16">
+                <div className="max-w-7xl mx-auto px-4 md:px-12">
+                    {/* Section Title */}
+                    <div className="text-center">
+                        <h1 className="hero-title-h1 m-auto font-bold Riosark text-white max-w-[900px] text-center">
+                            Work team
+                        </h1>
+                        <p className="max-w-[600px] text-white text-center text-base mt-10 md:mt-20 m-auto">
+                            Lorem ipsum dolor sit amet consectetur. Leo scelerisque in non sit sem sit id neque. Blandit at vulputate vitae tincidunt. Commodo mauris egestas viverra enim diam natoque rhoncus adipiscing.
                         </p>
-                        </div>
+        
                     </div>
 
-                    <div className="flex flex-col justify-center items-center py-10 md:py-20 rounded-xl boxes-services-style">
-                        <div className="flex flex-col items-center text-center px-12">
-                        <h2 className="hero-title-h2 font-bold text-white Riosark">
-                            Vision
-                        </h2>
-                        <p className="text-gray-300 max-w-[544px] text-center">
-                            Lorem ipsum dolor sit amet consectetur. Volutpat in risus sit vulputate penatibus. Urna nisi sollicitudin imperdiet vel commodo ultricies vitae velit varius. Non suspendisse consequat vulputate in.
-                        </p>
-                        </div>
-                    </div>
+                    <TeamSlider />
 
                 </div>
             </section>
 
             {/* Work Methodology Section */}
-            <section className="relative py-16 md:py-20 overflow-hidden px-4 md:px-16">
+            <section className="relative  overflow-hidden px-4 md:px-16">
                 <div className="max-w-7xl mx-auto px-4 md:px-12">
                     {/* Section Title */}
                     <div className="text-center">
                     <h1 className="hero-title-h1 m-auto font-bold Riosark text-white max-w-[900px] text-center">
                         Work Methodology
                     </h1>
-                    <p className="max-w-[600px] text-white text-center text-base mt-6 md:mt-10 m-auto">
+                    <p className="max-w-[600px] text-white text-center text-base mt-6 md:mt-5 m-auto">
                         Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat
                         odio fringilla augue. Sed dolor tempor in magna urna. Rhoncus feugiat
                         turpis duis ultrices sit lacus magna euismod.
@@ -176,27 +168,37 @@ export default function About() {
                 </div>
             </section>
 
-            {/* Work Methodology Section */}
-            <section className="relative pt-16 md:pt-20 overflow-hidden px-4 md:px-16">
-                <div className="max-w-7xl mx-auto px-4 md:px-12">
-                    {/* Section Title */}
-                    <div className="text-center">
-                        <h1 className="hero-title-h1 m-auto font-bold Riosark text-white max-w-[900px] text-center">
-                            Work team
-                        </h1>
-                        <p className="max-w-[600px] text-white text-center text-base mt-10 md:mt-20 m-auto">
-                            Lorem ipsum dolor sit amet consectetur. Leo scelerisque in non sit sem sit id neque. Blandit at vulputate vitae tincidunt. Commodo mauris egestas viverra enim diam natoque rhoncus adipiscing.
+            {/* Mision Vision */}
+            <section className="w-full flex justify-center items-center flex-col px-8 md:px-16 mt-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1440px] w-[75%] mt-10">
+                
+                    <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl boxes-services-style">
+                        <div className="flex flex-col items-center text-center px-12">
+                        <h2 className="hero-title-h2 font-bold text-white Riosark">
+                            Mision
+                        </h2>
+                        <p className="text-gray-300 max-w-[544px] text-center">
+                            Lorem ipsum dolor sit amet consectetur. Volutpat in risus sit vulputate penatibus. Urna nisi sollicitudin imperdiet vel commodo ultricies vitae velit varius. Non suspendisse consequat vulputate in.
                         </p>
-        
+                        </div>
                     </div>
 
-                    <TeamSlider />
+                    <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl boxes-services-style">
+                        <div className="flex flex-col items-center text-center px-12">
+                        <h2 className="hero-title-h2 font-bold text-white Riosark">
+                            Vision
+                        </h2>
+                        <p className="text-gray-300 max-w-[544px] text-center">
+                            Lorem ipsum dolor sit amet consectetur. Volutpat in risus sit vulputate penatibus. Urna nisi sollicitudin imperdiet vel commodo ultricies vitae velit varius. Non suspendisse consequat vulputate in.
+                        </p>
+                        </div>
+                    </div>
 
                 </div>
             </section>
 
             {/* NOON Section */}
-            <section className="relative pb-16 md:pb-25 overflow-hidden px-4 md:px-16">
+            <section className="relative pb-16 md:pb-25 overflow-hidden px-4 md:px-16 mt-20">
                 <div className="max-w-7xl mx-auto px-4 md:px-12">
                     {/* Section Title */}
                     <div className="text-center flex flex-col items-center">
@@ -214,6 +216,30 @@ export default function About() {
                             We are people who create technology with purpose. That’s why behind every solution there is a team that listens,
                             analyzes, and supports. More than just developing software, we help our clients move forward with confidence, clarity, and results.
                         </p>
+                    </div>
+                </div>
+            </section>
+
+            {/* NOON Section */}
+            <section className="relative py-16 md:py-15 overflow-hidden px-4 md:px-16 border-t border-[var(--secondary-border-color)]">
+                <div className="max-w-7xl mx-auto flex flex-row items-center justify-center">
+                    {/* Section Title */}
+                    <div className="w-[80%] flex flex-row items-center gap-10 no-wrap">
+                        <h2 className="w-full max-w-[320px] Riosark text-[48px]">Contact us</h2>
+                        <p className="text-blank text-[14px] max-w-[500px] w-full">We are people who create technology with purpose. That's why behind every solution there is a team that listens, analyzes, and supports. </p>
+                    </div>
+                    <div className="w-[20%] text-center flex flex-col items-center">
+                        <div style={{ width: 'fit-content' }}>
+                            <Link
+                                href="/contact"
+                                className="secondary-button flex gap-3 justify-end items-center"
+                            >
+                                <span className="text-base sm:text-sm md:text-base">Let's talk</span>
+                                <span className="flex border border-[var(--principal-color)] rounded-full p-1">
+                                    <ChevronRight className="size-6 text-[var(--principal-color)]" />
+                                </span>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </section>

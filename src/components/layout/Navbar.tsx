@@ -26,7 +26,7 @@ const Navbar = () => {
                     <Link href="/" className="block">
                         <div className="relative w-[90px] h-[28px] md:w-[152px] md:h-[35px]">
                             <Image
-                                src="/base/LOGO-NOON.svg"
+                                src="/base/LOGO-NOON-WHITE.svg"
                                 alt="Logo"
                                 fill
                                 sizes="(max-width: 768px) 120px, 152px"

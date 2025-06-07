@@ -40,7 +40,7 @@
   --principal-border-button: #3B2EB9;
   --secondary-border-color: #4D4B7B;
   --principal-button-color: #3B2EB9;
-  --principal-background-color: #0F0E2B;
+  --principal-background-color: #080717;
   --secondary-background-color: #2C2C31;
   --footer-border-gradient: linear-gradient(to bottom, #364153, rgba(0, 0, 0, 0)) 1;
   --footer-color-text: #848484;
@@ -127,14 +127,13 @@ h1 {
 
 .principal-button {
   background-color: var(--principal-button-color);
-  border-radius: 10px;
   color: var(--principal-title-color);
   font-family: 'Riosark', sans-serif;
   font-weight: 500;
   font-size: 20px;
   line-height: 24px;
   padding: 10px 20px;
-  border-radius: 50px;
+  border-radius: 10px;
   letter-spacing: 1.2px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
@@ -155,7 +154,7 @@ h1 {
   font-size: 20px;
   line-height: 24px;
   padding: 10px 20px;
-  border-radius: 50px;
+  border-radius: 10px;
   letter-spacing: 1.2px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
@@ -196,9 +195,8 @@ h1 {
 }
 
 .profesor-style {
-  width: 508px;
-  max-width: 508px;
-  height: auto;
+  max-height: 260px !important;
+  max-width: 260px !important;
 }
 
 .diagonal-pattern-box {  
@@ -261,7 +259,7 @@ h1 {
   bottom: 0;
 
   /* Aquí aplicamos el gradiente que actuará como filtro de color */
-  background: linear-gradient( 270deg, rgba(15, 14, 43, 1), rgba(15, 14, 43, 0.95));
+  background: linear-gradient( 270deg, rgba(8, 7, 23, 1), rgba(8, 7, 23, 0.95));
 
   /* Esto asegura que la superposición esté por encima del fondo del padre, pero por debajo de su contenido. */
   z-index: -1; 

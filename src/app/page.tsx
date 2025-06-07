@@ -51,9 +51,7 @@ export default function Home() {
               className="principal-button flex gap-3 justify-center items-center"
             >
               <span className="text-base sm:text-sm md:text-base">Anyways</span>
-              <span className="flex border border-white-900 rounded-full p-1">
-                <ChevronRight className="size-6 text-white" />
-              </span>
+              
             </Link>
           </div>
 
@@ -99,11 +97,11 @@ export default function Home() {
           Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat odio fringilla augue. Sed dolor tempor in magna urna. Rhoncus feugiat turpis duis ultrices sit lacus magna euismod.
         </p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16 mt-20">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-10 mt-20">
           {solutions.map((solution) => (
             <div
               key={solution.id}
-              className="px-6 py-6 rounded-xl max-w-[160px] flex flex-col items-center text-center boxes-services-style"
+              className="px-6 py-6 rounded-xl max-w-[190px] flex flex-col items-center text-center bg-gray-800/30 border border-gray-700/50"
             >
               {/* Icono (Placeholder) */}
               <div className="w-20 h-20 mb-4 rounded-full flex items-center justify-center">
@@ -199,18 +197,18 @@ export default function Home() {
 
         {/* Fist Row */}
         <div className="flex items-center w-full flex-col md:flex-row px-8 md:px-16 max-w-[1440px] m-auto">
-            <div className="w-full md:w-[55%] flex flex-col justify-center items-center md:items-start py-10 pr-0 md:py-16 md:pr-16">
+            <div className="w-full md:w-[55%] flex flex-col justify-center items-center md:items-start py-10 pr-0 md:py-16 md:pr-16 border-r-0 md:border-r-1 md:border-[var(--secondary-border-color)]">
               <h2 className="hero-title-h2 font-bold text-white Riosark ">Why <span className="text-[var(--principal-border-button)]">noon?</span></h2>
               <p className="mt-4 text-gray-300 max-w-[544px] text-center md:text-left">
                 Lorem ipsum dolor sit amet consectetur. Risus feugiat augue nisl leo augue ullamcorper tristique placerat. Malesuada pulvinar nunc malesuada a. Eu et egestas gravida at mi ut viverra pellentesque. Fermentum proin nibh faucibus in orci mattis est ultrices sit.
               </p>
             </div>
-            <div className="flex w-full md:w-[45%] justify-center md:justify-center items-center border-l-0 md:border-l-1 md:border-[var(--secondary-border-color)] text-base relative pb-4 md:pb-0">
+            <div className="flex w-full md:w-[45%] justify-center md:justify-center items-center text-base relative pb-4 md:pb-0">
               <Image
                 src="/base/profesor.gif"
                 alt="profesor"
-                width={508}
-                height={508}
+                width={100}
+                height={100}
                 className="profesor-style"
                 unoptimized
               />
@@ -277,9 +275,9 @@ export default function Home() {
 
       {/* Why noon? Section Three Row V2 */}
       <section className="w-full flex justify-center items-center flex-col px-8 md:px-16 my-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1440px] w-[60%] mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1440px] w-[80%] mt-10">
           
-          <div className="flex flex-col justify-center items-center py-10 md:py-20 rounded-xl boxes-services-style">
+          <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
             <div className="flex flex-col items-center text-center px-12">
               <h2 className="hero-title-h2 font-bold text-white">
                 <LazyNumberFlow targetValue={45} />
@@ -290,7 +288,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col justify-center items-center py-10 md:py-20 rounded-xl boxes-services-style">
+          <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
             <div className="flex flex-col items-center text-center px-12">
               <h2 className="hero-title-h2 font-bold text-white">
                 <LazyNumberFlow targetValue={120} />
@@ -301,7 +299,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col justify-center items-center py-10 md:py-20 rounded-xl boxes-services-style">
+          <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
             <div className="flex flex-col items-center text-center px-12">
               <h2 className="hero-title-h2 font-bold text-white">
                 <LazyNumberFlow targetValue={95} />
@@ -312,7 +310,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col justify-center items-center py-10 md:py-20 rounded-xl boxes-services-style">
+          <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
             <div className="flex flex-col items-center text-center px-12">
               <h2 className="hero-title-h2 font-bold text-white">
                 <LazyNumberFlow targetValue={83} />
