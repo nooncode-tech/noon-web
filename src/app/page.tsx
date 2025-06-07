@@ -207,8 +207,8 @@ export default function Home() {
               <Image
                 src="/base/profesor.gif"
                 alt="profesor"
-                width={100}
-                height={100}
+                width={260}
+                height={260}
                 className="profesor-style"
                 unoptimized
               />

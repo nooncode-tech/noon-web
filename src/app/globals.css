@@ -195,8 +195,8 @@ h1 {
 }
 
 .profesor-style {
-  max-height: 260px !important;
-  max-width: 260px !important;
+      max-height: 260px !important;
+      max-width: 260px !important;
 }
 
 .diagonal-pattern-box {  
@@ -332,15 +332,14 @@ h1 {
   font-size: 40px;
   }
   .profesor-style {
-    width: 340px;
-    max-width: 340px;
-    height: 340px;
+      max-height: 260px !important;
+      max-width: 260px !important;
   }
   .tecnologies-img {
   width: auto;
   max-height: 35px;
   height: 35px;
-}
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -351,9 +350,8 @@ h1 {
     font-size: 30px;
   }
   .profesor-style {
-    width: 240px;
-    max-width: 240px;
-    height: 240px;
+      max-height: 220px !important;
+      max-width: 220px !important;
   }
   .tecnologies-img {
   width: auto;
