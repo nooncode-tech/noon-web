@@ -49,7 +49,7 @@ export default function About() {
                         <h1 className="hero-title-h1 m-auto font-bold Riosark text-white max-w-[900px] text-center">
                             Work team
                         </h1>
-                        <p className="max-w-[600px] text-white text-center text-base mt-10 md:mt-20 m-auto">
+                        <p className="max-w-[600px] text-white text-center text-base mt-10 md:mt-5 m-auto">
                             Lorem ipsum dolor sit amet consectetur. Leo scelerisque in non sit sem sit id neque. Blandit at vulputate vitae tincidunt. Commodo mauris egestas viverra enim diam natoque rhoncus adipiscing.
                         </p>
         

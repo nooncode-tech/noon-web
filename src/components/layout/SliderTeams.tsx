@@ -93,7 +93,7 @@ const teamMembers = [
 
 export default function TeamSlider() {
     return (
-        <section className="pt-6 md:pt-20 relative overflow-hidden">
+        <section className="pt-6 md:pt-10 relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-0 md:px-7 py-10">
                 <div className="relative">
                 <Swiper
