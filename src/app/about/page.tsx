@@ -34,8 +34,8 @@ export default function About() {
                             left: '0%',
                             top: '50%',
                             transform: 'translateY(-50%)',
-                            maskImage: 'linear-gradient(to right, rgba(15, 14, 43, 1) 0%, rgba(15, 14, 43, 0.1) 40%)',
-                            WebkitMaskImage: 'linear-gradient(to right, rgba(15, 14, 43, 1) 0%, rgba(15, 14, 43, 0.1) 40%)',
+                            maskImage: 'linear-gradient(to right, rgba(15, 14, 43, 1) 0%, rgba(15, 14, 43, 0.1) 80%)',
+                            WebkitMaskImage: 'linear-gradient(to right, rgba(15, 14, 43, 1) 0%, rgba(15, 14, 43, 0.1) 80%)',
                         }}
                     />
                 </div>
@@ -61,7 +61,7 @@ export default function About() {
             </section>
 
             {/* Work Methodology Section */}
-            <section className="relative  overflow-hidden px-4 md:px-16">
+            <section className="relative  overflow-hidden pt-16 md:pt-20 px-4 md:px-16">
                 <div className="max-w-7xl mx-auto px-4 md:px-12">
                     {/* Section Title */}
                     <div className="text-center">
@@ -131,7 +131,7 @@ export default function About() {
             </section>
 
             {/* Brand Values Section */}
-            <section className="relative py-16 px-4 overflow-hidden md:py-20 md:px-16">
+            <section className="relative pt-16 px-4 overflow-hidden md:pt-32 md:px-16">
                 <div className="max-w-7xl mx-auto flex flex-col gap-8 px-0 md:px-12 md:flex-row md:gap-10">
                     
                     <div className="w-full flex flex-col items-center justify-center relative md:w-[60%] md:flex-row md:items-center md:justify-end">
@@ -169,8 +169,8 @@ export default function About() {
             </section>
 
             {/* Mision Vision */}
-            <section className="w-full flex justify-center items-center flex-col px-8 md:px-16 mt-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1440px] w-[75%] mt-10">
+            <section className="w-full flex justify-center items-center flex-col px-8 md:px-16 pt-16 md:pt-32">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1440px] w-[75%]">
                 
                     <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl boxes-services-style">
                         <div className="flex flex-col items-center text-center px-12">
@@ -198,7 +198,7 @@ export default function About() {
             </section>
 
             {/* NOON Section */}
-            <section className="relative pb-16 md:pb-25 overflow-hidden px-4 md:px-16 mt-20">
+            <section className="relative pb-16 md:pb-25 overflow-hidden px-4 md:px-16 pt-20">
                 <div className="max-w-7xl mx-auto px-4 md:px-12">
                     {/* Section Title */}
                     <div className="text-center flex flex-col items-center">
@@ -221,25 +221,27 @@ export default function About() {
             </section>
 
             {/* NOON Section */}
-            <section className="relative py-16 md:py-15 overflow-hidden px-4 md:px-16 border-t border-[var(--secondary-border-color)]">
-                <div className="max-w-7xl mx-auto flex flex-row items-center justify-center">
-                    {/* Section Title */}
-                    <div className="w-[80%] flex flex-row items-center gap-10 no-wrap">
-                        <h2 className="w-full max-w-[320px] Riosark text-[48px]">Contact us</h2>
-                        <p className="text-blank text-[14px] max-w-[500px] w-full">We are people who create technology with purpose. That's why behind every solution there is a team that listens, analyzes, and supports. </p>
+            <section className="relative py-12 md:py-15 overflow-hidden px-4 md:px-16 border-t border-[var(--secondary-border-color)]">
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-0">
+                    {/* Section Title and Text */}
+                    <div className="w-full md:w-[80%] flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-10">
+                    <h2 className="w-full md:max-w-[320px] Riosark text-3xl sm:text-4xl md:text-[48px] text-center md:text-left">
+                        Contact us
+                    </h2>
+                    <p className="text-blank text-base sm:text-[15px] md:text-[14px] w-full md:max-w-[500px] text-center md:text-left">
+                        We are people who create technology with purpose. That's why behind every solution there is a team that listens, analyzes, and supports.
+                    </p>
                     </div>
-                    <div className="w-[20%] text-center flex flex-col items-center">
-                        <div style={{ width: 'fit-content' }}>
-                            <Link
-                                href="/contact"
-                                className="secondary-button flex gap-3 justify-end items-center"
-                            >
-                                <span className="text-base sm:text-sm md:text-base">Let's talk</span>
-                                <span className="flex border border-[var(--principal-color)] rounded-full p-1">
-                                    <ChevronRight className="size-6 text-[var(--principal-color)]" />
-                                </span>
-                            </Link>
-                        </div>
+                    {/* Button */}
+                    <div className="w-full md:w-[20%] flex justify-center md:justify-center mt-4 md:mt-0">
+                    <div className="w-fit">
+                        <Link
+                        href="/contact"
+                        className="secondary-button flex gap-3 justify-center items-center"
+                        >
+                        <span className="text-base sm:text-sm md:text-base">Let's talk</span>
+                        </Link>
+                    </div>
                     </div>
                 </div>
             </section>

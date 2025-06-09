@@ -28,7 +28,7 @@ export default function Services() {
         <main className="min-h-screen text-white">
 
             {/* Hero Section */}
-            <section className="max-h-[766px] h-[80vh] md:h-[80vh] w-full flex flex-col items-center justify-end pt-40 md:pt-0 px-8 md:px-16 bg-[var(--secondary-background-color)] relative mx-auto">
+            <section className=" w-full flex flex-col items-center justify-end pt-40 md:pt-40 px-8 md:px-16 bg-[var(--secondary-background-color)] relative mx-auto">
                 <div className="w-full flex flex-col lg:flex-row items-start relative max-w-[1440px] pb-10 md:pb-20 justify-between gap-5 md:gap-20">
                     <h1 className="hero-title-h1 font-bold Riosark max-w-[900px] text-center">
                         Services
@@ -85,9 +85,6 @@ export default function Services() {
                                                     className="secondary-button flex gap-3 justify-end items-center"
                                                 >
                                                     <span className="text-base sm:text-sm md:text-base">Let's talk</span>
-                                                    <span className="flex border border-[var(--principal-color)] rounded-full p-1">
-                                                        <ChevronRight className="size-6 text-[var(--principal-color)]" />
-                                                    </span>
                                                 </Link>
                                             </div>
                                         </div>
@@ -106,7 +103,7 @@ export default function Services() {
                                                 alt={solution.title}
                                                 width={80}
                                                 height={80}
-                                                className="object-contain w-full h-full max-w-[120px] max-h-[120px] absolute bottom-[-20px] right-[-20px] bg-[var(--principal-background-color)] rounded-xl border border-[var(--secondary-border-color)] p-3"
+                                                className="object-contain w-full h-full max-w-[80px] md:max-w-[120px] max-h-[80px] md:max-h-[120px] absolute bottom-[-10px] md:bottom-[-20px] right-[-10px] md:right-[-20px] bg-[var(--principal-background-color)] rounded-xl border border-[var(--secondary-border-color)] p-3"
                                             />
                                         </div>
 
@@ -115,6 +112,31 @@ export default function Services() {
                             )}
                         </div>
                     ))}
+                </div>
+            </section>
+
+            {/* Call Action Section */}
+            <section className="relative pb-16 md:pb-20 overflow-hidden px-4 md:px-16 pt-10">
+                <div className="max-w-7xl mx-auto px-4 md:px-12">
+                    {/* Section Title */}
+                    <div className="text-center flex flex-col items-center">
+                        <div className="relative ">
+                            <h1 className="text-[30px] md:text-[50px] font-bold Riosark text-white">Another service</h1>
+                        </div>
+                        <p className="max-w-[900px] text-white text-center text-base mt-6 md:mt-10 m-auto">
+                            Lorem ipsum dolor sit amet consectetur. Faucibus eget pharetra potenti aliquet. Aenean vel viverra commodo ac turpis donec ut. Scelerisque amet venenatis nec lorem egestas. 
+                        </p>
+                        <div className="mix-w-[125px] text-center flex flex-col items-center mt-6">
+                            <div style={{ width: 'fit-content' }}>
+                                <Link
+                                    href="/contact"
+                                    className="secondary-button flex gap-3 justify-end items-center"
+                                >
+                                    <span className="text-base sm:text-sm md:text-base">Let's talk</span>
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
