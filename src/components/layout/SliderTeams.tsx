@@ -158,9 +158,9 @@ export default function TeamSlider() {
                                 </div>
                             </div>
                             </div>
-                            <div className="text-center">
-                            <h3 className="text-xl font-bold text-white mb-4 Riosark">{member.name}</h3>
-                            <p className="text-gray-400 text-sm leading-relaxed">{member.description}</p>
+                                <div className="text-center">
+                                <h3 className="text-xl font-bold text-white mb-4 Riosark">{member.name}</h3>
+                                <p className="text-gray-400 text-sm leading-relaxed">{member.description}</p>
                             </div>
                         </div>
                         </SwiperSlide>

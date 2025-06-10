@@ -21,8 +21,8 @@ function LazyNumberFlow({ targetValue }: LazyNumberFlowProps) {
   const valueToRender = inView ? targetValue : 0;
 
   return (
-    <span ref={ref} className="hero-title-h2 font-bold text-white">
-      + <CountUp start={0} end={valueToRender} duration={4} /> 
+    <span ref={ref} className="hero-title-h2 font-bold text-[#3B2EB9]! ">
+      + <CountUp start={0} end={valueToRender} duration={4} className="text-white"/> 
     </span>
   );
 }
@@ -99,10 +99,10 @@ export default function Home() {
           <div className="relative mt-9">
             <Link
               href="/"
-              className="principal-button flex gap-3 justify-center items-center"
+              className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
             >
-              <span className="text-base sm:text-sm md:text-base">Anyways</span>
-              
+              <span className="sm:text-sm">Anyways</span>
+
             </Link>
           </div>
 
@@ -181,14 +181,14 @@ export default function Home() {
             <h1 className="hero-title-h1 m-auto font-bold Riosark text-white max-w-[900px] text-center">
               Work Procedure
             </h1>
-            <p className="max-w-[600px] text-white text-center text-base mt-6 md:mt-10 m-auto">
+            <p className="max-w-[600px] text-white text-center text-base mt-6 md:my-10 m-auto">
               Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat
               odio fringilla augue. Sed dolor tempor in magna urna. Rhoncus feugiat
               turpis duis ultrices sit lacus magna euismod.
             </p>
 
             <div
-              className="flex flex-col md:flex-row flex-wrap justify-center items-center gap-6 mt-8"
+              className="flex flex-col md:flex-row flex-wrap justify-center items-center pt-6 gap-6"
             >
               <div
                 className="flex flex-col items-center gap-7 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
@@ -378,7 +378,7 @@ export default function Home() {
             <div className="relative mt-9" style={{ width: 'fit-content' }}>
               <Link
                 href="/"
-                className="principal-button flex gap-3 justify-center items-center"
+                className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
               >
                 <span className="text-base sm:text-sm md:text-base">Let's talk</span>
               </Link>

@@ -18,7 +18,7 @@ export default function Services() {
         { id: 8, title: "Game Development", description: "Lorem ipsum dolor sit amet consectetur. Aenean pharetra sagittis sed est viverra vel feugiat morbi pellentesque. Aenean vel viverra commodo ac turpis donec ut.", list: [{ id: 1, item: "Lorem Ipsum"}, { id: 2, item: "Lorem Ipsum"}, { id: 3, item: "Lorem Ipsum"}, { id: 4, item: "Lorem Ipsum"}], icon: "/services_icons/game.svg", image: "/placeholder.png" },
     ];
 
-    const [openSolutionId, setOpenSolutionId] = useState<number | null>(solutions[0].id);
+    const [openSolutionId, setOpenSolutionId] = useState<number | null>(null);
 
     const handleToggle = (id: number) => {
         setOpenSolutionId(openSolutionId === id ? null : id);
@@ -28,8 +28,8 @@ export default function Services() {
         <main className="min-h-screen text-white">
 
             {/* Hero Section */}
-            <section className=" w-full flex flex-col items-center justify-end pt-40 md:pt-40 px-8 md:px-16 bg-[var(--secondary-background-color)] relative mx-auto">
-                <div className="w-full flex flex-col lg:flex-row items-start relative max-w-[1440px] pb-10 md:pb-20 justify-between gap-5 md:gap-20">
+            <section className=" w-full flex flex-col items-center justify-end pt-40 md:pt-40 px-8 md:px-16 relative mx-auto">
+                <div className="w-full flex flex-col items-start relative max-w-[1440px] pb-10 md:pb-20 justify-between gap-5">
                     <h1 className="hero-title-h1 font-bold Riosark max-w-[900px] text-center">
                         Services
                     </h1>
@@ -40,7 +40,7 @@ export default function Services() {
             </section>
 
             {/* Services Section  */}
-            <section className="w-full flex flex-col items-center justify-center py-12 md:py-20 px-8 md:px-16">
+            <section className="w-full flex flex-col items-center justify-center py-12 md:py-0 px-8 md:px-16">
                 <div className="w-full max-w-[1440px] flex flex-col gap-4">
                     {solutions.map((solution, index) => (
                         <div key={solution.id} className="border border-[var(--secondary-border-color)] rounded-xl overflow-hidden transition-all duration-300">
@@ -54,7 +54,7 @@ export default function Services() {
                                     <Image src={solution.icon} alt={`${solution.title} icon`} width={32} height={32} />
                                     <h3 className="text-lg md:text-2xl font-bold Riosark">{solution.title}</h3>
                                 </div>
-                                <span className="text-[var(--principal-color)]">
+                                <span className="text-[var(--principal-button-color)]">
                                     {openSolutionId === solution.id ? <Minus size={30} /> : <Plus size={30} />}
                                 </span>
                             </div>
@@ -81,8 +81,8 @@ export default function Services() {
                                             </ul>
                                             <div className="mt-4" style={{ width: 'fit-content' }}>
                                                 <Link
-                                                    href="/contact"
-                                                    className="secondary-button flex gap-3 justify-end items-center"
+                                                    href="/"
+                                                    className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
                                                 >
                                                     <span className="text-base sm:text-sm md:text-base">Let's talk</span>
                                                 </Link>
@@ -115,27 +115,28 @@ export default function Services() {
                 </div>
             </section>
 
-            {/* Call Action Section */}
-            <section className="relative pb-16 md:pb-20 overflow-hidden px-4 md:px-16 pt-10">
-                <div className="max-w-7xl mx-auto px-4 md:px-12">
-                    {/* Section Title */}
-                    <div className="text-center flex flex-col items-center">
-                        <div className="relative ">
-                            <h1 className="text-[30px] md:text-[50px] font-bold Riosark text-white">Another service</h1>
-                        </div>
-                        <p className="max-w-[900px] text-white text-center text-base mt-6 md:mt-10 m-auto">
-                            Lorem ipsum dolor sit amet consectetur. Faucibus eget pharetra potenti aliquet. Aenean vel viverra commodo ac turpis donec ut. Scelerisque amet venenatis nec lorem egestas. 
-                        </p>
-                        <div className="mix-w-[125px] text-center flex flex-col items-center mt-6">
-                            <div style={{ width: 'fit-content' }}>
-                                <Link
-                                    href="/contact"
-                                    className="secondary-button flex gap-3 justify-end items-center"
-                                >
-                                    <span className="text-base sm:text-sm md:text-base">Let's talk</span>
-                                </Link>
-                            </div>
-                        </div>
+            {/* NOON Section */}
+            <section className="relative py-12 md:py-15 overflow-hidden px-4 md:px-16 border-t border-[var(--secondary-border-color)] mt-20">
+                <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-0">
+                    {/* Section Title and Text */}
+                    <div className="w-full md:w-[80%] flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-10">
+                    <h2 className="w-full md:max-w-[620px] Riosark text-3xl sm:text-4xl md:text-[48px] text-center md:text-left">
+                        Another service
+                    </h2>
+                    <p className="text-blank text-base sm:text-[15px] md:text-[14px] w-full md:max-w-[500px] text-center md:text-left">
+                        We are people who create technology with purpose. That's why behind every solution there is a team that listens, analyzes, and supports.
+                    </p>
+                    </div>
+                    {/* Button */}
+                    <div className="w-full md:w-[20%] flex justify-center md:justify-center mt-4 md:mt-0">
+                    <div className="w-fit">
+                        <Link
+                            href="/"
+                            className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
+                        >
+                            <span className="text-base sm:text-sm md:text-base">Let's talk</span>
+                        </Link>
+                    </div>
                     </div>
                 </div>
             </section>

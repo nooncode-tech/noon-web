@@ -98,7 +98,7 @@ export default function Contact() {
                                 </span>
                                 <button
                                     type="submit"
-                                    className="principal-button flex gap-3 justify-center items-center mt-4" // Añadí margin-top al botón
+                                    className="principal-button flex gap-3 justify-center items-center mt-4 text-white hover:text-[var(--principal-background-color)]!" // Añadí margin-top al botón
                                 >
                                     <span className="text-base">Send Message</span>
                                 </button>

@@ -4,7 +4,6 @@ import React from "react";
 import Image from "next/image";
 import TeamSlider from "../../components/layout/SliderTeams"
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 
 export default function About() {
 
@@ -49,7 +48,7 @@ export default function About() {
                         <h1 className="hero-title-h1 m-auto font-bold Riosark text-white max-w-[900px] text-center">
                             Work team
                         </h1>
-                        <p className="max-w-[600px] text-white text-center text-base mt-10 md:mt-5 m-auto">
+                        <p className="max-w-[600px] text-white text-center text-base my-10 md:my-10 m-auto">
                             Lorem ipsum dolor sit amet consectetur. Leo scelerisque in non sit sem sit id neque. Blandit at vulputate vitae tincidunt. Commodo mauris egestas viverra enim diam natoque rhoncus adipiscing.
                         </p>
         
@@ -68,14 +67,14 @@ export default function About() {
                     <h1 className="hero-title-h1 m-auto font-bold Riosark text-white max-w-[900px] text-center">
                         Work Methodology
                     </h1>
-                    <p className="max-w-[600px] text-white text-center text-base mt-6 md:mt-5 m-auto">
+                    <p className="max-w-[600px] text-white text-center text-base my-6 md:my-12 m-auto">
                         Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat
                         odio fringilla augue. Sed dolor tempor in magna urna. Rhoncus feugiat
                         turpis duis ultrices sit lacus magna euismod.
                     </p>
         
                     <div
-                        className="flex flex-col md:flex-row flex-wrap justify-center items-center gap-6 mt-8"
+                        className="flex flex-col md:flex-row flex-wrap justify-center items-center gap-6 mt-16"
                     >
                         <div
                         className="flex flex-col items-center gap-7 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
@@ -177,7 +176,7 @@ export default function About() {
                         <h2 className="hero-title-h2 font-bold text-white Riosark">
                             Mision
                         </h2>
-                        <p className="text-gray-300 max-w-[544px] text-center">
+                        <p className="text-gray-300 max-w-[544px] text-center pt-4">
                             Lorem ipsum dolor sit amet consectetur. Volutpat in risus sit vulputate penatibus. Urna nisi sollicitudin imperdiet vel commodo ultricies vitae velit varius. Non suspendisse consequat vulputate in.
                         </p>
                         </div>
@@ -188,7 +187,7 @@ export default function About() {
                         <h2 className="hero-title-h2 font-bold text-white Riosark">
                             Vision
                         </h2>
-                        <p className="text-gray-300 max-w-[544px] text-center">
+                        <p className="text-gray-300 max-w-[544px] text-center pt-4">
                             Lorem ipsum dolor sit amet consectetur. Volutpat in risus sit vulputate penatibus. Urna nisi sollicitudin imperdiet vel commodo ultricies vitae velit varius. Non suspendisse consequat vulputate in.
                         </p>
                         </div>
@@ -198,7 +197,7 @@ export default function About() {
             </section>
 
             {/* NOON Section */}
-            <section className="relative pb-16 md:pb-25 overflow-hidden px-4 md:px-16 pt-20">
+            <section className="relative pb-16 md:pb-15 overflow-hidden px-4 md:px-16 pt-30">
                 <div className="max-w-7xl mx-auto px-4 md:px-12">
                     {/* Section Title */}
                     <div className="text-center flex flex-col items-center">
@@ -220,7 +219,7 @@ export default function About() {
                 </div>
             </section>
 
-            {/* NOON Section */}
+            {/* NOON Contact Section */}
             <section className="relative py-12 md:py-15 overflow-hidden px-4 md:px-16 border-t border-[var(--secondary-border-color)]">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-0">
                     {/* Section Title and Text */}
@@ -236,10 +235,10 @@ export default function About() {
                     <div className="w-full md:w-[20%] flex justify-center md:justify-center mt-4 md:mt-0">
                     <div className="w-fit">
                         <Link
-                        href="/contact"
-                        className="secondary-button flex gap-3 justify-center items-center"
+                            href="/"
+                            className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
                         >
-                        <span className="text-base sm:text-sm md:text-base">Let's talk</span>
+                            <span className="text-base sm:text-sm md:text-base">Let's talk</span>
                         </Link>
                     </div>
                     </div>

@@ -40,6 +40,7 @@
   --principal-border-button: #3B2EB9;
   --secondary-border-color: #4D4B7B;
   --principal-button-color: #3B2EB9;
+  --principal-button-color-hover: #FFF;
   --principal-background-color: #080717;
   --secondary-background-color: #2C2C31;
   --footer-border-gradient: linear-gradient(to bottom, #364153, rgba(0, 0, 0, 0)) 1;
@@ -47,7 +48,7 @@
   --elipse-color-start: #FFFFFF;
   --elipse-color-end: rgba(255, 255, 255, 0);
   --background-gradient-secondary: linear-gradient(to top, rgba(15, 14, 43, 0.70) 5.56%, rgba(34, 33, 63, 0.70) 72.12%);
-  --background-gradient-circular: radial-gradient(circle at 35%, #272656 0%, #080719 100%);
+  --background-gradient-circular: #3B2EB9;
   --secondary-border-box: #4D4B7B;
 }
 
@@ -141,8 +142,7 @@ h1 {
 }
 
 .principal-button:hover {
-  box-shadow: 0 0 10px #3b3b3bba;
-  transform: scale(1.05);
+  background-color: var(--principal-button-color-hover);
 }
 
 .secondary-button {
