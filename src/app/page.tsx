@@ -144,11 +144,11 @@ export default function Home() {
           Services
         </h1>
 
-        <p className="max-w-[600px] text-white text-center text-base mt-10">
+        <p className="max-w-[600px] text-white text-center text-[14px] mt-6">
           Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat odio fringilla augue. Sed dolor tempor in magna urna. Rhoncus feugiat turpis duis ultrices sit lacus magna euismod.
         </p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-10 mt-20">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-10 mt-10">
           {solutions.map((solution) => (
             <div
               key={solution.id}
@@ -177,21 +177,21 @@ export default function Home() {
       <section className="relative pt-16 md:pt-32 overflow-hidden px-4 md:px-16">
         <div className="max-w-7xl mx-auto px-4 md:px-12">
           {/* Section Title */}
-          <div className="text-center">
+          <div className="text-center flex flex-col items-center">
             <h1 className="hero-title-h1 m-auto font-bold Riosark text-white max-w-[900px] text-center">
               Work Procedure
             </h1>
-            <p className="max-w-[600px] text-white text-center text-base mt-6 md:my-10 m-auto">
+            <p className="max-w-[600px] text-white text-center text-[14px] mt-6 md:my-6 m-auto">
               Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat
               odio fringilla augue. Sed dolor tempor in magna urna. Rhoncus feugiat
               turpis duis ultrices sit lacus magna euismod.
             </p>
 
             <div
-              className="flex flex-col md:flex-row flex-wrap justify-center items-center pt-6 gap-6"
+              className="max-w-[80%] flex flex-col md:flex-row flex-wrap justify-center items-center pt-6 gap-6"
             >
               <div
-                className="flex flex-col items-center gap-7 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
+                className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
               >
                 <Image
                   src="/placeholder.png"
@@ -207,7 +207,7 @@ export default function Home() {
                 </p>
               </div>
               <div
-                className="flex flex-col items-center gap-7 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
+                className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
               >
                 <Image
                   src="/placeholder.png"
@@ -223,7 +223,7 @@ export default function Home() {
                 </p>
               </div>
               <div
-                className="flex flex-col items-center gap-7 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
+                className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
               >
                 <Image
                   src="/placeholder.png"
@@ -248,9 +248,9 @@ export default function Home() {
 
         {/* Fist Row */}
         <div className="flex items-center w-full flex-col md:flex-row px-8 md:px-16 max-w-[1440px] m-auto">
-            <div className="w-full md:w-[55%] flex flex-col justify-center items-center md:items-start py-10 pr-0 md:py-16 md:pr-16 border-r-0 md:border-r-1 md:border-[var(--secondary-border-color)]">
+            <div className="w-full md:w-[55%] flex flex-col justify-center items-center md:items-start py-10 pr-0 md:py-16 border-r-0 md:border-r-1 md:border-[var(--secondary-border-color)]">
               <h2 className="hero-title-h2 font-bold text-white Riosark ">Why <span className="text-[var(--principal-border-button)]">noon?</span></h2>
-              <p className="mt-4 text-gray-300 max-w-[544px] text-center md:text-left">
+              <p className="mt-4 text-gray-300 max-w-[544px] text-[13px] text-center md:text-left">
                 Lorem ipsum dolor sit amet consectetur. Risus feugiat augue nisl leo augue ullamcorper tristique placerat. Malesuada pulvinar nunc malesuada a. Eu et egestas gravida at mi ut viverra pellentesque. Fermentum proin nibh faucibus in orci mattis est ultrices sit.
               </p>
             </div>
@@ -273,44 +273,44 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1440px] w-[80%] mt-10">
           
           <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
-            <div className="flex flex-col items-center text-center px-12">
+            <div className="flex flex-col items-center text-center px-10">
               <h2 className="hero-title-h2 font-bold text-white">
                 <LazyNumberFlow targetValue={45} />
               </h2>
-              <p className="text-gray-300 max-w-[544px] text-center">
+              <p className="text-gray-300 max-w-[544px] text-center text-[14px]">
                 Active programers
               </p>
             </div>
           </div>
 
           <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
-            <div className="flex flex-col items-center text-center px-12">
+            <div className="flex flex-col items-center text-center px-10">
               <h2 className="hero-title-h2 font-bold text-white">
                 <LazyNumberFlow targetValue={120} />
               </h2>
-              <p className="text-gray-300 max-w-[544px] text-center">
+              <p className="text-gray-300 max-w-[544px] text-center text-[14px]">
                 Completed projects
               </p>
             </div>
           </div>
 
           <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
-            <div className="flex flex-col items-center text-center px-12">
+            <div className="flex flex-col items-center text-center px-10">
               <h2 className="hero-title-h2 font-bold text-white">
                 <LazyNumberFlow targetValue={95} />
               </h2>
-              <p className="text-gray-300 max-w-[544px] text-center">
+              <p className="text-gray-300 max-w-[544px] text-center text-[14px]">
                 Satisfied customers
               </p>
             </div>
           </div>
 
           <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
-            <div className="flex flex-col items-center text-center px-12">
+            <div className="flex flex-col items-center text-center px-10">
               <h2 className="hero-title-h2 font-bold text-white">
                 <LazyNumberFlow targetValue={83} />
               </h2>
-              <p className="text-gray-300 max-w-[544px] text-center">
+              <p className="text-gray-300 max-w-[544px] text-center text-[14px]">
                 Solutions implemented
               </p>
             </div>
@@ -372,7 +372,7 @@ export default function Home() {
             <h2 className="hero-title-h1 font-bold Riosark text-white max-w-[900px] text-left hero-title-h2">
               Contact us
             </h2>
-            <p className="max-w-[480px] text-white text-left text-base mt-10">
+            <p className="max-w-[480px] text-white text-left text-[14px] mt-10">
               Lorem ipsum dolor sit amet consectetur. Aenean pharetra sagittis sed est viverra vel feugiat morbi pellentesque. Aenean vel viverra commodo ac turpis donec ut. Scelerisque amet venenatis nec lorem egestas. Tincidunt volutpat feugiat tincidunt orci gravida pretium ut scelerisque. Vulputate volutpat amet malesuada proin. Cras tempor pellentesque viverra molestie diam gravida.
             </p>
             <div className="relative mt-9" style={{ width: 'fit-content' }}>

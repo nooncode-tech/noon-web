@@ -17,7 +17,7 @@ export default function About() {
                     <h1 className="hero-title-h1 font-bold Riosark text-white max-w-[900px]">
                         Who we are
                     </h1>
-                    <p className="hero-title-p max-w-[465px] mt-4">
+                    <p className="hero-title-p max-w-[465px] mt-4 text-[14px]">
                         Lorem ipsum dolor sit amet consectetur. Volutpat in risus sit vulputate penatibus. Urna nisi sollicitudin imperdiet vel commodo ultricies vitae velit varius. Non suspendisse consequat vulputate in.
                     </p>
                 </div>
@@ -48,7 +48,7 @@ export default function About() {
                         <h1 className="hero-title-h1 m-auto font-bold Riosark text-white max-w-[900px] text-center">
                             Work team
                         </h1>
-                        <p className="max-w-[600px] text-white text-center text-base my-10 md:my-10 m-auto">
+                        <p className="max-w-[600px] text-white text-center text-[14px] my-10 md:my-6 m-auto">
                             Lorem ipsum dolor sit amet consectetur. Leo scelerisque in non sit sem sit id neque. Blandit at vulputate vitae tincidunt. Commodo mauris egestas viverra enim diam natoque rhoncus adipiscing.
                         </p>
         
@@ -63,70 +63,70 @@ export default function About() {
             <section className="relative  overflow-hidden pt-16 md:pt-20 px-4 md:px-16">
                 <div className="max-w-7xl mx-auto px-4 md:px-12">
                     {/* Section Title */}
-                    <div className="text-center">
-                    <h1 className="hero-title-h1 m-auto font-bold Riosark text-white max-w-[900px] text-center">
-                        Work Methodology
-                    </h1>
-                    <p className="max-w-[600px] text-white text-center text-base my-6 md:my-12 m-auto">
-                        Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat
-                        odio fringilla augue. Sed dolor tempor in magna urna. Rhoncus feugiat
-                        turpis duis ultrices sit lacus magna euismod.
-                    </p>
-        
-                    <div
-                        className="flex flex-col md:flex-row flex-wrap justify-center items-center gap-6 mt-16"
-                    >
-                        <div
-                        className="flex flex-col items-center gap-7 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
-                        >
-                        <Image
-                            src="/placeholder.png"
-                            alt="Agile"
-                            className="rounded-xl border border-[var(--secondary-border-color)] p-4"
-                            width={100}
-                            height={100}
-                        />
-                        <h2 className="Riosark">Agile</h2>
-                        <p className="text-[12px]">
-                            Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum
-                            volutpat odio fringilla augue.
+                    <div className="text-center flex flex-col items-center">
+                        <h1 className="hero-title-h1 m-auto font-bold Riosark text-white max-w-[900px] text-center">
+                            Work Methodology
+                        </h1>
+                        <p className="max-w-[600px] text-white text-center text-[14px] my-6 md:my-6 m-auto">
+                            Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat
+                            odio fringilla augue. Sed dolor tempor in magna urna. Rhoncus feugiat
+                            turpis duis ultrices sit lacus magna euismod.
                         </p>
-                        </div>
+            
                         <div
-                        className="flex flex-col items-center gap-7 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
+                            className="max-w-[80%] flex flex-col md:flex-row flex-wrap justify-center items-center pt-6 gap-6"
                         >
-                        <Image
-                            src="/placeholder.png"
-                            alt="Customer"
-                            className="rounded-xl border border-[var(--secondary-border-color)] p-4"
-                            width={100}
-                            height={100}
-                        />
-                        <h2 className="Riosark">Customer focus</h2>
-                        <p className="text-[12px]">
-                            Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum
-                            volutpat odio fringilla augue.
-                        </p>
-                        </div>
-                        <div
-                        className="flex flex-col items-center gap-7 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
+                            <div
+                            className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
                             >
-                                <Image
+                            <Image
                                 src="/placeholder.png"
-                                alt="Innovation"
+                                alt="Discovery"
                                 className="rounded-xl border border-[var(--secondary-border-color)] p-4"
                                 width={100}
                                 height={100}
-                                />
-                                <h2 className="Riosark">Constant innovation</h2>
-                                <p className="text-[12px]">
+                            />
+                            <h2 className="Riosark">Agile</h2>
+                            <p className="text-[12px]">
                                 Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum
                                 volutpat odio fringilla augue.
-                                </p>
+                            </p>
                             </div>
+                            <div
+                            className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
+                            >
+                            <Image
+                                src="/placeholder.png"
+                                alt="Strategy"
+                                className="rounded-xl border border-[var(--secondary-border-color)] p-4"
+                                width={100}
+                                height={100}
+                            />
+                            <h2 className="Riosark">Customer focus</h2>
+                            <p className="text-[12px]">
+                                Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum
+                                volutpat odio fringilla augue.
+                            </p>
+                            </div>
+                            <div
+                            className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
+                            >
+                            <Image
+                                src="/placeholder.png"
+                                alt="Development"
+                                className="rounded-xl border border-[var(--secondary-border-color)] p-4"
+                                width={100}
+                                height={100}
+                            />
+                            <h2 className="Riosark">Constant innovation</h2>
+                            <p className="text-[12px]">
+                                Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum
+                                volutpat odio fringilla augue.
+                            </p>
                             </div>
                         </div>
-                        </div>
+                    </div>
+                </div>
             </section>
 
             {/* Brand Values Section */}
@@ -160,7 +160,7 @@ export default function About() {
                         <h2 className="text-3xl font-bold text-white Riosark max-w-[240px] md:text-[40px]">
                             Brand Values
                         </h2>
-                        <p className="text-gray-300 mt-4 max-w-[400px]">
+                        <p className="text-gray-300 mt-4 max-w-[400px] text-[14px]">
                             Lorem ipsum dolor sit amet consectetur. Sodales proin vitae aenean auctor. Fames orci non suspendisse fermentum non tempus diam risus.
                         </p>
                     </div>
@@ -169,25 +169,25 @@ export default function About() {
 
             {/* Mision Vision */}
             <section className="w-full flex justify-center items-center flex-col px-8 md:px-16 pt-16 md:pt-32">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1440px] w-[75%]">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1440px] w-[70%]">
                 
                     <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl boxes-services-style">
-                        <div className="flex flex-col items-center text-center px-12">
+                        <div className="flex flex-col items-center text-center px-10">
                         <h2 className="hero-title-h2 font-bold text-white Riosark">
                             Mision
                         </h2>
-                        <p className="text-gray-300 max-w-[544px] text-center pt-4">
+                        <p className="text-gray-300 max-w-[544px] text-center pt-4 text-[14px]">
                             Lorem ipsum dolor sit amet consectetur. Volutpat in risus sit vulputate penatibus. Urna nisi sollicitudin imperdiet vel commodo ultricies vitae velit varius. Non suspendisse consequat vulputate in.
                         </p>
                         </div>
                     </div>
 
                     <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl boxes-services-style">
-                        <div className="flex flex-col items-center text-center px-12">
+                        <div className="flex flex-col items-center text-center px-10">
                         <h2 className="hero-title-h2 font-bold text-white Riosark">
                             Vision
                         </h2>
-                        <p className="text-gray-300 max-w-[544px] text-center pt-4">
+                        <p className="text-gray-300 max-w-[544px] text-center pt-4 text-[14px]">
                             Lorem ipsum dolor sit amet consectetur. Volutpat in risus sit vulputate penatibus. Urna nisi sollicitudin imperdiet vel commodo ultricies vitae velit varius. Non suspendisse consequat vulputate in.
                         </p>
                         </div>
@@ -211,8 +211,8 @@ export default function About() {
                                 className="object-contain"
                             />
                         </div>
-                        <p className="max-w-[900px] text-white text-center text-base mt-6 md:mt-10 m-auto">
-                            We are people who create technology with purpose. That’s why behind every solution there is a team that listens,
+                        <p className="max-w-[900px] text-white text-center text-[14px] mt-6 md:mt-10 m-auto">
+                            We are people who create technology with purpose. That's why behind every solution there is a team that listens,
                             analyzes, and supports. More than just developing software, we help our clients move forward with confidence, clarity, and results.
                         </p>
                     </div>

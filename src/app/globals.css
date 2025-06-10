@@ -167,11 +167,11 @@ h1 {
 }
 
 .hero-title-h1 {
-  font-size: 60px;
+  font-size: 40px;
 }
 
 .hero-title-h2 {
-  font-size: 60px;
+  font-size: 40px;
 }
 
 
@@ -333,7 +333,7 @@ h1 {
 
 @media screen and (max-width: 1380px) {
   .hero-title-h1 {
-    font-size: 56px;
+    font-size: 40px;
   }
   .hero-title-h2 {
   font-size: 40px;
@@ -351,7 +351,7 @@ h1 {
 
 @media screen and (max-width: 768px) {
   .hero-title-h1 {
-    font-size: 36px;
+    font-size: 30px;
   }
   .hero-title-h2 {
     font-size: 30px;

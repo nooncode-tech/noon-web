@@ -12,7 +12,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 
 function getOnlineStatus(memberId: number, date = new Date()) {
-    const hoursOnline = 19; // Ahora 18 horas online
+    const hoursOnline = 16; // Ahora 18 horas online
     const totalHours = 24;
 
     // Día del año para que varíe día a día
@@ -94,7 +94,7 @@ const teamMembers = [
 export default function TeamSlider() {
     return (
         <section className="pt-6 md:pt-10 relative overflow-hidden">
-            <div className="max-w-7xl mx-auto px-0 md:px-7 py-10">
+            <div className="max-w-7xl mx-auto px-0 md:px-7 py-3">
                 <div className="relative">
                 <Swiper
                     modules={[Pagination, Navigation, Autoplay]}
@@ -144,17 +144,21 @@ export default function TeamSlider() {
                                 height={200}
                                 className="w-[150%] h-[150%] object-cover rounded-lg transition-opacity duration-300 hover:opacity-100"
                                 />
-                                <div className="absolute bottom-[-8px] left-3 flex items-center justify-center">
-                                <div className="relative">
-                                    <div
-                                    className={`w-4 h-4 rounded-full ${
-                                        status === "online"
-                                        ? "bg-green-500 animate-pulse"
-                                        : "bg-gray-400"
-                                    }`}
-                                    title={status === "online" ? "Disponible" : "No disponible"}
-                                    ></div>
-                                </div>
+                                <div className="absolute bottom-[-10px] left-3 flex items-center justify-center">
+                                    <div className="relative flex flex-row items-center gap-2 bg-gray-800 backdrop-blur-sm border border-gray-700/50 rounded-full px-3 py-1 text-sm text-gray-300">
+                                        <div
+                                            className={`w-4 h-4 rounded-full ${
+                                                status === "online"
+                                                ? "bg-green-500 animate-pulse"
+                                                : "bg-gray-400"
+                                            }`}
+                                            title={status === "online" ? "Disponible" : "No disponible"}
+                                        >
+                                        </div>
+                                        <div className="mt-0.5">
+                                            {status === "online" ? "Online" : "Offline"}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             </div>

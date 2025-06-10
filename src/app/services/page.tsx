@@ -33,7 +33,7 @@ export default function Services() {
                     <h1 className="hero-title-h1 font-bold Riosark max-w-[900px] text-center">
                         Services
                     </h1>
-                    <p className="text-[12px] md:text-[16px]">
+                    <p className="text-[12px] md:text-[14px]">
                         Lorem ipsum dolor sit amet consectetur. Aenean pharetra sagittis sed est viverra vel feugiat morbi pellentesque. Aenean vel viverra commodo ac turpis donec ut. Scelerisque amet venenatis nec lorem egestas. Tincidunt volutpat feugiat tincidunt orci gravida pretium ut scelerisque.
                     </p>
                 </div>
