@@ -30,18 +30,18 @@ function LazyNumberFlow({ targetValue }: LazyNumberFlowProps) {
 const technologies = [
     {
         id: 1,
-        alt: "react",
-        image: "/technologies/react.svg",
+        alt: "notion",
+        image: "/technologies/notion.svg",
     },
     {
         id: 2,
-        alt: "flutter",
-        image: "/technologies/flutter.svg",
+        alt: "discord",
+        image: "/technologies/discord.svg",
     },
     {
         id: 3,
-        alt: "solidity",
-        image: "/technologies/solidity.svg",
+        alt: "office",
+        image: "/technologies/office.svg",
     },
     {
         id: 4,
@@ -51,23 +51,48 @@ const technologies = [
     },
     {
         id: 5,
-        alt: "react",
-        image: "/technologies/react.svg",
+        alt: "vercel",
+        image: "/technologies/vercel.svg",
     },
     {
         id: 6,
-        alt: "flutter",
-        image: "/technologies/flutter.svg",
+        alt: "github",
+        image: "/technologies/github.svg",
     },
     {
         id: 7,
-        alt: "solidity",
-        image: "/technologies/solidity.svg",
+        alt: "figma",
+        image: "/technologies/figma.svg",
     },
     {
         id: 8,
-        alt: "python",
-        image: "/technologies/python.svg",
+        alt: "canva",
+        image: "/technologies/canva.svg",
+    },
+    {
+        id: 9,
+        alt: "openai",
+        image: "/technologies/openai.svg",
+    },
+    {
+        id: 10,
+        alt: "javascript",
+        image: "/technologies/javascript.svg",
+    },
+    {
+        id: 11,
+        alt: "nodejs",
+        image: "/technologies/nodejs.svg",
+    },
+    {
+        id: 12,
+        alt: "django",
+        image: "/technologies/django.svg",
+    },
+    {
+        id: 13,
+        alt: "csharp",
+        image: "/technologies/c-sharp.svg",
     },
 ];
 
@@ -321,8 +346,8 @@ export default function Home() {
       {/* Contact Section */}
       <section className="w-full flex justify-center items-center flex-col px-8 md:px-30 my-16 md:my-32">
 
-        {/* Tecnologies Box */}
-        <div className="max-w-[1032px] w-full px-4 md:px-6 py-6 md:py-10 rounded-xl   text-center boxes-tecnologies-style justify-evenly overflow-hidden">
+      {/* Tecnologies Box */}
+      <div className="max-w-[1032px] w-full px-4 md:px-6 py-6 md:py-10 rounded-xl   text-center boxes-tecnologies-style justify-evenly overflow-hidden">
           <Swiper
             modules={[Autoplay]}
             spaceBetween={20}
