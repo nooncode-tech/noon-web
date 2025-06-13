@@ -101,7 +101,7 @@ export default function Home() {
   const solutions = [
     { id: 1, title: "Web Solutions", icon: "/services_icons/web.svg", url: "web-solutions" },
     { id: 2, title: "Mobile Solutions", icon: "/services_icons/mobile.svg", url: "mobile-solutions" },
-    { id: 3, title: "AI & Automation", icon: "/services_icons/ia.svg", url: "ai-automation" },
+    { id: 3, title: "AI & Automation", icon: "/services_icons/ia.svg", url: "ai-and-automation" },
     { id: 4, title: "Custom Software", icon: "/services_icons/custom_software.svg", url: "custom-software" },
     { id: 5, title: "Desktop Solutions", icon: "/services_icons/desktop.svg", url: "desktop-solutions" },
     { id: 6, title: "Blockchain Services", icon: "/services_icons/blockchain.svg", url: "blockchain-services" },
