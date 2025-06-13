@@ -12,7 +12,7 @@ const menuItems = [
     { label: "Home", path: "/" },
     { label: "Services", path: "/services" },
     { label: "About", path: "/about" },
-    { label: "Contact", path: "/contact", className: "border rounded-[6px] border-[var(--principal-border-button)] px-5 py-2" },
+    { label: "Contact", path: "/contact", className: "navbar-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!" },
 ]
 
 const Navbar = () => {

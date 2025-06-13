@@ -126,6 +126,24 @@ h1 {
   letter-spacing: 1px;
 }
 
+.navbar-button {
+  background-color: var(--principal-button-color);
+  color: var(--principal-title-color);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 10px 20px;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.navbar-button:hover {
+  background-color: var(--principal-button-color-hover);
+}
+
 .principal-button {
   background-color: var(--principal-button-color);
   color: var(--principal-title-color);

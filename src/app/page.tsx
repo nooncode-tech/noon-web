@@ -114,48 +114,66 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="h-auto md:h-screen w-full flex flex-col items-center justify-end md:justify-center pt-40 md:pt-0 px-8 md:px-16">
-        <div className="w-full flex flex-col items-center justify-center relative">
+        <div className="w-full flex flex-row items-center justify-center relative gap-10">
+          
+          <div className="w-[50%] flex flex-col items-start justify-center text-center">
 
-          <h1 className="hero-title-h1 font-bold Riosark text-white max-w-[900px] text-center">
-            We boost your vision with digital innovation
-          </h1>
+            <h1 className="hero-title-h1 font-bold Riosark text-white max-w-[900px] text-start!">
+              We boost your vision with digital innovation
+            </h1>
 
-          <div className="relative mt-9">
-            <Link
-              href="/"
-              className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
-            >
-              <span className="sm:text-sm">Anyways</span>
+            <p className="max-w-[600px] text-white text-start text-[14px] mt-6">
+              Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat odio fringilla augue. Sed dolor tempor in magna urna. Rhoncus feugiat turpis duis ultrices sit lacus magna euismod.
+            </p>
 
-            </Link>
+            <div className="relative mt-9" style={{ width: 'fit-content' }}>
+              <Link
+                href="/"
+                className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
+              >
+                <span className="sm:text-sm">Anyways</span>
+
+              </Link>
+            </div>
+
+            <p className="max-w-[600px] text-white text-start text-[14px] mt-6">
+              Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat odio fringilla augue.
+            </p>
+
+            {/* Semi-Arc
+            <div className="relative w-full flex justify-center items-center" style={{ minHeight: '150px' }}>
+              <div className="absolute top-0 left-0 right-0 w-full max-w-[1440px] overflow-hidden m-auto">
+                <svg
+                  className="w-full h-auto"
+                  viewBox="0 0 1440 300"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M0,300 
+                    C360,0 1080,0 1440,300" 
+                    stroke="url(#gradient)" 
+                    strokeWidth="7" 
+                    fill="none"
+                  />
+                  <defs>
+                    <linearGradient id="gradient" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+                      <stop offset="0" stopColor="#FFF" stopOpacity="0" />
+                      <stop offset="0.5" stopColor="#FFF" />
+                      <stop offset="1" stopColor="#FFF" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+            */}
+
           </div>
 
-          {/* Semi-Arc */}
-          <div className="relative w-full flex justify-center items-center" style={{ minHeight: '150px' }}>
-            <div className="absolute top-0 left-0 right-0 w-full max-w-[1440px] overflow-hidden m-auto">
-              <svg
-                className="w-full h-auto"
-                viewBox="0 0 1440 300"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="none"
-              >
-                <path
-                  d="M0,300 
-                  C360,0 1080,0 1440,300" 
-                  stroke="url(#gradient)" 
-                  strokeWidth="7" 
-                  fill="none"
-                />
-                <defs>
-                  <linearGradient id="gradient" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stopColor="#FFF" stopOpacity="0" />
-                    <stop offset="0.5" stopColor="#FFF" />
-                    <stop offset="1" stopColor="#FFF" stopOpacity="0" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
+          <div className="w-[50%]">
+
+            
           </div>
 
         </div>
@@ -346,78 +364,82 @@ export default function Home() {
       {/* Contact Section */}
       <section className="w-full flex justify-center items-center flex-col px-8 md:px-30 my-16 md:my-32">
 
-      {/* Tecnologies Box */}
-      <div className="max-w-[1032px] w-full px-4 md:px-6 py-6 md:py-10 rounded-xl   text-center boxes-tecnologies-style justify-evenly overflow-hidden">
-          <Swiper
-            modules={[Autoplay]}
-            spaceBetween={20}
-            loop={true}
-            autoplay={{
-                delay: 0,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: false,
-            }}
-            speed={5000}
-            freeMode={true}
-            grabCursor={true} 
-            breakpoints={{
-                0: {
-                  slidesPerView: 2,
-                  centeredSlides: false,
-                  spaceBetween: 10,
-                  },
-                768: {
-                    slidesPerView: 3,
-                    centeredSlides: false,
-                },
-                1024: {
-                    slidesPerView: 4,
-                    centeredSlides: false,
-                },
-            }}
-            className="technologies-swiper"
-        >
-            {technologies.map((tech) => (
-              <SwiperSlide key={tech.id}>
-                <Image
-                  src={tech.image}
-                  alt={tech.alt}
-                  width={100}
-                  height={100}
-                  className="tecnologies-img"
-                />
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+        <h1 className="text-[22px] Riosark font-bold text-white max-w-[500px] text-center">
+          Technologies we use
+        </h1>
 
-      {/* Contact  */}
-      <div className="w-full max-w-[1440px] flex flex-col md:flex-row items-center justify-center mt-16 md:mt-30 gap-10">
-        <div className="w-[100%] md:w-[50%]">
-            <h2 className="hero-title-h1 font-bold Riosark text-white max-w-[900px] text-left hero-title-h2">
-              Contact us
-            </h2>
-            <p className="max-w-[480px] text-white text-left text-[14px] mt-10">
-              Lorem ipsum dolor sit amet consectetur. Aenean pharetra sagittis sed est viverra vel feugiat morbi pellentesque. Aenean vel viverra commodo ac turpis donec ut. Scelerisque amet venenatis nec lorem egestas. Tincidunt volutpat feugiat tincidunt orci gravida pretium ut scelerisque. Vulputate volutpat amet malesuada proin. Cras tempor pellentesque viverra molestie diam gravida.
-            </p>
-            <div className="relative mt-9" style={{ width: 'fit-content' }}>
-              <Link
-                href="/"
-                className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
-              >
-                <span className="text-base sm:text-sm md:text-base">Let's talk</span>
-              </Link>
+        {/* Tecnologies Box */}
+        <div className="max-w-[1032px] w-full px-4 md:px-6 py-6 md:py-10 rounded-xl   text-center boxes-tecnologies-style justify-evenly overflow-hidden mt-10">
+            <Swiper
+              modules={[Autoplay]}
+              spaceBetween={20}
+              loop={true}
+              autoplay={{
+                  delay: 0,
+                  disableOnInteraction: false,
+                  pauseOnMouseEnter: false,
+              }}
+              speed={5000}
+              freeMode={true}
+              grabCursor={true} 
+              breakpoints={{
+                  0: {
+                    slidesPerView: 2,
+                    centeredSlides: false,
+                    spaceBetween: 10,
+                    },
+                  768: {
+                      slidesPerView: 3,
+                      centeredSlides: false,
+                  },
+                  1024: {
+                      slidesPerView: 4,
+                      centeredSlides: false,
+                  },
+              }}
+              className="technologies-swiper"
+          >
+              {technologies.map((tech) => (
+                <SwiperSlide key={tech.id}>
+                  <Image
+                    src={tech.image}
+                    alt={tech.alt}
+                    width={100}
+                    height={100}
+                    className="tecnologies-img"
+                  />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+
+        {/* Contact  */}
+        <div className="w-full max-w-[1440px] flex flex-col md:flex-row items-center justify-center mt-16 md:mt-30 gap-10">
+          <div className="w-[100%] md:w-[50%]">
+              <h2 className="hero-title-h1 font-bold Riosark text-white max-w-[900px] text-left hero-title-h2">
+                Contact us
+              </h2>
+              <p className="max-w-[480px] text-white text-left text-[14px] mt-10">
+                Lorem ipsum dolor sit amet consectetur. Aenean pharetra sagittis sed est viverra vel feugiat morbi pellentesque. Aenean vel viverra commodo ac turpis donec ut. Scelerisque amet venenatis nec lorem egestas. Tincidunt volutpat feugiat tincidunt orci gravida pretium ut scelerisque. Vulputate volutpat amet malesuada proin. Cras tempor pellentesque viverra molestie diam gravida.
+              </p>
+              <div className="relative mt-9" style={{ width: 'fit-content' }}>
+                <Link
+                  href="/"
+                  className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
+                >
+                  <span className="text-base sm:text-sm md:text-base">Let's talk</span>
+                </Link>
+              </div>
             </div>
-          </div>
-          <div className="w-[100%] md:w-[50%] max-w-[600px] border border-[var(--secondary-border-color)] rounded-xl overflow-hidden p-10">
-            <Image
-              src="/placeholder.png"
-              alt="Contact Us"
-              width={500}
-              height={500}
-              className="w-full h-auto"
-            />
-          </div>
+            <div className="w-[100%] md:w-[50%] max-w-[600px] border border-[var(--secondary-border-color)] rounded-xl overflow-hidden p-10">
+              <Image
+                src="/placeholder.png"
+                alt="Contact Us"
+                width={500}
+                height={500}
+                className="w-full h-auto"
+              />
+            </div>
         </div>
 
       </section>
