@@ -12,7 +12,7 @@ const menuItems = [
     { label: "Home", path: "/" },
     { label: "Services", path: "/services" },
     { label: "About", path: "/about" },
-    { label: "Contact", path: "/contact", className: "border rounded-4xl border-[var(--principal-border-button)] px-5 py-2" },
+    { label: "Contact", path: "/contact", className: "border rounded-[6px] border-[var(--principal-border-button)] px-5 py-2" },
 ]
 
 const Navbar = () => {
