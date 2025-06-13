@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link";
-import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useInView } from 'react-intersection-observer';
 import CountUp from 'react-countup';
@@ -75,14 +74,14 @@ export default function Home() {
 
   {/* Services Boxes */}
   const solutions = [
-    { id: 1, title: "Web Solutions", icon: "/services_icons/web.svg" },
-    { id: 2, title: "Mobile Solutions", icon: "/services_icons/mobile.svg" },
-    { id: 3, title: "AI & Automation", icon: "/services_icons/ia.svg" },
-    { id: 4, title: "Custom Software", icon: "/services_icons/custom_software.svg" },
-    { id: 5, title: "Desktop Solutions", icon: "/services_icons/desktop.svg" },
-    { id: 6, title: "Blockchain Services", icon: "/services_icons/blockchain.svg" },
-    { id: 7, title: "Network Solutions", icon: "/services_icons/network.svg" },
-    { id: 8, title: "Game Development", icon: "/services_icons/game.svg" },
+    { id: 1, title: "Web Solutions", icon: "/services_icons/web.svg", url: "web-solutions" },
+    { id: 2, title: "Mobile Solutions", icon: "/services_icons/mobile.svg", url: "mobile-solutions" },
+    { id: 3, title: "AI & Automation", icon: "/services_icons/ia.svg", url: "ai-automation" },
+    { id: 4, title: "Custom Software", icon: "/services_icons/custom_software.svg", url: "custom-software" },
+    { id: 5, title: "Desktop Solutions", icon: "/services_icons/desktop.svg", url: "desktop-solutions" },
+    { id: 6, title: "Blockchain Services", icon: "/services_icons/blockchain.svg", url: "blockchain-services" },
+    { id: 7, title: "Network Solutions", icon: "/services_icons/network.svg", url: "network-solutions" },
+    { id: 8, title: "Game Development", icon: "/services_icons/game.svg", url: "game-development" },
   ];
 
   return (
@@ -150,9 +149,10 @@ export default function Home() {
 
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-10 mt-10">
           {solutions.map((solution) => (
-            <div
+            <Link
               key={solution.id}
-              className="px-6 py-6 rounded-xl max-w-[190px] flex flex-col items-center text-center bg-gray-800/30 border border-gray-700/50"
+              className="px-6 py-6 rounded-xl max-w-[190px] flex flex-col items-center text-center bg-gray-800/30 border border-gray-700/50 transition-colors duration-200 hover:bg-gray-700/70 cursor-pointer"
+              href={`/services/${solution.url}`}
             >
               {/* Icono (Placeholder) */}
               <div className="w-20 h-20 mb-4 rounded-full flex items-center justify-center">
@@ -167,7 +167,7 @@ export default function Home() {
               <h3 className="text-[12px] md:text-[17px] font-semibold text-white Riosark">
                 {solution.title}
               </h3>
-            </div>
+            </Link>
           ))}
         </div>
 
