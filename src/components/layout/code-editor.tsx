@@ -86,7 +86,7 @@ const usuario = "Desarrollador";`,
         <div
             className={`
                 w-full 
-                max-w-[650px]
+                max-w-[680px]
                 mx-auto 
                 rounded 
                 overflow-hidden 
