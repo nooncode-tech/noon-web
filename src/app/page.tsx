@@ -177,7 +177,7 @@ export default function Home() {
             <div className="mt-7">
               <AvatarGroup>
                 {AVATARS.map((avatar, index) => (
-                  <Avatar key={index} className="w-10 h-10 border-5 border-green-100">
+                  <Avatar key={index} className="w-10 h-10 border-5 border-lime-600">
                     <AvatarImage src={avatar.src} />
                     <AvatarFallback>{avatar.fallback}</AvatarFallback>
                     <AvatarGroupTooltip>
@@ -188,7 +188,7 @@ export default function Home() {
               </AvatarGroup>
             </div>
 
-            <p className="max-w-[600px] text-white text-start text-[11px] mt-6">
+            <p className="max-w-[600px] text-white text-start text-[12px] mt-6">
               Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat odio fringilla augue.
             </p>
 
