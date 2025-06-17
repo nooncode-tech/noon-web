@@ -6,11 +6,14 @@ import { useInView } from 'react-intersection-observer';
 import CountUp from 'react-countup';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
+import { MotionEffect } from '@/components/animate-ui/effects/motion-effect';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
+
+import CodeEditorWidget from '@/components/layout/code-editor'
 
 import {
   Avatar,
@@ -152,8 +155,8 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="h-auto md:h-screen w-full flex flex-col items-center justify-end md:justify-center pt-40 md:pt-0 px-8 md:px-16">
-        <div className="w-full flex flex-row items-center justify-center relative gap-10">
-          
+        <div className="w-full max-w-[1440px] flex flex-row items-center justify-center relative gap-10">
+
           <div className="w-[50%] flex flex-col items-start justify-center text-center">
 
             <h1 className="hero-title-h1 font-bold Riosark text-white max-w-[900px] text-start!">
@@ -177,7 +180,7 @@ export default function Home() {
             <div className="mt-7">
               <AvatarGroup>
                 {AVATARS.map((avatar, index) => (
-                  <Avatar key={index} className="w-10 h-10 border-5 border-lime-600">
+                  <Avatar key={index} className="w-10 h-10 border-3 border-[#0B4008]">
                     <AvatarImage src={avatar.src} />
                     <AvatarFallback>{avatar.fallback}</AvatarFallback>
                     <AvatarGroupTooltip>
@@ -225,7 +228,17 @@ export default function Home() {
 
           <div className="w-[50%]">
 
-            
+            <MotionEffect
+              slide={{
+                direction: 'down',
+              }}
+              fade
+              zoom
+              inView
+              delay={0.3}>
+              <CodeEditorWidget />
+            </MotionEffect>
+
           </div>
 
         </div>
