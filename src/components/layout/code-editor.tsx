@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Copy, Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useTypewriter } from "react-simple-typewriter"
 
 interface CodeEditorWidgetProps {
     title?: string
@@ -15,8 +16,7 @@ interface CodeEditorWidgetProps {
 export default function CodeEditorWidget({
     title = "page.tsx",
     language = "typescript",
-    code = `// Ejemplo de código JavaScript
-function saludar(nombre) {
+    code = `function saludar(nombre) {
 console.log("Hola, " + nombre + "!");
 return "Bienvenido, " + nombre;
 }
@@ -44,6 +44,15 @@ const usuario = "Desarrollador";`,
 }: CodeEditorWidgetProps) {
     const [copied, setCopied] = useState(false)
 
+    // Typewriter hook
+    const [text, { isDone }] = useTypewriter({
+        words: [code],
+        typeSpeed: Math.max(1, Math.floor(1000 / code.length)),
+        deleteSpeed: 99999,
+        delaySpeed: 99999,
+        loop: 1
+    })
+
     const copyToClipboard = async () => {
         try {
             await navigator.clipboard.writeText(code)
@@ -54,35 +63,31 @@ const usuario = "Desarrollador";`,
         }
     }
 
-    const highlightCode = (code: string) => {
-        // Escapar HTML primero
-        let highlighted = code
+    const highlightCode = (str: string) => {
+        let highlighted = str
             .replace(/&/g, "&amp;")
             .replace(/</g, "&lt;")
             .replace(/>/g, "&gt;")
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#39;")
-
-        // Aplicar syntax highlighting de forma más segura
         highlighted = highlighted
-            // Comentarios
             .replace(/(\/\/.*$|#.*$)/gm, '<span style="color: #6b7280;">$1</span>')
-            // Palabras clave
             .replace(
                 /\b(function|const|let|var|if|else|for|while|return|import|export|class|extends|def|print|from|as)\b/g,
                 '<span style="color: #a855f7;">$1</span>',
             )
-            // Objetos/métodos comunes
             .replace(/\b(console|document|window)\b/g, '<span style="color: #3b82f6;">$1</span>')
-            // Strings (más simple y seguro)
             .replace(/(&quot;[^&]*?&quot;|&#39;[^&]*?&#39;)/g, '<span style="color: #10b981;">$1</span>')
-            // Números
             .replace(/\b(\d+)\b/g, '<span style="color: #f97316;">$1</span>')
-
         return highlighted
     }
 
     const lines = code.split("\n")
+    // typewriterText (text) puede estar vacío al principio, así que forzamos al menos una línea
+    const shownLines: string[] = (text ? text : "").split("\n")
+
+    // Lógica para mostrar el cursor animado sólo mientras no termina de escribir
+    const showCursor = !isDone
 
     return (
         <div
@@ -100,6 +105,8 @@ const usuario = "Desarrollador";`,
             style={{
                 fontSize: '11px',
                 lineHeight: 1.35,
+                maxHeight: '460px',
+                minHeight: '340px'
             }}
         >
             {/* Barra de título de la ventana */}
@@ -120,11 +127,7 @@ const usuario = "Desarrollador";`,
                         <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
                         <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                     </div>
-
-                    {/* Título del archivo */}
                     <span className={`text-[10px] font-medium ${theme === "dark" ? "text-gray-200" : "text-gray-700"}`}>{title}</span>
-
-                    {/* Indicador de lenguaje */}
                     <span
                         className={`text-[9px] px-1 py-0.5 rounded ${theme === "dark" ? "bg-blue-600 text-blue-100" : "bg-blue-100 text-blue-800"
                             }`}
@@ -132,8 +135,6 @@ const usuario = "Desarrollador";`,
                         {language}
                     </span>
                 </div>
-
-                {/* Botón de copiar */}
                 <Button
                     variant="ghost"
                     size="sm"
@@ -160,7 +161,6 @@ const usuario = "Desarrollador";`,
                 </Button>
             </div>
 
-            {/* Contenido principal: barra de archivos + código */}
             <div className={`flex ${theme === "dark" ? "bg-[var(--principal-background-color)]" : "bg-gray-50"}`} style={{height: 'calc(100% - 26px - 22px)', minHeight: 0}}>
                 {/* Barra lateral de archivos */}
                 <div
@@ -176,7 +176,7 @@ const usuario = "Desarrollador";`,
                         EXPLORER
                     </div>
                     <div className="flex-1 flex flex-col gap-0.5">
-                        {files.map((file, idx) => (
+                        {files.map((file) => (
                             <div
                                 key={file}
                                 className={`
@@ -197,7 +197,10 @@ const usuario = "Desarrollador";`,
                 </div>
 
                 {/* Código */}
-                <div className="flex-1 overflow-x-auto overflow-y-auto" style={{ minHeight: 0 }}>
+                <div
+                    className="flex-1 overflow-x-auto overflow-y-auto"
+                    style={{ minHeight: 0 }}
+                >
                     <div className="flex">
                         {/* Números de línea */}
                         <div
@@ -209,7 +212,7 @@ const usuario = "Desarrollador";`,
                                 }
                             `}
                         >
-                            {lines.map((_, index) => (
+                            {Array.from({ length: Math.max(1, shownLines.length) }).map((_, index) => (
                                 <div key={index} className="text-[9.5px] leading-4 font-mono">
                                     {index + 1}
                                 </div>
@@ -220,17 +223,21 @@ const usuario = "Desarrollador";`,
                         <div className="flex-1 py-2 px-2">
                             <pre
                                 className={`
-                                    text-[10.5px] font-mono leading-4
+                                    text-[10.5px] font-mono leading-4 min-h-[280px]
                                     ${theme === "dark" ? "text-gray-100" : "text-gray-800"}
                                 `}
                                 style={{ margin: 0 }}
                             >
-                                {lines.map((line, index) => (
+                                {shownLines.map((line: string, index: number) => (
                                     <div key={index} className="min-h-[1.10rem]">
                                         <code
                                             style={{ fontSize: "10.5px" }}
                                             dangerouslySetInnerHTML={{
-                                                __html: line ? highlightCode(line) : "&nbsp;",
+                                                __html:
+                                                    highlightCode(line) +
+                                                    (showCursor && index === shownLines.length - 1
+                                                        ? '<span class="animate-pulse inline-block w-2" style="color:#a3a3a3;">|</span>'
+                                                        : ""),
                                             }}
                                         />
                                     </div>
