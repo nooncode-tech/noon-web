@@ -12,6 +12,16 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from '@/components/ui/avatar';
+import {
+  AvatarGroup,
+  AvatarGroupTooltip,
+} from '@/components/animate-ui/components/avatar-group';
+
 interface LazyNumberFlowProps {
   targetValue: number;
 }
@@ -25,6 +35,34 @@ function LazyNumberFlow({ targetValue }: LazyNumberFlowProps) {
     </span>
   );
 }
+
+const AVATARS = [
+  {
+    src: 'https://pbs.twimg.com/profile_images/1909615404789506048/MTqvRsjo_400x400.jpg',
+    fallback: 'SK',
+    tooltip: 'Skyleen',
+  },
+  {
+    src: 'https://pbs.twimg.com/profile_images/1593304942210478080/TUYae5z7_400x400.jpg',
+    fallback: 'CN',
+    tooltip: 'Shadcn',
+  },
+  {
+    src: 'https://pbs.twimg.com/profile_images/1677042510839857154/Kq4tpySA_400x400.jpg',
+    fallback: 'AW',
+    tooltip: 'Adam Wathan',
+  },
+  {
+    src: 'https://pbs.twimg.com/profile_images/1783856060249595904/8TfcCN0r_400x400.jpg',
+    fallback: 'GR',
+    tooltip: 'Guillermo Rauch',
+  },
+  {
+    src: 'https://pbs.twimg.com/profile_images/1534700564810018816/anAuSfkp_400x400.jpg',
+    fallback: 'JH',
+    tooltip: 'Jhey',
+  },
+];
 
 const technologies = [
     {
@@ -136,7 +174,21 @@ export default function Home() {
               </Link>
             </div>
 
-            <p className="max-w-[600px] text-white text-start text-[14px] mt-6">
+            <div className="mt-7">
+              <AvatarGroup>
+                {AVATARS.map((avatar, index) => (
+                  <Avatar key={index} className="w-10 h-10 border-5 border-green-100">
+                    <AvatarImage src={avatar.src} />
+                    <AvatarFallback>{avatar.fallback}</AvatarFallback>
+                    <AvatarGroupTooltip>
+                      <p>{avatar.tooltip}</p>
+                    </AvatarGroupTooltip>
+                  </Avatar>
+                ))}
+              </AvatarGroup>
+            </div>
+
+            <p className="max-w-[600px] text-white text-start text-[11px] mt-6">
               Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat odio fringilla augue.
             </p>
 
