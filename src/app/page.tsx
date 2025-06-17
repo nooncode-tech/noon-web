@@ -180,7 +180,7 @@ export default function Home() {
             <div className="mt-7">
               <AvatarGroup>
                 {AVATARS.map((avatar, index) => (
-                  <Avatar key={index} className="w-10 h-10 border-3 border-[#0B4008]">
+                  <Avatar key={index} className="w-10 h-10 border-3 border-[var(--principal-button-color)]">
                     <AvatarImage src={avatar.src} />
                     <AvatarFallback>{avatar.fallback}</AvatarFallback>
                     <AvatarGroupTooltip>
