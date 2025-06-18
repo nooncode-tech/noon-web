@@ -157,7 +157,7 @@ export default function Home() {
       <section className="h-auto md:h-screen w-full flex flex-col items-center justify-end md:justify-center pt-40 md:pt-0 px-8 md:px-16">
         <div className="w-full max-w-[1440px] flex flex-row items-center justify-center relative gap-10">
 
-          <div className="w-[50%] flex flex-col items-start justify-center text-center">
+          <div className="w-[full] md:w-[50%] flex flex-col items-start justify-center text-center">
 
             <h1 className="hero-title-h1 font-bold Riosark text-white max-w-[900px] text-start!">
               We boost your vision with digital innovation
@@ -230,7 +230,7 @@ export default function Home() {
 
           </div>
 
-          <div className="w-[50%]">
+          <div className="w-[full] md:w-[50%]">
 
             <MotionEffect
               slide={{

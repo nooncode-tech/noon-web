@@ -266,7 +266,9 @@ export default function LandingPage() {
                 fontSize: '11px',
                 lineHeight: 1.35,
                 maxHeight: '360px',
-                minHeight: '360px'
+                minHeight: '360px',
+                // Sombra clara personalizada:
+                boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
             }}
         >
             {/* Barra de título de la ventana */}
