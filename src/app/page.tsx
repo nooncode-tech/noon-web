@@ -181,11 +181,15 @@ export default function Home() {
               <AvatarGroup>
                 {AVATARS.map((avatar, index) => (
                   <Avatar key={index} className="w-10 h-10 border-3 border-[var(--principal-button-color)]">
-                    <AvatarImage src={avatar.src} />
-                    <AvatarFallback>{avatar.fallback}</AvatarFallback>
-                    <AvatarGroupTooltip>
-                      <p>{avatar.tooltip}</p>
-                    </AvatarGroupTooltip>
+                    <Link
+                      href="/about"
+                    >
+                      <AvatarImage src={avatar.src} />
+                      <AvatarFallback>{avatar.fallback}</AvatarFallback>
+                      <AvatarGroupTooltip>
+                        <p>{avatar.tooltip}</p>
+                      </AvatarGroupTooltip>
+                    </Link>
                   </Avatar>
                 ))}
               </AvatarGroup>
@@ -381,44 +385,44 @@ export default function Home() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1440px] w-[80%] mt-10">
           
           <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
-            <div className="flex flex-col items-center text-center px-10">
+            <div className="flex flex-col items-center text-center px-8">
               <h2 className="hero-title-h2 font-bold text-white">
                 <LazyNumberFlow targetValue={45} />
               </h2>
-              <p className="text-gray-300 max-w-[544px] text-center text-[14px]">
+              <p className="text-gray-300 max-w-[544px] text-center text-[12px]">
                 Active programers
               </p>
             </div>
           </div>
 
           <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
-            <div className="flex flex-col items-center text-center px-10">
+            <div className="flex flex-col items-center text-center px-8">
               <h2 className="hero-title-h2 font-bold text-white">
                 <LazyNumberFlow targetValue={120} />
               </h2>
-              <p className="text-gray-300 max-w-[544px] text-center text-[14px]">
+              <p className="text-gray-300 max-w-[544px] text-center text-[12px]">
                 Completed projects
               </p>
             </div>
           </div>
 
           <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
-            <div className="flex flex-col items-center text-center px-10">
+            <div className="flex flex-col items-center text-center px-8">
               <h2 className="hero-title-h2 font-bold text-white">
                 <LazyNumberFlow targetValue={95} />
               </h2>
-              <p className="text-gray-300 max-w-[544px] text-center text-[14px]">
+              <p className="text-gray-300 max-w-[544px] text-center text-[12px]">
                 Satisfied customers
               </p>
             </div>
           </div>
 
           <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
-            <div className="flex flex-col items-center text-center px-10">
+            <div className="flex flex-col items-center text-center px-8">
               <h2 className="hero-title-h2 font-bold text-white">
                 <LazyNumberFlow targetValue={83} />
               </h2>
-              <p className="text-gray-300 max-w-[544px] text-center text-[14px]">
+              <p className="text-gray-300 max-w-[544px] text-center text-[12px]">
                 Solutions implemented
               </p>
             </div>
