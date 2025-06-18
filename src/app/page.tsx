@@ -158,6 +158,14 @@ export default function Home() {
         <div className="w-full max-w-[1440px] flex flex-col md:flex-row items-center justify-center relative gap-10">
 
           <div className="w-[full] md:w-[50%] flex flex-col items-start justify-center text-center">
+            <MotionEffect
+              slide={{
+                direction: 'down',
+              }}
+              fade
+              zoom
+              inView
+              delay={0.3}>
 
             <h1 className="hero-title-h1 font-bold Riosark text-white max-w-[900px] text-start!">
               We boost your vision with digital innovation
@@ -227,6 +235,7 @@ export default function Home() {
               </div>
             </div>
             */}
+            </MotionEffect>
 
           </div>
 
@@ -268,7 +277,7 @@ export default function Home() {
                   <Image
                     src="/hero-section/mobile.png"
                     alt="Placeholder"
-                    className="absolute bottom-[-44px] right-[-120px] w-[300px] h-auto object-cover rounded-xl"
+                    className="absolute bottom-[-38px] right-[-119px] w-[300px] h-auto object-cover rounded-xl"
                     width={2000}
                     height={2000}
                   />
