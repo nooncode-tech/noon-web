@@ -154,8 +154,8 @@ export default function Home() {
     <main className="min-h-screen">
 
       {/* Hero Section */}
-      <section className="h-auto md:h-screen w-full flex flex-col items-center justify-end md:justify-center pt-40 md:pt-0 px-8 md:px-16">
-        <div className="w-full max-w-[1440px] flex flex-row items-center justify-center relative gap-10">
+      <section className="h-auto md:h-screen w-full flex flex-col items-center justify-end md:justify-center pt-30 pb-10 md:pt-40 md:pb-0 md:pt-0 px-8 md:px-16">
+        <div className="w-full max-w-[1440px] flex flex-col md:flex-row items-center justify-center relative gap-10">
 
           <div className="w-[full] md:w-[50%] flex flex-col items-start justify-center text-center">
 
