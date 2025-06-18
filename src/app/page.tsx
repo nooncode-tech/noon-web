@@ -230,7 +230,7 @@ export default function Home() {
 
           </div>
 
-          <div className="w-[full] md:w-[50%]">
+          <div className="w-[full] md:w-[50%] relative">
 
             <MotionEffect
               slide={{
@@ -241,6 +241,20 @@ export default function Home() {
               inView
               delay={0.3}>
               <CodeEditorWidget />
+              <Image
+                src="/hero-section/desktop.png"
+                alt="Placeholder"
+                className="absolute bottom-[-23px] right-[-48px] w-[400px] h-auto object-cover rounded-xl"
+                width={2000}
+                height={2000}
+              />
+              <Image
+                src="/hero-section/mobile.png"
+                alt="Placeholder"
+                className="absolute bottom-[-14px] right-[-130px] w-[360px] h-auto object-cover rounded-xl"
+                width={2000}
+                height={2000}
+              />
             </MotionEffect>
 
           </div>
