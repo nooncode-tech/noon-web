@@ -151,10 +151,10 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen flex flex-col gap-30">
 
       {/* Hero Section */}
-      <section className="max-h-auto md:max-h-[760px] h-auto md:h-[100vh] w-full flex flex-col items-center justify-end md:justify-center pt-30 pb-10 md:pt-0 md:pb-0 md:pt-0 px-8 md:px-16">
+      <section className="w-full flex flex-col items-center justify-end md:justify-center px-8 md:px-16 overflow-hidden border-b border-[var(--secondary-border-color)] py-30">
         <div className="w-full max-w-[1440px] flex flex-col md:flex-row items-center justify-center relative gap-10">
 
           <div className="w-[full] md:w-[50%] flex flex-col items-start justify-center text-center">
@@ -241,20 +241,38 @@ export default function Home() {
               inView
               delay={0.3}>
               <CodeEditorWidget />
-              <Image
-                src="/hero-section/desktop.png"
-                alt="Placeholder"
-                className="absolute bottom-[-53px] right-[-30px] w-[460px] h-auto object-cover rounded-xl"
-                width={2000}
-                height={2000}
-              />
-              <Image
-                src="/hero-section/mobile.png"
-                alt="Placeholder"
-                className="absolute bottom-[-44px] right-[-183px] w-[380px] h-auto object-cover rounded-xl"
-                width={2000}
-                height={2000}
-              />
+              <MotionEffect
+                slide={{
+                  direction: 'down',
+                }}
+                fade
+                zoom
+                inView
+                delay={1.2}>
+                  <Image
+                    src="/hero-section/desktop.png"
+                    alt="Placeholder"
+                    className="absolute bottom-[-53px] right-[-30px] w-[460px] h-auto object-cover rounded-xl"
+                    width={2000}
+                    height={2000}
+                  />
+              </MotionEffect>
+              <MotionEffect
+                slide={{
+                  direction: 'down',
+                }}
+                fade
+                zoom
+                inView
+                delay={1.5}>
+                  <Image
+                    src="/hero-section/mobile.png"
+                    alt="Placeholder"
+                    className="absolute bottom-[-44px] right-[-120px] w-[300px] h-auto object-cover rounded-xl"
+                    width={2000}
+                    height={2000}
+                  />
+              </MotionEffect>
             </MotionEffect>
 
           </div>
@@ -263,7 +281,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="w-full flex flex-col items-center justify-center pt-8 md:pt-0 mt-0 md:mt-8 px-8 md:px-16">
+      <section className="w-full flex flex-col items-center justify-center pb-30 px-8 md:px-16 border-b border-[var(--secondary-border-color)]">
 
         <h1 className="hero-title-h1 font-bold Riosark text-white max-w-[900px] text-center">
           Services
@@ -300,7 +318,7 @@ export default function Home() {
       </section>
 
       {/* Work Procedure Section */}
-      <section className="relative pt-16 md:pt-32 overflow-hidden px-4 md:px-16">
+      <section className="relative overflow-hidden px-4 md:px-16 ">
         <div className="max-w-7xl mx-auto px-4 md:px-12">
           {/* Section Title */}
           <div className="text-center flex flex-col items-center">
@@ -370,11 +388,11 @@ export default function Home() {
       </section>
 
       {/* Why noon? Section First Row */}
-      <section className="w-full flex flex-col mt-16 md:mt-32 border-t border-b border-[var(--secondary-border-color)]">
+      <section className="w-full flex flex-col border-t border-b border-[var(--secondary-border-color)] ">
 
         {/* Fist Row */}
         <div className="flex items-center w-full flex-col md:flex-row px-8 md:px-16 max-w-[1440px] m-auto">
-            <div className="w-full md:w-[55%] flex flex-col justify-center items-center md:items-start py-10 pr-0 md:py-16 border-r-0 md:border-r-1 md:border-[var(--secondary-border-color)]">
+            <div className="w-full md:w-[55%]  flex flex-col justify-center items-center md:items-start py-10 pr-0 md:py-16 border-r-0 md:border-r-1 md:border-[var(--secondary-border-color)]">
               <h2 className="hero-title-h2 font-bold text-white Riosark ">Why <span className="text-[var(--principal-border-button)]">noon?</span></h2>
               <p className="mt-4 text-gray-300 max-w-[544px] text-[13px] text-center md:text-left">
                 Lorem ipsum dolor sit amet consectetur. Risus feugiat augue nisl leo augue ullamcorper tristique placerat. Malesuada pulvinar nunc malesuada a. Eu et egestas gravida at mi ut viverra pellentesque. Fermentum proin nibh faucibus in orci mattis est ultrices sit.
@@ -395,8 +413,8 @@ export default function Home() {
       </section>
 
       {/* Why noon? Section Three Row V2 */}
-      <section className="w-full flex justify-center items-center flex-col px-8 md:px-16 my-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1440px] w-[80%] mt-10">
+      <section className="w-full flex justify-center items-center flex-col px-8 md:px-16 border-b border-[var(--secondary-border-color)] pb-30">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1440px] w-[80%] ">
           
           <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
             <div className="flex flex-col items-center text-center px-8">
@@ -444,15 +462,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="w-full flex justify-center items-center flex-col px-8 md:px-30 my-16 md:my-32">
+      {/* Technologies Section */}
+      <section className="w-full flex justify-center items-center flex-col px-8 md:px-30 border-b border-[var(--secondary-border-color)] pb-30">
 
         <h1 className="text-[22px] Riosark font-bold text-white max-w-[500px] text-center">
           Technologies we use
         </h1>
 
-        {/* Tecnologies Box */}
-        <div className="max-w-[1032px] w-full px-4 md:px-6 py-6 md:py-10 rounded-xl   text-center boxes-tecnologies-style justify-evenly overflow-hidden mt-10">
+        {/* Technologies Box */}
+        <div className="max-w-[1032px] w-full px-4 md:px-6 py-6 md:py-10 rounded-xl text-center boxes-tecnologies-style justify-evenly overflow-hidden mt-10">
             <Swiper
               modules={[Autoplay]}
               spaceBetween={20}
@@ -496,8 +514,11 @@ export default function Home() {
           </Swiper>
         </div>
 
-        {/* Contact  */}
-        <div className="w-full max-w-[1440px] flex flex-col md:flex-row items-center justify-center mt-16 md:mt-30 gap-10">
+      </section>
+
+      {/* Contact Section */}
+      <section className="w-full flex flex-col items-center justify-center px-8 md:px-16 pb-30">
+        <div className="w-full max-w-[1440px] flex flex-col md:flex-row items-center justify-center gap-10">
           <div className="w-[100%] md:w-[50%]">
               <h2 className="hero-title-h1 font-bold Riosark text-white max-w-[900px] text-left hero-title-h2">
                 Contact us
@@ -524,8 +545,8 @@ export default function Home() {
               />
             </div>
         </div>
-
       </section>
+
 
     </main>
 
