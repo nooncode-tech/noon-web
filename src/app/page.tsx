@@ -251,7 +251,7 @@ export default function Home() {
               <Image
                 src="/hero-section/mobile.png"
                 alt="Placeholder"
-                className="absolute bottom-[-44px] right-[-193px] w-[420px] h-auto object-cover rounded-xl"
+                className="absolute bottom-[-44px] right-[-183px] w-[380px] h-auto object-cover rounded-xl"
                 width={2000}
                 height={2000}
               />
