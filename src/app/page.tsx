@@ -306,6 +306,9 @@ export default function Home() {
               key={solution.id}
               className="px-6 py-6 rounded-xl max-w-[190px] flex flex-col items-center text-center bg-gray-800/30 border border-gray-700/50 transition-colors duration-200 hover:bg-gray-700/70 cursor-pointer"
               href={`/services/${solution.url}`}
+              style={{
+                  boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+              }}
             >
               {/* Icono (Placeholder) */}
               <div className="w-20 h-20 mb-4 rounded-full flex items-center justify-center">
@@ -327,7 +330,7 @@ export default function Home() {
       </section>
 
       {/* Work Procedure Section */}
-      <section className="relative overflow-hidden px-4 md:px-16 ">
+      <section className="relative px-4 md:px-16 ">
         <div className="max-w-7xl mx-auto px-4 md:px-12">
           {/* Section Title */}
           <div className="text-center flex flex-col items-center">
@@ -341,10 +344,13 @@ export default function Home() {
             </p>
 
             <div
-              className="max-w-[80%] flex flex-col md:flex-row flex-wrap justify-center items-center pt-6 gap-6"
+              className="max-w-[80%] flex flex-col md:flex-row justify-center items-center pt-6 gap-8"
             >
               <div
-                className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
+                className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] shadow-xl"
+                style={{
+                  boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+                }}
               >
                 <Image
                   src="/placeholder.png"
@@ -361,6 +367,9 @@ export default function Home() {
               </div>
               <div
                 className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
+                style={{
+                  boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+                }}
               >
                 <Image
                   src="/placeholder.png"
@@ -377,6 +386,9 @@ export default function Home() {
               </div>
               <div
                 className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
+                style={{
+                  boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+                }}
               >
                 <Image
                   src="/placeholder.png"
