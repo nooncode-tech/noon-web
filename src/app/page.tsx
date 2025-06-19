@@ -261,7 +261,7 @@ export default function Home() {
                   <Image
                     src="/hero-section/desktop.png"
                     alt="Placeholder"
-                    className="absolute bottom-[-53px] right-[-30px] w-[460px] h-auto object-cover rounded-xl"
+                    className="absolute bottom-[-53px] right-[-100px] w-[460px] h-auto object-cover rounded-xl"
                     width={2000}
                     height={2000}
                   />
@@ -277,7 +277,7 @@ export default function Home() {
                   <Image
                     src="/hero-section/mobile.png"
                     alt="Placeholder"
-                    className="absolute bottom-[-38px] right-[-119px] w-[300px] h-auto object-cover rounded-xl"
+                    className="absolute bottom-[-38px] right-[146px] w-[300px] h-auto object-cover rounded-xl"
                     width={2000}
                     height={2000}
                   />
