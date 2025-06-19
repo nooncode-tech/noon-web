@@ -76,58 +76,58 @@ const technologies = [
     {
         id: 2,
         alt: "discord",
-        image: "/technologies/discord.svg",
+        image: "/technologies/discord.png",
     },
     {
         id: 3,
         alt: "office",
-        image: "/technologies/office.svg",
+        image: "/technologies/office.png",
     },
     {
         id: 4,
         alt: "python",
-        image: "/technologies/python.svg",
+        image: "/technologies/python.png",
         
     },
     {
         id: 5,
         alt: "vercel",
-        image: "/technologies/vercel.svg",
+        image: "/technologies/vercel.png",
     },
     {
         id: 6,
         alt: "github",
-        image: "/technologies/github.svg",
+        image: "/technologies/github.png",
     },
     {
         id: 7,
         alt: "figma",
-        image: "/technologies/figma.svg",
+        image: "/technologies/figma.png",
     },
     {
         id: 8,
         alt: "canva",
-        image: "/technologies/canva.svg",
+        image: "/technologies/canva.png",
     },
     {
         id: 9,
         alt: "openai",
-        image: "/technologies/openai.svg",
+        image: "/technologies/openai.png",
     },
     {
         id: 10,
         alt: "javascript",
-        image: "/technologies/javascript.svg",
+        image: "/technologies/javascript.png",
     },
     {
         id: 11,
         alt: "nodejs",
-        image: "/technologies/nodejs.svg",
+        image: "/technologies/nodejs.png",
     },
     {
         id: 12,
         alt: "django",
-        image: "/technologies/django.svg",
+        image: "/technologies/django.png",
     },
     {
         id: 13,
@@ -300,7 +300,7 @@ export default function Home() {
           Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat odio fringilla augue. Sed dolor tempor in magna urna. Rhoncus feugiat turpis duis ultrices sit lacus magna euismod.
         </p>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-10 mt-10">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-14 mt-10">
           {solutions.map((solution) => (
             <Link
               key={solution.id}
@@ -539,8 +539,8 @@ export default function Home() {
 
       {/* Contact Section */}
       <section className="w-full flex flex-col items-center justify-center px-8 md:px-16 pb-30">
-        <div className="w-full max-w-[1440px] flex flex-col md:flex-row items-center justify-center gap-10">
-          <div className="w-[100%] md:w-[50%]">
+        <div className="w-full max-w-[1440px] flex flex-col md:flex-row items-center justify-center gap-30">
+          <div className="w-[100%] md:w-[30%]">
               <h2 className="hero-title-h1 font-bold Riosark text-white max-w-[900px] text-left hero-title-h2">
                 Contact us
               </h2>
@@ -556,14 +556,42 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-            <div className="w-[100%] md:w-[50%] max-w-[600px] border border-[var(--secondary-border-color)] rounded-xl overflow-hidden p-10">
-              <Image
-                src="/placeholder.png"
-                alt="Contact Us"
-                width={500}
-                height={500}
-                className="w-full h-auto"
-              />
+            <div className="w-[100%] md:w-[70%] max-w-[700px] border border-[var(--secondary-border-color)] rounded-xl overflow-hidden p-10">
+              <form className="w-full">
+                  <div className="flex flex-col gap-4 text-white">
+                      <label htmlFor="name">Name</label>
+                      <input
+                          type="text"
+                          id="name" // Añadí id para el label
+                          placeholder="Your Name"
+                          className="p-3 md:p-4 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" // Añadí estilos para bg y text
+                      />
+                      <label htmlFor="email">Email</label>
+                      <input
+                          type="email"
+                          id="email" // Añadí id para el label
+                          placeholder="Your Email"
+                          className="p-3 md:p-4 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
+                      <label htmlFor="message">Message</label>
+                      <textarea
+                          id="message" // Añadí id para el label
+                          placeholder="Your Message"
+                          rows={5} // Establecí un número de filas por defecto
+                          className="p-3 md:p-4 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      ></textarea>
+                      <span className="flex items-center gap-2 text-sm md:text-base"> {/* Alineación y ajuste de tamaño de fuente */}
+                          <input type="checkbox" id="privacy-policy" className="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2" /> {/* ID para checkbox y estilos básicos */}
+                          <label htmlFor="privacy-policy">I have read and accept the privacy policies</label>
+                      </span>
+                      <button
+                          type="submit"
+                          className="principal-button flex gap-3 justify-center items-center mt-4 text-white hover:text-[var(--principal-background-color)]!" // Añadí margin-top al botón
+                      >
+                          <span className="text-base">Send Message</span>
+                      </button>
+                  </div>
+              </form>
             </div>
         </div>
       </section>

@@ -62,9 +62,9 @@ export default function Contact() {
 
                         <div className="w-[50%] rounded-2xl overflow-hidden">
                             <Image
-                                src="/map2.png"
+                                src="/map3.PNG"
                                 alt="Contact Image"
-                                className="w-full h-full  object-cover"
+                                className="w-full h-full  object-contain"
                                 width={2000}
                                 height={1000}
                                 priority

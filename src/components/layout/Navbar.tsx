@@ -11,7 +11,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 const menuItems = [
     { label: "Home", path: "/" },
     { label: "Services", path: "/services" },
-    { label: "About", path: "/about" },
+    { label: "About Us", path: "/about" },
     { label: "Contact", path: "/contact", className: "navbar-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!" },
 ]
 

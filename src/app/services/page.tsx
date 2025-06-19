@@ -28,7 +28,7 @@ export default function Services() {
         <main className="min-h-screen text-white">
 
             {/* Hero Section */}
-            <section className=" w-full flex flex-col items-center justify-end pt-40 md:pt-40 px-8 md:px-16 relative mx-auto">
+            <section className=" w-full flex flex-col items-center justify-end pt-10 md:pt-16 px-8 md:px-16 relative mx-auto">
                 <div className="w-full flex flex-col items-start relative max-w-[1440px] pb-10 md:pb-20 justify-between gap-5">
                     <h1 className="hero-title-h1 font-bold Riosark max-w-[900px] text-center">
                         Services

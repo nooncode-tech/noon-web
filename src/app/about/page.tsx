@@ -11,7 +11,7 @@ export default function About() {
         <main className="min-h-screen text-white">
 
             {/* Hero Section */}
-            <section className="h-auto md:h-screen w-full flex flex-col md:flex-row items-center md:items-center justify-end md:justify-center pt-40 md:pt-0 px-6 md:px-16 background-about relative overflow-hidden gap-8 border-b border-[var(--secondary-border-color)]">
+            <section className="h-auto md:h-[80vh] w-full flex flex-col md:flex-row items-center md:items-center justify-end md:justify-center px-6 md:px-16 background-about relative overflow-hidden gap-8 border-b border-[var(--secondary-border-color)]">
 
                 <div className="w-full md:w-[50%] flex flex-col items-center md:items-end justify-center relative text-center md:text-right px-4 md:px-0">
                     <h1 className="hero-title-h1 font-bold Riosark text-white max-w-[900px]">
@@ -41,7 +41,7 @@ export default function About() {
             </section>
 
             {/* Work Team Section */}
-            <section className="relative pt-16 md:pt-20 overflow-hidden px-4 md:px-16">
+            <section className="relative overflow-hidden px-4 md:px-16 border-b border-[var(--secondary-border-color)] py-30">
                 <div className="max-w-7xl mx-auto px-4 md:px-12">
                     {/* Section Title */}
                     <div className="text-center">
@@ -60,7 +60,7 @@ export default function About() {
             </section>
 
             {/* Work Methodology Section */}
-            <section className="relative  overflow-hidden pt-16 md:pt-20 px-4 md:px-16">
+            <section className="relative  overflow-hidden px-4 md:px-16 border-b border-[var(--secondary-border-color)] py-30">
                 <div className="max-w-7xl mx-auto px-4 md:px-12">
                     {/* Section Title */}
                     <div className="text-center flex flex-col items-center">
@@ -74,10 +74,13 @@ export default function About() {
                         </p>
             
                         <div
-                            className="max-w-[80%] flex flex-col md:flex-row flex-wrap justify-center items-center pt-6 gap-6"
+                            className="max-w-[80%] flex flex-col md:flex-row justify-center items-center pt-6 gap-8"
                         >
                             <div
                             className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
+                            style={{
+                                boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+                            }}
                             >
                             <Image
                                 src="/placeholder.png"
@@ -94,6 +97,9 @@ export default function About() {
                             </div>
                             <div
                             className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
+                            style={{
+                                boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+                            }}
                             >
                             <Image
                                 src="/placeholder.png"
@@ -110,6 +116,9 @@ export default function About() {
                             </div>
                             <div
                             className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
+                            style={{
+                                boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+                            }}
                             >
                             <Image
                                 src="/placeholder.png"
@@ -130,7 +139,7 @@ export default function About() {
             </section>
 
             {/* Brand Values Section */}
-            <section className="relative pt-16 px-4 overflow-hidden md:pt-32 md:px-16">
+            <section className="relative px-4 overflow-hidden md:px-16 border-b border-[var(--secondary-border-color)] py-30">
                 <div className="max-w-7xl mx-auto flex flex-col gap-8 px-0 md:px-12 md:flex-row md:gap-10">
                     
                     <div className="w-full flex flex-col items-center justify-center relative md:w-[60%] md:flex-row md:items-center md:justify-end">
@@ -168,10 +177,12 @@ export default function About() {
             </section>
 
             {/* Mision Vision */}
-            <section className="w-full flex justify-center items-center flex-col px-8 md:px-16 pt-16 md:pt-32">
+            <section className="w-full flex justify-center items-center flex-col px-8 md:px-16 border-b border-[var(--secondary-border-color)] py-30">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1440px] w-[70%]">
                 
-                    <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl boxes-services-style">
+                    <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl boxes-services-style" style={{
+                                boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+                            }}>
                         <div className="flex flex-col items-center text-center px-10">
                         <h2 className="hero-title-h2 font-bold text-white Riosark">
                             Mision
@@ -182,7 +193,9 @@ export default function About() {
                         </div>
                     </div>
 
-                    <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl boxes-services-style">
+                    <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl boxes-services-style" style={{
+                                boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+                            }}>
                         <div className="flex flex-col items-center text-center px-10">
                         <h2 className="hero-title-h2 font-bold text-white Riosark">
                             Vision
@@ -197,7 +210,7 @@ export default function About() {
             </section>
 
             {/* NOON Section */}
-            <section className="relative pb-16 md:pb-15 overflow-hidden px-4 md:px-16 pt-30">
+            <section className="relative overflow-hidden px-4 md:px-16 py-20">
                 <div className="max-w-7xl mx-auto px-4 md:px-12">
                     {/* Section Title */}
                     <div className="text-center flex flex-col items-center">
@@ -220,7 +233,7 @@ export default function About() {
             </section>
 
             {/* NOON Contact Section */}
-            <section className="relative py-12 md:py-15 overflow-hidden px-4 md:px-16 border-t border-[var(--secondary-border-color)]">
+            <section className="relative overflow-hidden px-4 md:px-16 border-t border-[var(--secondary-border-color)] py-20">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-0">
                     {/* Section Title and Text */}
                     <div className="w-full md:w-[80%] flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-10">
