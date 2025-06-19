@@ -506,16 +506,16 @@ export default function Home() {
               grabCursor={true} 
               breakpoints={{
                   0: {
-                    slidesPerView: 2,
+                    slidesPerView: 3,
                     centeredSlides: false,
                     spaceBetween: 10,
                     },
                   768: {
-                      slidesPerView: 3,
+                      slidesPerView: 4,
                       centeredSlides: false,
                   },
                   1024: {
-                      slidesPerView: 4,
+                      slidesPerView: 5,
                       centeredSlides: false,
                   },
               }}
