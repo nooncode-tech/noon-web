@@ -17,7 +17,7 @@ export default function Contact() {
 
                 <div className="max-w-[1440px] min-h-[1000px] w-full flex flex-col-reverse md:flex-row gap-8 md:gap-20 justify-center items-center"> {/* Cambiado a flex-col en móvil, ajuste de gap */}
 
-                    <div className="flex w-full border border-gray-700/50 rounded-2xl p-6 md:p-16 mt-8 md:mt-0 gap-10"> {/* w-full en móvil, padding y margin top ajustados */}
+                    <div className="flex w-full border border-[var(--secondary-border-color)] rounded-2xl p-6 md:p-16 mt-8 md:mt-0 gap-10"> {/* w-full en móvil, padding y margin top ajustados */}
 
                         <div className="w-[50%]">
 
@@ -29,21 +29,21 @@ export default function Contact() {
                                         type="text"
                                         id="name" // Añadí id para el label
                                         placeholder="Your Name"
-                                        className="p-3 md:p-4 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" // Añadí estilos para bg y text
+                                        className="p-3 md:p-4 rounded-md border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500" // Añadí estilos para bg y text
                                     />
                                     <label htmlFor="email">Email</label>
                                     <input
                                         type="email"
                                         id="email" // Añadí id para el label
                                         placeholder="Your Email"
-                                        className="p-3 md:p-4 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="p-3 md:p-4 rounded-md border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />
                                     <label htmlFor="message">Message</label>
                                     <textarea
                                         id="message" // Añadí id para el label
                                         placeholder="Your Message"
                                         rows={5} // Establecí un número de filas por defecto
-                                        className="p-3 md:p-4 rounded-md border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="p-3 md:p-4 rounded-md border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     ></textarea>
                                     <span className="flex items-center gap-2 text-sm md:text-base"> {/* Alineación y ajuste de tamaño de fuente */}
                                         <input type="checkbox" id="privacy-policy" className="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2" /> {/* ID para checkbox y estilos básicos */}
