@@ -247,7 +247,7 @@ export default function Home() {
               }}
               fade
               zoom
-              inView
+              
               delay={0.3}>
               <CodeEditorWidget />
             </MotionEffect>
@@ -257,7 +257,7 @@ export default function Home() {
                 }}
                 fade
                 zoom
-                inView
+                
                 delay={1.2}>
                   <Image
                     src="/hero-section/desktop.png"
@@ -273,12 +273,12 @@ export default function Home() {
                 }}
                 fade
                 zoom
-                inView
+                
                 delay={1.5}>
                   <Image
                     src="/hero-section/mobile.png"
                     alt="Placeholder"
-                    className="absolute bottom-[-21px] md:bottom-[-36px] right-[80px] md:right-[146px] w-[230px] md:w-[300px] h-auto object-cover rounded-xl"
+                    className="absolute bottom-[-21px] md:bottom-[-36px] right-[87.5px] md:right-[146px] w-[230px] md:w-[300px] h-auto object-cover rounded-xl"
                     width={2000}
                     height={2000}
                   />
