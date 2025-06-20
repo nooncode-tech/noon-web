@@ -161,6 +161,7 @@ h1 {
 
 .principal-button:hover {
   background-color: var(--principal-button-color-hover);
+  color: var(--principal-background-color);
 }
 
 .secondary-button {
