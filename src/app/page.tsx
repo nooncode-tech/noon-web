@@ -151,10 +151,10 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen flex flex-col gap-30">
+    <main className="min-h-screen flex flex-col gap-10 md:gap-30">
 
       {/* Hero Section */}
-      <section className="w-full flex flex-col items-center justify-end md:justify-center px-8 md:px-16 overflow-hidden border-b border-[var(--secondary-border-color)] py-30">
+      <section className="w-full flex flex-col items-center justify-end md:justify-center px-8 md:px-16 overflow-hidden border-b border-[var(--secondary-border-color)] py-10 md:py-30">
         <div className="w-full max-w-[1440px] flex flex-col md:flex-row items-center justify-center relative gap-10">
 
           <div className="w-[full] md:w-[50%] flex flex-col items-start justify-center text-center">
@@ -290,7 +290,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="w-full flex flex-col items-center justify-center pb-30 px-8 md:px-16 border-b border-[var(--secondary-border-color)]">
+      <section className="w-full flex flex-col items-center justify-center pb-10 md:pb-30 px-8 md:px-16 border-b border-[var(--secondary-border-color)]">
 
         <h1 className="hero-title-h1 font-bold Riosark text-white max-w-[900px] text-center">
           Services
@@ -434,7 +434,7 @@ export default function Home() {
       </section>
 
       {/* Why noon? Section Three Row V2 */}
-      <section className="w-full flex justify-center items-center flex-col px-8 md:px-16 border-b border-[var(--secondary-border-color)] pb-30">
+      <section className="w-full flex justify-center items-center flex-col px-8 md:px-16 border-b border-[var(--secondary-border-color)] pb-10 md:pb-30">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-[1440px] w-[80%] ">
           
           <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
@@ -484,7 +484,7 @@ export default function Home() {
       </section>
 
       {/* Technologies Section */}
-      <section className="w-full flex justify-center items-center flex-col px-8 md:px-30 border-b border-[var(--secondary-border-color)] pb-30">
+      <section className="w-full flex justify-center items-center flex-col px-8 md:px-30 border-b border-[var(--secondary-border-color)] pb-10 md:pb-30">
 
         <h1 className="text-[22px] Riosark font-bold text-white max-w-[500px] text-center">
           Technologies we use
@@ -538,8 +538,8 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section className="w-full flex flex-col items-center justify-center px-8 md:px-16 pb-30">
-        <div className="w-full max-w-[1440px] flex flex-col md:flex-row items-center justify-center gap-30">
+      <section className="w-full flex flex-col items-center justify-center px-8 md:px-16 pb-10 md:pb-30">
+        <div className="w-full max-w-[1440px] flex flex-col md:flex-row items-center justify-center gap-10 md:gap-30">
           <div className="w-[100%] md:w-[30%]">
               <h2 className="hero-title-h1 font-bold Riosark text-white max-w-[900px] text-left hero-title-h2">
                 Contact us
@@ -595,7 +595,6 @@ export default function Home() {
             </div>
         </div>
       </section>
-
 
     </main>
 
