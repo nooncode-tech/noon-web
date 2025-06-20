@@ -363,8 +363,8 @@ h1 {
   }
   .tecnologies-img {
   width: auto;
-  max-height: 35px;
-  height: 35px;
+  max-height: 50px;
+  height: 50px;
   }
 }
 
@@ -381,7 +381,7 @@ h1 {
   }
   .tecnologies-img {
   width: auto;
-  max-height: 20px;
-  height: 20px;
+  max-height: 35px;
+  height: 35px;
 }
 }
