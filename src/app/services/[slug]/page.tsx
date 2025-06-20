@@ -80,8 +80,8 @@ export default function ServicesPage() {
         <main className="min-h-screen text-white">
 
             {/* ... Hero Section igual ... */}
-            <section className="w-full flex flex-col items-center justify-end pt-40 md:pt-40 px-8 md:px-16 relative mx-auto">
-                <div className="w-full flex flex-col items-start relative max-w-[1440px] pb-10 md:pb-20 justify-between gap-5">
+            <section className="w-full flex flex-col items-center justify-end pt-10 md:pt-16 px-8 md:px-16 relative mx-auto">
+                <div className="w-full flex flex-col items-start relative max-w-[1440px] pb-0 md:pb-10 md:pb-20 justify-between gap-5">
                 <h1 className="hero-title-h1 font-bold Riosark max-w-[900px] text-center">
                     Services
                 </h1>
@@ -187,7 +187,7 @@ export default function ServicesPage() {
             </section>
 
             {/* NOON Section */}
-            <section className="relative py-12 md:py-15 overflow-hidden px-4 md:px-16 border-t border-[var(--secondary-border-color)] mt-20">
+            <section className="relative py-12 md:py-15 overflow-hidden px-4 md:px-16 border-t border-[var(--secondary-border-color)] mt-0 md:mt-20">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-0">
                     {/* Section Title and Text */}
                     <div className="w-full md:w-[80%] flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-10">

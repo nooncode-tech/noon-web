@@ -11,7 +11,7 @@ export default function About() {
         <main className="min-h-screen text-white">
 
             {/* Hero Section */}
-            <section className="h-auto md:h-[80vh] w-full flex flex-col md:flex-row items-center md:items-center justify-end md:justify-center px-6 md:px-16 background-about relative overflow-hidden gap-8 border-b border-[var(--secondary-border-color)]">
+            <section className="h-[40vh] md:h-[80vh] w-full flex flex-col md:flex-row items-center md:items-center justify-center px-6 md:px-16 background-about relative overflow-hidden gap-8 border-b border-[var(--secondary-border-color)]">
 
                 <div className="w-full md:w-[50%] flex flex-col items-center md:items-end justify-center relative text-center md:text-right px-4 md:px-0">
                     <h1 className="hero-title-h1 font-bold Riosark text-white max-w-[900px]">
@@ -22,7 +22,7 @@ export default function About() {
                     </p>
                 </div>
 
-                <div className="w-full md:w-[50%] relative h-64 md:h-full flex items-center justify-start md:justify-center">
+                <div className="w-full md:w-[50%] relative h-64 md:h-full hidden md:flex items-center justify-start md:justify-center">
                     <Image
                         src="/base/LOGO-NOON-WHITE.svg"
                         alt="About Hero Image"
@@ -41,7 +41,7 @@ export default function About() {
             </section>
 
             {/* Work Team Section */}
-            <section className="relative overflow-hidden px-4 md:px-16 border-b border-[var(--secondary-border-color)] py-30">
+            <section className="relative overflow-hidden px-4 md:px-16 border-b border-[var(--secondary-border-color)] py-10 md:py-30">
                 <div className="max-w-7xl mx-auto px-4 md:px-12">
                     {/* Section Title */}
                     <div className="text-center">
@@ -60,7 +60,7 @@ export default function About() {
             </section>
 
             {/* Work Methodology Section */}
-            <section className="relative  overflow-hidden px-4 md:px-16 border-b border-[var(--secondary-border-color)] py-30">
+            <section className="relative  overflow-hidden px-4 md:px-16 border-b border-[var(--secondary-border-color)] py-10 md:py-30">
                 <div className="max-w-7xl mx-auto px-4 md:px-12">
                     {/* Section Title */}
                     <div className="text-center flex flex-col items-center">
@@ -139,7 +139,7 @@ export default function About() {
             </section>
 
             {/* Brand Values Section */}
-            <section className="relative px-4 overflow-hidden md:px-16 border-b border-[var(--secondary-border-color)] py-30">
+            <section className="relative px-4 overflow-hidden md:px-16 border-b border-[var(--secondary-border-color)] py-10 md:py-30">
                 <div className="max-w-7xl mx-auto flex flex-col gap-8 px-0 md:px-12 md:flex-row md:gap-10">
                     
                     <div className="w-full flex flex-col items-center justify-center relative md:w-[60%] md:flex-row md:items-center md:justify-end">
@@ -165,7 +165,7 @@ export default function About() {
                         </div>
                     </div>
 
-                    <div className="w-full flex flex-col items-center justify-center text-center mt-8 md:mt-0 md:w-[40%] md:items-start md:text-left">
+                    <div className="w-full flex flex-col items-center justify-center text-center mt-0 md:mt-8 md:mt-0 md:w-[40%] md:items-start md:text-left">
                         <h2 className="text-3xl font-bold text-white Riosark max-w-[240px] md:text-[40px]">
                             Brand Values
                         </h2>
@@ -177,8 +177,8 @@ export default function About() {
             </section>
 
             {/* Mision Vision */}
-            <section className="w-full flex justify-center items-center flex-col px-8 md:px-16 border-b border-[var(--secondary-border-color)] py-30">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1440px] w-[70%]">
+            <section className="w-full flex justify-center items-center flex-col px-8 md:px-16 border-b border-[var(--secondary-border-color)] py-10 md:py-30">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1440px] w-[90%] md:w-[70%]">
                 
                     <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl boxes-services-style" style={{
                                 boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
@@ -210,7 +210,7 @@ export default function About() {
             </section>
 
             {/* NOON Section */}
-            <section className="relative overflow-hidden px-4 md:px-16 py-20">
+            <section className="relative overflow-hidden px-4 md:px-16 py-10 md:py-20">
                 <div className="max-w-7xl mx-auto px-4 md:px-12">
                     {/* Section Title */}
                     <div className="text-center flex flex-col items-center">
@@ -233,7 +233,7 @@ export default function About() {
             </section>
 
             {/* NOON Contact Section */}
-            <section className="relative overflow-hidden px-4 md:px-16 border-t border-[var(--secondary-border-color)] py-20">
+            <section className="relative overflow-hidden px-4 md:px-16 border-t border-[var(--secondary-border-color)] py-10 md:py-20">
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-0">
                     {/* Section Title and Text */}
                     <div className="w-full md:w-[80%] flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-10">
