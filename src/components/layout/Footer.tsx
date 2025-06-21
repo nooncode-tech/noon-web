@@ -7,7 +7,7 @@ import { FaXTwitter } from "react-icons/fa6"
 
 const Footer: React.FC = () => {
   return (
-    <footer className="text-gray-300 py-12 border-t border-[var(--secondary-border-color)]">
+    <footer className="text-gray-300 py-12 border-t border-[var(--secondary-border-color)] max-w-[2600px] mx-auto">
       <div className="max-w-[1440px] mx-auto px-8 md:px-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-5 border-b border-[var(--secondary-border-color)] pb-8">
             

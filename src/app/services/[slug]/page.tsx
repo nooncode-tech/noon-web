@@ -86,7 +86,7 @@ export default function ServicesPage() {
                     Services
                 </h1>
                 <p className="text-[12px] md:text-[14px]">
-                    Lorem ipsum dolor sit amet consectetur. Aenean pharetra sagittis sed est viverra vel feugiat morbi pellentesque. Aenean vel viverra commodo ac turpis donec ut. Scelerisque amet venenatis nec lorem egestas. Tincidunt volutpat feugiat tincidunt orci gravida pretium ut scelerisque.
+                    Comprehensive tech solutions, tailored to your vision. At Noon, we offer end-to-end development services—from websites and mobile apps to AI systems, blockchain, and custom software. Whatever you need, we build it with precision, speed, and quality.
                 </p>
                 </div>
             </section>

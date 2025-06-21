@@ -151,7 +151,7 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen flex flex-col gap-10 md:gap-30">
+    <main className="min-h-screen flex flex-col gap-10 md:gap-30 max-w-[2600px] mx-auto">
 
       {/* Hero Section */}
       <section className="w-full flex flex-col items-center justify-end md:justify-center px-8 md:px-16 overflow-hidden border-b border-[var(--secondary-border-color)] py-10 md:py-30">
@@ -168,11 +168,11 @@ export default function Home() {
               delay={0.3}>
 
             <h1 className="hero-title-h1 font-bold Riosark text-white max-w-[900px] text-start!">
-              We boost your vision with digital innovation
+              We develop your tech idea into code
             </h1>
 
             <p className="max-w-[600px] text-white text-start text-[14px] mt-6">
-              Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat odio fringilla augue. Sed dolor tempor in magna urna. Rhoncus feugiat turpis duis ultrices sit lacus magna euismod.
+              At Noon, we turn your idea into code with the highest quality, record-fast delivery, and the best pricing in the market. Whether it's a simple website or a full-scale professional AI solution—we've got you covered.
             </p>
 
             <div className="relative mt-9" style={{ width: 'fit-content' }}>
@@ -204,7 +204,7 @@ export default function Home() {
             </div>
 
             <p className="max-w-[600px] text-white text-start text-[12px] mt-6">
-              Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat odio fringilla augue.
+              Backed by 500+ expert developers and a team fully committed to your goals, Noon turns vision into reality—with precision, speed, and long-term partnership.
             </p>
 
             {/* Semi-Arc
@@ -297,7 +297,7 @@ export default function Home() {
         </h1>
 
         <p className="max-w-[600px] text-white text-center text-[14px] mt-6">
-          Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat odio fringilla augue. Sed dolor tempor in magna urna. Rhoncus feugiat turpis duis ultrices sit lacus magna euismod.
+          Comprehensive tech solutions, tailored to your vision. At Noon, we offer end-to-end development services—from websites and mobile apps to AI systems, blockchain, and custom software. Whatever you need, we build it with precision, speed, and quality.
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-14 mt-10">
@@ -338,13 +338,12 @@ export default function Home() {
               Work Procedure
             </h1>
             <p className="max-w-[600px] text-white text-center text-[14px] mt-6 md:my-6 m-auto">
-              Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat
-              odio fringilla augue. Sed dolor tempor in magna urna. Rhoncus feugiat
-              turpis duis ultrices sit lacus magna euismod.
+              Clear steps. Reliable results.
+At Noon, we follow a streamlined process that keeps you involved and your project on track—from the first visual prototype to final delivery. Our method ensures speed, precision, and full alignment with your vision.
             </p>
 
             <div
-              className="max-w-[80%] flex flex-col md:flex-row justify-center items-center pt-6 gap-8"
+              className="max-w-[80%] flex flex-col md:flex-row justify-stretch  pt-6 gap-8"
             >
               <div
                 className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] shadow-xl"
@@ -359,10 +358,9 @@ export default function Home() {
                   width={100}
                   height={100}
                 />
-                <h2 className="Riosark">Discovery</h2>
+                <h2 className="Riosark">Visual Prototype</h2>
                 <p className="text-[12px]">
-                  Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum
-                  volutpat odio fringilla augue.
+                  We create a visual prototype of your idea to review details together and make adjustments before development.
                 </p>
               </div>
               <div
@@ -378,10 +376,9 @@ export default function Home() {
                   width={100}
                   height={100}
                 />
-                <h2 className="Riosark">Strategy</h2>
+                <h2 className="Riosark">Development</h2>
                 <p className="text-[12px]">
-                  Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum
-                  volutpat odio fringilla augue.
+                  We turn the prototype into functional code, built with quality and efficiency.
                 </p>
               </div>
               <div
@@ -397,10 +394,9 @@ export default function Home() {
                   width={100}
                   height={100}
                 />
-                <h2 className="Riosark">Development</h2>
+                <h2 className="Riosark">Delivery</h2>
                 <p className="text-[12px]">
-                  Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum
-                  volutpat odio fringilla augue.
+                  We deliver the final product on time—ready to launch and fully tailored to your needs.
                 </p>
               </div>
             </div>
@@ -416,7 +412,8 @@ export default function Home() {
             <div className="w-full md:w-[55%]  flex flex-col justify-center items-center md:items-start py-10 pr-0 md:py-16 border-r-0 md:border-r-1 md:border-[var(--secondary-border-color)]">
               <h2 className="hero-title-h2 font-bold text-white Riosark ">Why <span className="text-[var(--principal-border-button)]">noon?</span></h2>
               <p className="mt-4 text-gray-300 max-w-[544px] text-[13px] text-center md:text-left">
-                Lorem ipsum dolor sit amet consectetur. Risus feugiat augue nisl leo augue ullamcorper tristique placerat. Malesuada pulvinar nunc malesuada a. Eu et egestas gravida at mi ut viverra pellentesque. Fermentum proin nibh faucibus in orci mattis est ultrices sit.
+                Because we don’t just write code—we develop your idea.
+We’re a team committed to making your vision a reality. With over 500 expert developers, agile execution, and a process tailored to your goals, we deliver results with speed, quality, and the best pricing in the market.
               </p>
             </div>
             <div className="flex w-full md:w-[45%] justify-center md:justify-center items-center text-base relative pb-4 md:pb-0">
@@ -440,7 +437,7 @@ export default function Home() {
           <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
             <div className="flex flex-col items-center text-center px-8">
               <h2 className="hero-title-h2 font-bold text-white">
-                <LazyNumberFlow targetValue={45} />
+                <LazyNumberFlow targetValue={500} />
               </h2>
               <p className="text-gray-300 max-w-[544px] text-center text-[12px]">
                 Active programers
@@ -451,7 +448,7 @@ export default function Home() {
           <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl bg-gray-800/30 border border-gray-700/50">
             <div className="flex flex-col items-center text-center px-8">
               <h2 className="hero-title-h2 font-bold text-white">
-                <LazyNumberFlow targetValue={120} />
+                <LazyNumberFlow targetValue={250} />
               </h2>
               <p className="text-gray-300 max-w-[544px] text-center text-[12px]">
                 Completed projects
