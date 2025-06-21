@@ -165,7 +165,7 @@ export default function ServicesPage() {
                             <Image
                                 src={solution.image}
                                 alt={`${solution.title} illustration`}
-                                className="rounded-xl border border-[var(--secondary-border-color)] p-4 md:p-10 w-full h-auto max-h-[480px] object-cover"
+                                className="rounded-xl border border-[var(--secondary-border-color)] p-4 md:p-10 w-full h-auto max-h-[300px] object-cover"
                                 width={540}
                                 height={540}
                                 priority={index < 2}
