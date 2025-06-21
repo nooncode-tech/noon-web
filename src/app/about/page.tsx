@@ -18,7 +18,8 @@ export default function About() {
                         Who we are
                     </h1>
                     <p className="hero-title-p max-w-[465px] mt-4 text-[14px]">
-                        Lorem ipsum dolor sit amet consectetur. Volutpat in risus sit vulputate penatibus. Urna nisi sollicitudin imperdiet vel commodo ultricies vitae velit varius. Non suspendisse consequat vulputate in.
+                        Noon is a global tech company focused on custom digital solutions.
+                        With 500+ expert developers and a results-driven approach, we deliver efficient, high-quality technology tailored to your goals.
                     </p>
                 </div>
 
@@ -49,9 +50,10 @@ export default function About() {
                             Work team
                         </h1>
                         <p className="max-w-[600px] text-white text-center text-[14px] my-10 md:my-6 m-auto">
-                            Lorem ipsum dolor sit amet consectetur. Leo scelerisque in non sit sem sit id neque. Blandit at vulputate vitae tincidunt. Commodo mauris egestas viverra enim diam natoque rhoncus adipiscing.
+                            At Noon, our team comprises highly qualified developers, designers, and technology specialists dedicated to delivering excellence.
+                            We operate with precision, collaboration, and a clear focus on achieving our clients' objectives.
                         </p>
-        
+
                     </div>
 
                     <TeamSlider />
@@ -60,78 +62,74 @@ export default function About() {
             </section>
 
             {/* Work Methodology Section */}
-            <section className="relative  overflow-hidden px-4 md:px-16 border-b border-[var(--secondary-border-color)] py-10 md:py-30">
+            <section className="relative px-4 md:px-16 border-b border-[var(--secondary-border-color)] py-10 md:py-30">
                 <div className="max-w-7xl mx-auto px-4 md:px-12">
                     {/* Section Title */}
                     <div className="text-center flex flex-col items-center">
                         <h1 className="hero-title-h1 m-auto font-bold Riosark text-white max-w-[900px] text-center">
-                            Work Methodology
+                            Work Procedure
                         </h1>
-                        <p className="max-w-[600px] text-white text-center text-[14px] my-6 md:my-6 m-auto">
-                            Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum volutpat
-                            odio fringilla augue. Sed dolor tempor in magna urna. Rhoncus feugiat
-                            turpis duis ultrices sit lacus magna euismod.
+                        <p className="max-w-[600px] text-white text-center text-[14px] mt-6 md:my-6 m-auto">
+                            Clear steps. Reliable results.
+                            At Noon, we follow a streamlined process that keeps you involved and your project on track—from the first visual prototype to final delivery. Our method ensures speed, precision, and full alignment with your vision.
                         </p>
-            
+
                         <div
-                            className="max-w-[80%] flex flex-col md:flex-row justify-center items-center pt-6 gap-8"
+                            className="max-w-[80%] flex flex-col md:flex-row justify-stretch  pt-6 gap-8"
                         >
                             <div
-                            className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
-                            style={{
-                                boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
-                            }}
+                                className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] shadow-xl"
+                                style={{
+                                    boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+                                }}
                             >
-                            <Image
-                                src="/placeholder.png"
-                                alt="Discovery"
-                                className="rounded-xl border border-[var(--secondary-border-color)] p-4"
-                                width={100}
-                                height={100}
-                            />
-                            <h2 className="Riosark">Agile</h2>
-                            <p className="text-[12px]">
-                                Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum
-                                volutpat odio fringilla augue.
-                            </p>
+                                <Image
+                                    src="/placeholder.png"
+                                    alt="Discovery"
+                                    className="rounded-xl border border-[var(--secondary-border-color)] p-4"
+                                    width={100}
+                                    height={100}
+                                />
+                                <h2 className="Riosark">Visual Prototype</h2>
+                                <p className="text-[12px]">
+                                    We create a visual prototype of your idea to review details together and make adjustments before development.
+                                </p>
                             </div>
                             <div
-                            className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
-                            style={{
-                                boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
-                            }}
+                                className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
+                                style={{
+                                    boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+                                }}
                             >
-                            <Image
-                                src="/placeholder.png"
-                                alt="Strategy"
-                                className="rounded-xl border border-[var(--secondary-border-color)] p-4"
-                                width={100}
-                                height={100}
-                            />
-                            <h2 className="Riosark">Customer focus</h2>
-                            <p className="text-[12px]">
-                                Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum
-                                volutpat odio fringilla augue.
-                            </p>
+                                <Image
+                                    src="/placeholder.png"
+                                    alt="Strategy"
+                                    className="rounded-xl border border-[var(--secondary-border-color)] p-4"
+                                    width={100}
+                                    height={100}
+                                />
+                                <h2 className="Riosark">Development</h2>
+                                <p className="text-[12px]">
+                                    We turn the prototype into functional code, built with quality and efficiency.
+                                </p>
                             </div>
                             <div
-                            className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
-                            style={{
-                                boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
-                            }}
+                                className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
+                                style={{
+                                    boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+                                }}
                             >
-                            <Image
-                                src="/placeholder.png"
-                                alt="Development"
-                                className="rounded-xl border border-[var(--secondary-border-color)] p-4"
-                                width={100}
-                                height={100}
-                            />
-                            <h2 className="Riosark">Constant innovation</h2>
-                            <p className="text-[12px]">
-                                Lorem ipsum dolor sit amet consectetur. Ipsum elementum ipsum
-                                volutpat odio fringilla augue.
-                            </p>
+                                <Image
+                                    src="/placeholder.png"
+                                    alt="Development"
+                                    className="rounded-xl border border-[var(--secondary-border-color)] p-4"
+                                    width={100}
+                                    height={100}
+                                />
+                                <h2 className="Riosark">Delivery</h2>
+                                <p className="text-[12px]">
+                                    We deliver the final product on time—ready to launch and fully tailored to your needs.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -141,7 +139,7 @@ export default function About() {
             {/* Brand Values Section */}
             <section className="relative px-4 overflow-hidden md:px-16 border-b border-[var(--secondary-border-color)] py-10 md:py-30">
                 <div className="max-w-7xl mx-auto flex flex-col gap-8 px-0 md:px-12 md:flex-row md:gap-10">
-                    
+
                     <div className="w-full flex flex-col items-center justify-center relative md:w-[60%] md:flex-row md:items-center md:justify-end">
                         <Image
                             src="/placeholder.png"
@@ -179,30 +177,30 @@ export default function About() {
             {/* Mision Vision */}
             <section className="w-full flex justify-center items-center flex-col px-8 md:px-16 border-b border-[var(--secondary-border-color)] py-10 md:py-30">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[1440px] w-[90%] md:w-[70%]">
-                
+
                     <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl boxes-services-style" style={{
-                                boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
-                            }}>
+                        boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+                    }}>
                         <div className="flex flex-col items-center text-center px-10">
-                        <h2 className="hero-title-h2 font-bold text-white Riosark">
-                            Mision
-                        </h2>
-                        <p className="text-gray-300 max-w-[544px] text-center pt-4 text-[14px]">
-                            Lorem ipsum dolor sit amet consectetur. Volutpat in risus sit vulputate penatibus. Urna nisi sollicitudin imperdiet vel commodo ultricies vitae velit varius. Non suspendisse consequat vulputate in.
-                        </p>
+                            <h2 className="hero-title-h2 font-bold text-white Riosark">
+                                Mision
+                            </h2>
+                            <p className="text-gray-300 max-w-[544px] text-center pt-4 text-[14px]">
+                                To develop tailored technological solutions that drive growth and digital transformation for our clients, delivering quality, innovation, and efficiency in every project.
+                            </p>
                         </div>
                     </div>
 
                     <div className="flex flex-col justify-center items-center py-10 md:py-10 rounded-xl boxes-services-style" style={{
-                                boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
-                            }}>
+                        boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+                    }}>
                         <div className="flex flex-col items-center text-center px-10">
-                        <h2 className="hero-title-h2 font-bold text-white Riosark">
-                            Vision
-                        </h2>
-                        <p className="text-gray-300 max-w-[544px] text-center pt-4 text-[14px]">
-                            Lorem ipsum dolor sit amet consectetur. Volutpat in risus sit vulputate penatibus. Urna nisi sollicitudin imperdiet vel commodo ultricies vitae velit varius. Non suspendisse consequat vulputate in.
-                        </p>
+                            <h2 className="hero-title-h2 font-bold text-white Riosark">
+                                Vision
+                            </h2>
+                            <p className="text-gray-300 max-w-[544px] text-center pt-4 text-[14px]">
+                                To become a global leader in technology development, recognized for the excellence of our services, our commitment to clients, and our ability to turn ideas into scalable, real-world solutions.
+                            </p>
                         </div>
                     </div>
 
@@ -237,27 +235,27 @@ export default function About() {
                 <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-8 md:gap-0">
                     {/* Section Title and Text */}
                     <div className="w-full md:w-[80%] flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-10">
-                    <h2 className="w-full md:max-w-[320px] Riosark text-3xl sm:text-4xl md:text-[48px] text-center md:text-left">
-                        Contact us
-                    </h2>
-                    <p className="text-blank text-base sm:text-[15px] md:text-[14px] w-full md:max-w-[500px] text-center md:text-left">
-                        We are people who create technology with purpose. That's why behind every solution there is a team that listens, analyzes, and supports.
-                    </p>
+                        <h2 className="w-full md:max-w-[320px] Riosark text-3xl sm:text-4xl md:text-[48px] text-center md:text-left">
+                            Contact us
+                        </h2>
+                        <p className="text-blank text-base sm:text-[15px] md:text-[14px] w-full md:max-w-[500px] text-center md:text-left">
+                            We are people who create technology with purpose. That's why behind every solution there is a team that listens, analyzes, and supports.
+                        </p>
                     </div>
                     {/* Button */}
                     <div className="w-full md:w-[20%] flex justify-center md:justify-center mt-4 md:mt-0">
-                    <div className="w-fit">
-                        <Link
-                            href="/"
-                            className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
-                        >
-                            <span className="text-base sm:text-sm md:text-base">Let's talk</span>
-                        </Link>
-                    </div>
+                        <div className="w-fit">
+                            <Link
+                                href="/"
+                                className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
+                            >
+                                <span className="text-base sm:text-sm md:text-base">Let's talk</span>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </section>
-            
+
         </main>
     );
 }
