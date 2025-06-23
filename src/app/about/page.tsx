@@ -72,8 +72,8 @@ function StatCard({
             ref={cardRef}
             className="px-4 py-8 rounded-xl flex flex-col items-center text-center bg-gray-800/30 border border-gray-700/50 transition-colors duration-200 hover:bg-gray-700/70 cursor-pointer"
         >
-            <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mb-3">
-                <Icon className="w-6 h-6 text-blue-400" />
+            <div className="w-12 h-12 bg-[var(--principal-button-color)] rounded-full flex items-center justify-center mb-3">
+                <Icon className="w-6 h-6 text-white" />
             </div>
             <div className="text-2xl md:text-3xl font-bold text-white Riosark">
                 {count}
