@@ -4,6 +4,139 @@ import React from "react";
 import Image from "next/image";
 import TeamSlider from "../../components/layout/SliderTeams"
 import Link from "next/link";
+import { useEffect, useState, useRef } from "react";
+import { TrendingUp, Users, Award, Target, Star, CheckCircle } from "lucide-react"
+
+function useCountUp(end: number, duration = 2000) {
+    const [count, setCount] = useState(0)
+    const [isVisible, setIsVisible] = useState(false)
+
+    useEffect(() => {
+        if (!isVisible) return
+
+        let startTime: number
+        const animate = (currentTime: number) => {
+            if (!startTime) startTime = currentTime
+            const progress = Math.min((currentTime - startTime) / duration, 1)
+
+            setCount(Math.floor(progress * end))
+
+            if (progress < 1) {
+                requestAnimationFrame(animate)
+            }
+        }
+
+        requestAnimationFrame(animate)
+    }, [end, duration, isVisible])
+
+    return { count, setIsVisible }
+}
+
+function StatCard({
+    icon: Icon,
+    value,
+    suffix = "",
+    label,
+    delay = 0,
+}: {
+    icon: any
+    value: number
+    suffix?: string
+    label: string
+    delay?: number
+}) {
+    const { count, setIsVisible } = useCountUp(value, 2000 + delay)
+    const cardRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        const refCurrent = cardRef.current
+        if (!refCurrent) return
+
+        const observer = new window.IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => setIsVisible(true), delay)
+                    observer.unobserve(refCurrent)
+                }
+            },
+            { threshold: 0.3 } // Ajusta el threshold según necesites
+        )
+
+        observer.observe(refCurrent)
+
+        return () => observer.disconnect()
+    }, [delay, setIsVisible])
+
+    return (
+        <div
+            ref={cardRef}
+            className="px-4 py-8 rounded-xl flex flex-col items-center text-center bg-gray-800/30 border border-gray-700/50 transition-colors duration-200 hover:bg-gray-700/70 cursor-pointer"
+        >
+            <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mb-3">
+                <Icon className="w-6 h-6 text-blue-400" />
+            </div>
+            <div className="text-2xl md:text-3xl font-bold text-white Riosark">
+                {count}
+                {suffix}
+            </div>
+            <div className="text-sm text-gray-300 mt-1">{label}</div>
+        </div>
+    )
+}
+
+function ProgressBar({
+    label,
+    percentage,
+    color = "blue",
+}: {
+    label: string
+    percentage: number
+    color?: string
+}) {
+    const [width, setWidth] = useState(0)
+    const barRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        const refCurrent = barRef.current
+        if (!refCurrent) return
+
+        const observer = new window.IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => setWidth(percentage), 500)
+                    observer.unobserve(refCurrent)
+                }
+            },
+            { threshold: 0.3 } // Ajusta el threshold si lo necesitas
+        )
+
+        observer.observe(refCurrent)
+
+        return () => observer.disconnect()
+    }, [percentage])
+
+    const colorClasses = {
+        blue: "bg-blue-500",
+        green: "bg-green-500",
+        purple: "bg-purple-500",
+        orange: "bg-orange-500",
+    }
+
+    return (
+        <div className="space-y-2" ref={barRef}>
+            <div className="flex justify-between items-center">
+                <span className="text-sm text-gray-300">{label}</span>
+                <span className="text-sm font-semibold text-white">{percentage}%</span>
+            </div>
+            <div className="w-full bg-gray-700/50 rounded-full h-2">
+                <div
+                    className={`h-2 rounded-full transition-all duration-1000 ease-out ${colorClasses[color as keyof typeof colorClasses]}`}
+                    style={{ width: `${width}%` }}
+                />
+            </div>
+        </div>
+    )
+}
 
 export default function About() {
 
@@ -84,10 +217,10 @@ export default function About() {
                                 }}
                             >
                                 <Image
-                                    src="/placeholder.png"
+                                    src="/home-img/visual-prototype.png"
                                     alt="Discovery"
-                                    className="rounded-xl border border-[var(--secondary-border-color)] p-4"
-                                    width={100}
+                                    className="p-4"
+                                    width={110}
                                     height={100}
                                 />
                                 <h2 className="Riosark">Visual Prototype</h2>
@@ -102,10 +235,10 @@ export default function About() {
                                 }}
                             >
                                 <Image
-                                    src="/placeholder.png"
+                                    src="/home-img/development.png"
                                     alt="Strategy"
-                                    className="rounded-xl border border-[var(--secondary-border-color)] p-4"
-                                    width={100}
+                                    className="p-4"
+                                    width={110}
                                     height={100}
                                 />
                                 <h2 className="Riosark">Development</h2>
@@ -120,10 +253,10 @@ export default function About() {
                                 }}
                             >
                                 <Image
-                                    src="/placeholder.png"
-                                    alt="Development"
-                                    className="rounded-xl border border-[var(--secondary-border-color)] p-4"
-                                    width={100}
+                                    src="/home-img/delivery.png"
+                                    alt="Delivery"
+                                    className="p-4"
+                                    width={110}
                                     height={100}
                                 />
                                 <h2 className="Riosark">Delivery</h2>
@@ -138,39 +271,52 @@ export default function About() {
 
             {/* Brand Values Section */}
             <section className="relative px-4 overflow-hidden md:px-16 border-b border-[var(--secondary-border-color)] py-10 md:py-30">
+                <div className="max-w-7xl mx-auto mb-10">
+                    <h2 className="text-3xl font-bold text-white text-center Riosark md:text-[40px]">
+                        Brand Values
+                    </h2>
+                </div>
                 <div className="max-w-7xl mx-auto flex flex-col gap-8 px-0 md:px-12 md:flex-row md:gap-10">
 
-                    <div className="w-full flex flex-col items-center justify-center relative md:w-[60%] md:flex-row md:items-center md:justify-end">
-                        <Image
-                            src="/placeholder.png"
-                            alt="Brand Values Image"
-                            className="rounded-xl border border-[var(--secondary-border-color)] p-4 w-[90%] h-auto max-h-[480px] object-cover md:p-10"
-                            width={540}
-                            height={540}
-                        />
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2  md:-translate-x-0 md:-translate-y-0 flex flex-col Riosark
-                                        text-center text-3xl md:text-left md:text-3xl lg:text-[40px]
-                                        md:top-10 md:left-0 md:transform-none">
-                            <h2 className="font-bold text-white mt-2 tracking-[3px] md:mt-5 md:tracking-[5px]">
-                                Innovation
-                            </h2>
-                            <h2 className="font-bold text-white mt-2 tracking-[3px] md:mt-5 md:tracking-[5px]">
-                                Quality
-                            </h2>
-                            <h2 className="font-bold text-white mt-2 tracking-[3px] md:mt-5 md:tracking-[5px]">
-                                Commitment
-                            </h2>
+                    <div className="w-full flex flex-col items-center justify-start text-center mt-0 md:mt-0 md:w-[50%] md:items-center md:text-left">
+                        <div className="grid grid-cols-2 gap-4 w-full max-w-[400px]">
+                            <StatCard icon={Users} value={150} suffix="+" label="Happy Clients" delay={0} />
+                            <StatCard icon={Award} value={98} suffix="%" label="Success Rate" delay={200} />
+                            <StatCard icon={TrendingUp} value={250} suffix="+" label="Projects Delivered" delay={400} />
+                            <StatCard icon={Target} value={5} suffix=" Years" label="Experience" delay={600} />
                         </div>
                     </div>
 
-                    <div className="w-full flex flex-col items-center justify-center text-center mt-0 md:mt-8 md:mt-0 md:w-[40%] md:items-start md:text-left">
-                        <h2 className="text-3xl font-bold text-white Riosark max-w-[240px] md:text-[40px]">
-                            Brand Values
-                        </h2>
-                        <p className="text-gray-300 mt-4 max-w-[400px] text-[14px]">
-                            Lorem ipsum dolor sit amet consectetur. Sodales proin vitae aenean auctor. Fames orci non suspendisse fermentum non tempus diam risus.
-                        </p>
+                    <div className="w-full flex flex-col items-center justify-center relative md:w-[50%] md:flex-col md:items-center md:justify-center">
+                        {/* Barras de Progreso */}
+                        <div className="w-full max-w-[400px] space-y-4">
+                            <h3 className="text-lg font-semibold text-white Riosark mb-4">Our Expertise</h3>
+                            <ProgressBar label="Client Satisfaction" percentage={98} color="blue" />
+                            <ProgressBar label="Project Delivery" percentage={95} color="green" />
+                            <ProgressBar label="Innovation Index" percentage={92} color="purple" />
+                            <ProgressBar label="Team Expertise" percentage={96} color="orange" />
+                        </div>
+
+                        {/* Logros Destacados */}
+                        <div className="w-full max-w-[400px] mt-8">
+                            <h3 className="text-lg font-semibold text-white Riosark mb-4">Key Achievements</h3>
+                            <div className="space-y-3">
+                            <div className="flex items-center gap-3">
+                                <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                                <span className="text-sm text-gray-300">ISO 9001 Quality Certified</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <Star className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+                                <span className="text-sm text-gray-300">4.9/5 Average Client Rating</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <Award className="w-5 h-5 text-blue-400 flex-shrink-0" />
+                                <span className="text-sm text-gray-300">Tech Innovation Award 2024</span>
+                            </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </section>
 

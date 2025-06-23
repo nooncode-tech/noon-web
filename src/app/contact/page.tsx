@@ -60,15 +60,56 @@ export default function Contact() {
 
                         </div>
 
-                        <div className="w-[50%] rounded-2xl overflow-hidden">
-                            <Image
-                                src="/map3.PNG"
-                                alt="Contact Image"
-                                className="w-full h-full  object-contain"
-                                width={2000}
-                                height={1000}
-                                priority
-                            />
+                        <div className="w-[50%] flex flex-col gap-10 rounded-2xl overflow-hidden">
+                            <div className="border border-[var(--secondary-border-color)] rounded-2xl relative
+                            ">
+                                <Image
+                                    src="/map3.PNG"
+                                    alt="Contact Image"
+                                    className="w-full h-full  object-contain"
+                                    width={2000}
+                                    height={1000}
+                                    priority
+                                />
+                            </div>
+                            <div className="border border-[var(--secondary-border-color)] rounded-2xl relative p-10 flex flex-col align-start justify-start gap-6">
+                                <span className="flex flex-row gap-2 items-center"> {/* Asegura alineación vertical */}
+                                    <Link
+                                        href="tel:+0001238426000"
+                                        className="flex items-center gap-3 transition-colors duration-200 text-white text-lg md:text-[15px]" // Ajuste tamaño de fuente
+                                    >
+                                        <Phone className="size-6 md:size-7" /> {/* Ajuste de tamaño de icono */}
+                                        <span className="Riosark">Phone</span>
+                                        <span>+000 123 (8426) 000</span>
+                                    </Link>
+                                </span>
+
+                                <span className="flex flex-row gap-2 items-center"> {/* Asegura alineación vertical */}
+                                    <Link
+                                        href="mailto:Hello@noon.com"
+                                        className="flex items-center gap-3 transition-colors duration-200 text-white text-lg md:text-[15px]" // Ajuste tamaño de fuente
+                                    >
+                                        <Mail className="size-6 md:size-7" /> {/* Cambié a Mail icon, Phone repetido no es correcto */}
+                                        <span className="Riosark">Email</span>
+                                        <span>Hello@noon.com</span>
+                                    </Link>
+                                </span>
+
+                                <div className="flex space-x-6 justify-center md:justify-start text-white mt-4 md:mt-0"> {/* Ajuste de alineación y margin top para mobile */}
+                                    <Link href="#" aria-label="TikTok">
+                                        <FaTiktok className="size-6" />
+                                    </Link>
+                                    <Link href="#" aria-label="Facebook">
+                                        <FaFacebook className="size-6" />
+                                    </Link>
+                                    <Link href="#" aria-label="Instagram">
+                                        <FaInstagram className="size-6" />
+                                    </Link>
+                                    <Link href="#" aria-label="X (Twitter)">
+                                        <FaXTwitter className="size-6" />
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -77,33 +118,33 @@ export default function Contact() {
 
             </section>
 
-            {/* Contact Map Section */}
+            {/* Contact Map Section
             <section className="w-full flex flex-col items-center justify-center pt-0 px-0 md:px-16 pb-12 md:pb-0 border-t border-[var(--secondary-border-color)]">
                 <div className="w-full max-w-[1440px] flex flex-col-reverse md:flex-col gap-6 py-16 justify-center items-center">
-                    {/* Contact Info */}
-                        <span className="flex flex-row gap-2 items-center"> {/* Asegura alineación vertical */}
+                   
+                        <span className="flex flex-row gap-2 items-center">
                             <Link
                                 href="tel:+0001238426000"
-                                className="flex items-center gap-3 transition-colors duration-200 text-white text-lg md:text-[15px]" // Ajuste tamaño de fuente
+                                className="flex items-center gap-3 transition-colors duration-200 text-white text-lg md:text-[15px]" 
                             >
-                                <Phone className="size-6 md:size-7" /> {/* Ajuste de tamaño de icono */}
+                                <Phone className="size-6 md:size-7" />
                                 <span className="Riosark">Phone</span>
                                 <span>+000 123 (8426) 000</span>
                             </Link>
                         </span>
 
-                        <span className="flex flex-row gap-2 items-center"> {/* Asegura alineación vertical */}
+                        <span className="flex flex-row gap-2 items-center">
                             <Link
                                 href="mailto:Hello@noon.com"
-                                className="flex items-center gap-3 transition-colors duration-200 text-white text-lg md:text-[15px]" // Ajuste tamaño de fuente
+                                className="flex items-center gap-3 transition-colors duration-200 text-white text-lg md:text-[15px]"
                             >
-                                <Mail className="size-6 md:size-7" /> {/* Cambié a Mail icon, Phone repetido no es correcto */}
+                                <Mail className="size-6 md:size-7" /> 
                                 <span className="Riosark">Email</span>
                                 <span>Hello@noon.com</span>
                             </Link>
                         </span>
 
-                        <div className="flex space-x-6 justify-center md:justify-start text-white mt-4 md:mt-0"> {/* Ajuste de alineación y margin top para mobile */}
+                        <div className="flex space-x-6 justify-center md:justify-start text-white mt-4 md:mt-0">
                             <Link href="#" aria-label="TikTok">
                                 <FaTiktok className="size-6" />
                             </Link>
@@ -118,7 +159,7 @@ export default function Contact() {
                             </Link>
                         </div>
                 </div>
-            </section>
+            </section>*/}
 
         </main>
     );

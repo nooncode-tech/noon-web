@@ -352,10 +352,10 @@ At Noon, we follow a streamlined process that keeps you involved and your projec
                 }}
               >
                 <Image
-                  src="/placeholder.png"
+                  src="/home-img/visual-prototype.png"
                   alt="Discovery"
-                  className="rounded-xl border border-[var(--secondary-border-color)] p-4"
-                  width={100}
+                  className="p-4"
+                  width={110}
                   height={100}
                 />
                 <h2 className="Riosark">Visual Prototype</h2>
@@ -370,10 +370,10 @@ At Noon, we follow a streamlined process that keeps you involved and your projec
                 }}
               >
                 <Image
-                  src="/placeholder.png"
+                  src="/home-img/development.png"
                   alt="Strategy"
-                  className="rounded-xl border border-[var(--secondary-border-color)] p-4"
-                  width={100}
+                  className="p-4"
+                  width={110}
                   height={100}
                 />
                 <h2 className="Riosark">Development</h2>
@@ -388,10 +388,10 @@ At Noon, we follow a streamlined process that keeps you involved and your projec
                 }}
               >
                 <Image
-                  src="/placeholder.png"
-                  alt="Development"
-                  className="rounded-xl border border-[var(--secondary-border-color)] p-4"
-                  width={100}
+                  src="/home-img/delivery.png"
+                  alt="Delivery"
+                  className="p-4"
+                  width={110}
                   height={100}
                 />
                 <h2 className="Riosark">Delivery</h2>
