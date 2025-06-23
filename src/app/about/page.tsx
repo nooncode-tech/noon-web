@@ -271,7 +271,7 @@ export default function About() {
 
             {/* Brand Values Section */}
             <section className="relative px-4 overflow-hidden md:px-16 border-b border-[var(--secondary-border-color)] py-10 md:py-30">
-                <div className="max-w-7xl mx-auto mb-10">
+                <div className="max-w-7xl mx-auto mb-16">
                     <h2 className="text-3xl font-bold text-white text-center Riosark md:text-[40px]">
                         Brand Values
                     </h2>
