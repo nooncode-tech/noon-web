@@ -91,20 +91,14 @@ export default function Services() {
 
                                         <div className="w-full md:w-[55%] flex justify-center items-center relative">
                                             <Image
-                                                src={solution.image}
+                                                src={solution.icon}
                                                 alt={`${solution.title} illustration`}
-                                                className="rounded-xl border border-[var(--secondary-border-color)] p-4 md:p-10 w-full h-auto max-h-[300px] object-cover"
+                                                className="rounded-xl border border-[var(--secondary-border-color)] p-4 md:p-10 w-full h-auto max-h-[300px] object-contain"
                                                 width={540}
                                                 height={540}
                                                 priority={index < 2}
                                             />
-                                            <Image
-                                                src={solution.icon}
-                                                alt={solution.title}
-                                                width={80}
-                                                height={80}
-                                                className="object-contain w-full h-full max-w-[80px] md:max-w-[120px] max-h-[80px] md:max-h-[120px] absolute bottom-[-10px] md:bottom-[-20px] right-[-10px] md:right-[-20px] bg-[var(--principal-background-color)] rounded-xl border border-[var(--secondary-border-color)] p-3"
-                                            />
+                                            
                                         </div>
 
                                     </div>

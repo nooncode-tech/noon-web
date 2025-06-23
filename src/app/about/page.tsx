@@ -79,7 +79,7 @@ function StatCard({
                 {count}
                 {suffix}
             </div>
-            <div className="text-sm text-gray-300 mt-1">{label}</div>
+            <div className="text-[12px] text-gray-300 mt-1">{label}</div>
         </div>
     )
 }
@@ -273,15 +273,15 @@ export default function About() {
             <section className="relative px-4 overflow-hidden md:px-16 border-b border-[var(--secondary-border-color)] py-10 md:py-30">
                 <div className="max-w-7xl mx-auto mb-16">
                     <h2 className="text-3xl font-bold text-white text-center Riosark md:text-[40px]">
-                        Brand Values
+                        What Sets Us Apart
                     </h2>
                 </div>
                 <div className="max-w-7xl mx-auto flex flex-col gap-8 px-0 md:px-12 md:flex-row md:gap-10">
 
                     <div className="w-full flex flex-col items-center justify-start text-center mt-0 md:mt-0 md:w-[50%] md:items-center md:text-left">
                         <div className="grid grid-cols-2 gap-4 w-full max-w-[400px]">
-                            <StatCard icon={Users} value={150} suffix="+" label="Happy Clients" delay={0} />
-                            <StatCard icon={Award} value={98} suffix="%" label="Success Rate" delay={200} />
+                            <StatCard icon={Users} value={95} suffix="+" label="Satisfied Customers" delay={0} />
+                            <StatCard icon={Award} value={98} suffix="+" label="Solutions Implemented" delay={200} />
                             <StatCard icon={TrendingUp} value={250} suffix="+" label="Projects Delivered" delay={400} />
                             <StatCard icon={Target} value={5} suffix=" Years" label="Experience" delay={600} />
                         </div>
@@ -291,28 +291,28 @@ export default function About() {
                         {/* Barras de Progreso */}
                         <div className="w-full max-w-[400px] space-y-4">
                             <h3 className="text-lg font-semibold text-white Riosark mb-4">Our Expertise</h3>
-                            <ProgressBar label="Client Satisfaction" percentage={98} color="blue" />
-                            <ProgressBar label="Project Delivery" percentage={95} color="green" />
-                            <ProgressBar label="Innovation Index" percentage={92} color="purple" />
-                            <ProgressBar label="Team Expertise" percentage={96} color="orange" />
+                            <ProgressBar label="Commitment to Quality" percentage={98} color="blue" />
+                            <ProgressBar label="Agile & Scalable Delivery" percentage={95} color="green" />
+                            <ProgressBar label="Client-Centered Communication" percentage={92} color="purple" />
+                            <ProgressBar label="Cutting-Edge Tech Solutions" percentage={96} color="orange" />
                         </div>
 
                         {/* Logros Destacados */}
                         <div className="w-full max-w-[400px] mt-8">
                             <h3 className="text-lg font-semibold text-white Riosark mb-4">Key Achievements</h3>
                             <div className="space-y-3">
-                            <div className="flex items-center gap-3">
-                                <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
-                                <span className="text-sm text-gray-300">ISO 9001 Quality Certified</span>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <Star className="w-5 h-5 text-yellow-400 flex-shrink-0" />
-                                <span className="text-sm text-gray-300">4.9/5 Average Client Rating</span>
-                            </div>
-                            <div className="flex items-center gap-3">
-                                <Award className="w-5 h-5 text-blue-400 flex-shrink-0" />
-                                <span className="text-sm text-gray-300">Tech Innovation Award 2024</span>
-                            </div>
+                                <div className="flex items-center gap-3">
+                                    <Award className="w-5 h-5 text-blue-400 flex-shrink-0" />
+                                    <span className="text-sm text-gray-300">ISO 9001 Quality Certified</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />
+                                    <span className="text-sm text-gray-300">250+ Projects Successfully Delivered</span>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <Star className="w-5 h-5 text-yellow-400 flex-shrink-0" />
+                                    <span className="text-sm text-gray-300">4.9/5 Average Client Rating</span>
+                                </div>
                             </div>
                         </div>
                     </div>
