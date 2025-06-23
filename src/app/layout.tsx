@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar"; 
-import Footer from "@/components/layout/Footer"; 
+import Footer from "@/components/layout/Footer";
+import ChatWidget from "@/components/chatbot/chatbot"; // Importa el componente del chatbot
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,10 +37,11 @@ export default function RootLayout({
         <link href="https://fonts.cdnfonts.com/css/riosark" rel="stylesheet" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased `}
+        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased relative`}
       >
         <Navbar />
         {children}
+        {/* <ChatWidget /> */}
         <Footer />
       </body>
     </html>
