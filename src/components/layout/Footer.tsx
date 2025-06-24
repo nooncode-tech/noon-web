@@ -8,8 +8,8 @@ import { FaXTwitter } from "react-icons/fa6"
 const Footer: React.FC = () => {
   return (
     <footer className="text-gray-300 py-12 border-t border-[var(--secondary-border-color)] max-w-[2600px] mx-auto">
-      <div className="max-w-[1440px] mx-auto px-8 md:px-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-5 border-b border-[var(--secondary-border-color)] pb-8">
+      <div className="w-full mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-5 border-b border-[var(--secondary-border-color)] pb-8 px-8 md:px-16">
             
           {/* Column 1: Logo and description*/}
           <div className="flex flex-col justify-center space-y-4 sm:col-span-2 lg:col-span-1">
@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
               </div>
             </Link>
             <p className="text-sm leading-relaxed text-gray-400">
-              Lorem ipsum dolor sit amet consectetur. Faucibus eget pharetra potenti aliquet.
+              We transform your vision into reliable, production-ready code
             </p>
           </div>
 

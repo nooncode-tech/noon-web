@@ -63,7 +63,7 @@ const Navbar = () => {
 
                     <SheetTitle className="hidden">Menu</SheetTitle>
 
-                    <SheetContent side="right" className="w-[300px] bg-[var(--principal-background-color)] border-gray-700 p-0 [&>button]:hidden">
+                    <SheetContent side="right" className="w-[300px] bg-[var(--principal-background-color)] border-gray-700 p-0 [&>button]:hidden h-[100vh]">
                         <div className="flex flex-col h-full">
                             <div className="flex justify-between items-center px-6 py-4 border-b border-gray-700">
                                 <Link

@@ -6,6 +6,7 @@ import TeamSlider from "../../components/layout/SliderTeams"
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 import { TrendingUp, Users, Award, Target, Star, CheckCircle } from "lucide-react"
+import { MotionEffect } from '@/components/animate-ui/effects/motion-effect';
 
 function useCountUp(end: number, duration = 2000) {
     const [count, setCount] = useState(0)
@@ -195,7 +196,7 @@ export default function About() {
             </section>
 
             {/* Work Methodology Section */}
-            <section className="relative px-4 md:px-16 border-b border-[var(--secondary-border-color)] py-10 md:py-30">
+            <section className="relative px-4 md:px-16 ">
                 <div className="max-w-7xl mx-auto px-4 md:px-12">
                     {/* Section Title */}
                     <div className="text-center flex flex-col items-center">
@@ -208,62 +209,71 @@ export default function About() {
                         </p>
 
                         <div
-                            className="max-w-[80%] flex flex-col md:flex-row justify-stretch  pt-6 gap-8"
+                            className="
+                max-w-[80%]
+                flex flex-col md:flex-row
+                justify-stretch
+                pt-6
+                gap-8
+                items-stretch
+                mx-auto
+              "
                         >
-                            <div
-                                className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] shadow-xl"
-                                style={{
-                                    boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
-                                }}
-                            >
-                                <Image
-                                    src="/home-img/visual-prototype.png"
-                                    alt="Discovery"
-                                    className="p-4"
-                                    width={110}
-                                    height={100}
-                                />
-                                <h2 className="Riosark">Visual Prototype</h2>
-                                <p className="text-[12px]">
-                                    We create a visual prototype of your idea to review details together and make adjustments before development.
-                                </p>
-                            </div>
-                            <div
-                                className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
-                                style={{
-                                    boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
-                                }}
-                            >
-                                <Image
-                                    src="/home-img/development.png"
-                                    alt="Strategy"
-                                    className="p-4"
-                                    width={110}
-                                    height={100}
-                                />
-                                <h2 className="Riosark">Development</h2>
-                                <p className="text-[12px]">
-                                    We turn the prototype into functional code, built with quality and efficiency.
-                                </p>
-                            </div>
-                            <div
-                                className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
-                                style={{
-                                    boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
-                                }}
-                            >
-                                <Image
-                                    src="/home-img/delivery.png"
-                                    alt="Delivery"
-                                    className="p-4"
-                                    width={110}
-                                    height={100}
-                                />
-                                <h2 className="Riosark">Delivery</h2>
-                                <p className="text-[12px]">
-                                    We deliver the final product on time—ready to launch and fully tailored to your needs.
-                                </p>
-                            </div>
+                            {[{
+                                key: "visual-prototype",
+                                img: "/home-img/visual-prototype.png",
+                                alt: "Discovery",
+                                title: "Visual Prototype",
+                                desc: "We create a visual prototype of your idea to review details together and make adjustments before development."
+                            }, {
+                                key: "development",
+                                img: "/home-img/development.png",
+                                alt: "Strategy",
+                                title: "Development",
+                                desc: "We turn the prototype into functional code, built with quality and efficiency."
+                            }, {
+                                key: "delivery",
+                                img: "/home-img/delivery.png",
+                                alt: "Delivery",
+                                title: "Delivery",
+                                desc: "We deliver the final product on time—ready to launch and fully tailored to your needs."
+                            }].map((step, idx) => (
+                                <MotionEffect
+                                    key={step.key}
+                                    slide={{ direction: 'down' }}
+                                    fade
+                                    zoom
+                                    inView
+                                    delay={0.3 + idx * 0.5}
+                                    className="w-[33%] flex"
+                                >
+                                    <div
+                                        className="
+                      flex flex-col items-center gap-5 text-white
+                      rounded-xl boxes-services-style
+                      p-7
+                      shadow-xl
+                      flex-1
+                      min-w-0
+                    "
+                                        style={{
+                                            boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+                                        }}
+                                    >
+                                        <Image
+                                            src={step.img}
+                                            alt={step.alt}
+                                            className="p-4"
+                                            width={110}
+                                            height={100}
+                                        />
+                                        <h2 className="Riosark">{step.title}</h2>
+                                        <p className="text-[12px]">
+                                            {step.desc}
+                                        </p>
+                                    </div>
+                                </MotionEffect>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -303,7 +313,7 @@ export default function About() {
                             <div className="space-y-3">
                                 <div className="flex items-center gap-3">
                                     <Award className="w-5 h-5 text-blue-400 flex-shrink-0" />
-                                    <span className="text-sm text-gray-300">ISO 9001 Quality Certified</span>
+                                    <span className="text-sm text-gray-300">Internal QA and Delivery Standards Audited Quarterly</span>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0" />

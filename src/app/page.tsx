@@ -180,7 +180,7 @@ export default function Home() {
                 href="/"
                 className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
               >
-                <span className="sm:text-sm">Anyways</span>
+                <span className="text-[14px] sm:text-sm">Anyways</span>
 
               </Link>
             </div>
@@ -339,66 +339,75 @@ export default function Home() {
             </h1>
             <p className="max-w-[600px] text-white text-center text-[14px] mt-6 md:my-6 m-auto">
               Clear steps. Reliable results.
-At Noon, we follow a streamlined process that keeps you involved and your project on track—from the first visual prototype to final delivery. Our method ensures speed, precision, and full alignment with your vision.
+              At Noon, we follow a streamlined process that keeps you involved and your project on track—from the first visual prototype to final delivery. Our method ensures speed, precision, and full alignment with your vision.
             </p>
 
             <div
-              className="max-w-[80%] flex flex-col md:flex-row justify-stretch  pt-6 gap-8"
+              className="
+                max-w-[80%]
+                flex flex-col md:flex-row
+                justify-stretch
+                pt-6
+                gap-8
+                items-stretch
+                mx-auto
+              "
             >
-              <div
-                className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] shadow-xl"
-                style={{
-                  boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
-                }}
-              >
-                <Image
-                  src="/home-img/visual-prototype.png"
-                  alt="Discovery"
-                  className="p-4"
-                  width={110}
-                  height={100}
-                />
-                <h2 className="Riosark">Visual Prototype</h2>
-                <p className="text-[12px]">
-                  We create a visual prototype of your idea to review details together and make adjustments before development.
-                </p>
-              </div>
-              <div
-                className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
-                style={{
-                  boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
-                }}
-              >
-                <Image
-                  src="/home-img/development.png"
-                  alt="Strategy"
-                  className="p-4"
-                  width={110}
-                  height={100}
-                />
-                <h2 className="Riosark">Development</h2>
-                <p className="text-[12px]">
-                  We turn the prototype into functional code, built with quality and efficiency.
-                </p>
-              </div>
-              <div
-                className="flex flex-col items-center gap-5 text-white rounded-xl boxes-services-style p-7 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)]"
-                style={{
-                  boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
-                }}
-              >
-                <Image
-                  src="/home-img/delivery.png"
-                  alt="Delivery"
-                  className="p-4"
-                  width={110}
-                  height={100}
-                />
-                <h2 className="Riosark">Delivery</h2>
-                <p className="text-[12px]">
-                  We deliver the final product on time—ready to launch and fully tailored to your needs.
-                </p>
-              </div>
+              {[{
+                key: "visual-prototype",
+                img: "/home-img/visual-prototype.png",
+                alt: "Discovery",
+                title: "Visual Prototype",
+                desc: "We create a visual prototype of your idea to review details together and make adjustments before development."
+              }, {
+                key: "development",
+                img: "/home-img/development.png",
+                alt: "Strategy",
+                title: "Development",
+                desc: "We turn the prototype into functional code, built with quality and efficiency."
+              }, {
+                key: "delivery",
+                img: "/home-img/delivery.png",
+                alt: "Delivery",
+                title: "Delivery",
+                desc: "We deliver the final product on time—ready to launch and fully tailored to your needs."
+              }].map((step, idx) => (
+                <MotionEffect
+                  key={step.key}
+                  slide={{ direction: 'down' }}
+                  fade
+                  zoom
+                  inView
+                  delay={0.3 + idx * 0.5}
+                  className="w-full md:w-[33%] flex"
+                >
+                  <div
+                    className="
+                      flex flex-col items-center gap-5 text-white
+                      rounded-xl boxes-services-style
+                      p-7
+                      shadow-xl
+                      flex-1
+                      min-w-0
+                    "
+                    style={{
+                      boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+                    }}
+                  >
+                    <Image
+                      src={step.img}
+                      alt={step.alt}
+                      className="p-4"
+                      width={110}
+                      height={100}
+                    />
+                    <h2 className="Riosark">{step.title}</h2>
+                    <p className="text-[12px]">
+                      {step.desc}
+                    </p>
+                  </div>
+                </MotionEffect>
+              ))}
             </div>
           </div>
         </div>
