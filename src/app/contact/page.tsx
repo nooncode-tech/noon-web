@@ -17,9 +17,9 @@ export default function Contact() {
 
                 <div className="max-w-[1440px] min-h-[1000px] w-full flex flex-col-reverse md:flex-row gap-8 md:gap-20 justify-center items-center"> {/* Cambiado a flex-col en móvil, ajuste de gap */}
 
-                    <div className="flex w-full border border-[var(--secondary-border-color)] rounded-2xl p-6 md:p-16 mt-8 md:mt-0 gap-10"> {/* w-full en móvil, padding y margin top ajustados */}
+                    <div className="flex flex-col md:flex-row w-full border border-[var(--secondary-border-color)] rounded-2xl p-6 md:p-16 mt-8 md:mt-0 gap-10"> {/* w-full en móvil, padding y margin top ajustados */}
 
-                        <div className="w-[50%]">
+                        <div className="w-full md:w-[50%]">
 
                             <form className="w-full">
                                 <h1 className="text-2xl md:text-[30px] font-bold Riosark text-white mb-6 md:mb-10 text-center text-start!">Contact us</h1> {/* Ajuste de tamaño de fuente y alineación */}
@@ -60,7 +60,7 @@ export default function Contact() {
 
                         </div>
 
-                        <div className="w-[50%] flex flex-col gap-10 rounded-2xl overflow-hidden">
+                        <div className="w-full md:w-[50%] flex flex-col gap-10 rounded-2xl overflow-hidden">
                             <div className="border border-[var(--secondary-border-color)] rounded-2xl relative
                             ">
                                 <Image
@@ -72,11 +72,11 @@ export default function Contact() {
                                     priority
                                 />
                             </div>
-                            <div className="border border-[var(--secondary-border-color)] rounded-2xl relative p-10 flex flex-col align-start justify-start gap-6">
+                            <div className="border border-[var(--secondary-border-color)] rounded-2xl relative p-10 flex flex-col align-start justify-start gap-3 md:gap-6">
                                 <span className="flex flex-row gap-2 items-center"> {/* Asegura alineación vertical */}
                                     <Link
                                         href="tel:+0001238426000"
-                                        className="flex items-center gap-3 transition-colors duration-200 text-white text-lg md:text-[15px]" // Ajuste tamaño de fuente
+                                        className="flex items-center gap-3 transition-colors duration-200 text-white text-[12px] md:text-[15px]" // Ajuste tamaño de fuente
                                     >
                                         <Phone className="size-6 md:size-7" /> {/* Ajuste de tamaño de icono */}
                                         <span className="Riosark">Phone</span>
@@ -87,7 +87,7 @@ export default function Contact() {
                                 <span className="flex flex-row gap-2 items-center"> {/* Asegura alineación vertical */}
                                     <Link
                                         href="mailto:Hello@noon.com"
-                                        className="flex items-center gap-3 transition-colors duration-200 text-white text-lg md:text-[15px]" // Ajuste tamaño de fuente
+                                        className="flex items-center gap-3 transition-colors duration-200 text-white text-[12px] md:text-[15px]" // Ajuste tamaño de fuente
                                     >
                                         <Mail className="size-6 md:size-7" /> {/* Cambié a Mail icon, Phone repetido no es correcto */}
                                         <span className="Riosark">Email</span>

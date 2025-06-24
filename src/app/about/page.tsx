@@ -196,7 +196,7 @@ export default function About() {
             </section>
 
             {/* Work Methodology Section */}
-            <section className="relative px-4 md:px-16 ">
+            <section className="relative px-4 md:px-16 border-b border-[var(--secondary-border-color)] py-10 md:py-30">
                 <div className="max-w-7xl mx-auto px-4 md:px-12">
                     {/* Section Title */}
                     <div className="text-center flex flex-col items-center">
@@ -210,14 +210,14 @@ export default function About() {
 
                         <div
                             className="
-                max-w-[80%]
-                flex flex-col md:flex-row
-                justify-stretch
-                pt-6
-                gap-8
-                items-stretch
-                mx-auto
-              "
+                            max-w-[80%]
+                            flex flex-col md:flex-row
+                            justify-stretch
+                            pt-6
+                            gap-8
+                            items-stretch
+                            mx-auto
+                          "
                         >
                             {[{
                                 key: "visual-prototype",
@@ -245,17 +245,17 @@ export default function About() {
                                     zoom
                                     inView
                                     delay={0.3 + idx * 0.5}
-                                    className="w-[33%] flex"
+                                    className="w-full md:w-[33%] flex"
                                 >
                                     <div
                                         className="
-                      flex flex-col items-center gap-5 text-white
-                      rounded-xl boxes-services-style
-                      p-7
-                      shadow-xl
-                      flex-1
-                      min-w-0
-                    "
+                                  flex flex-col items-center gap-5 text-white
+                                  rounded-xl boxes-services-style
+                                  p-7
+                                  shadow-xl
+                                  flex-1
+                                  min-w-0
+                                "
                                         style={{
                                             boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
                                         }}
@@ -280,8 +280,8 @@ export default function About() {
             </section>
 
             {/* Brand Values Section */}
-            <section className="relative px-4 overflow-hidden md:px-16 border-b border-[var(--secondary-border-color)] py-10 md:py-30">
-                <div className="max-w-7xl mx-auto mb-16">
+            <section className="relative px-4 overflow-hidden md:px-16 border-b border-[var(--secondary-border-color)] px-10 md:px-0 py-10 md:py-30">
+                <div className="max-w-7xl mx-auto mb-6 md:mb-16">
                     <h2 className="text-3xl font-bold text-white text-center Riosark md:text-[40px]">
                         What Sets Us Apart
                     </h2>
