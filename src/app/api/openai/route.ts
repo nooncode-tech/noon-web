@@ -1,7 +1,7 @@
-import { GoogleGenAI } from "@google/genai";
+import { OpenAI } from "openai";
 import type { NextRequest } from 'next/server';
 
-const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_GENAI_API_KEY });
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // Para manejar POST
 export async function POST(request: NextRequest) {
@@ -9,12 +9,14 @@ export async function POST(request: NextRequest) {
         const body = await request.json();
         const { prompt } = body;
 
-        const response = await ai.models.generateContent({
-            model: "gemini-2.5-flash",
-            contents: prompt,
+        const completion = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo", // Puedes cambiar a "gpt-4" si tienes acceso
+            messages: [
+                { role: "user", content: prompt }
+            ],
         });
 
-        const reply = response?.text || 'No response';
+        const reply = completion.choices[0]?.message?.content || 'No response';
 
         return new Response(JSON.stringify({ reply }), {
             status: 200,

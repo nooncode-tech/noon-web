@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import Image from "next/image"
 
 const ChatWidget = () => {
     const [open, setOpen] = useState(false)
@@ -36,7 +37,7 @@ const ChatWidget = () => {
         }, 500)
 
         try {
-            const res = await fetch("/api/gemini", {
+            const res = await fetch("/api/openai", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -93,24 +94,18 @@ const ChatWidget = () => {
         return (
             <div className="fixed bottom-6 right-6 z-50">
                 <button
-                    className="group relative bg-gradient-to-br from-blue-500 via-purple-500 to-indigo-600 shadow-2xl rounded-full w-16 h-16 flex items-center justify-center hover:shadow-3xl transition-all duration-300 ease-out hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-200"
+                    className="group relative bg-gradient-to-br from-[var(--principal-background-color)] via-[var(--principal-button-color)] to-indigo-600 shadow-2xl rounded-full w-25 h-25 flex items-center justify-center hover:shadow-3xl transition-all duration-300 ease-out hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-200"
                     onClick={() => setOpen(true)}
                     aria-label="Abrir chat de IA"
                 >
                     <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 to-transparent"></div>
-                    <svg
-                        className="w-7 h-7 text-white transition-transform duration-300 group-hover:scale-110"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                        />
-                    </svg>
+                    <Image
+                        src="/base/profesor.gif"
+                        className="w-20 h-auto text-white transition-transform duration-300 group-hover:scale-110"
+                        width={100}
+                        height={100}
+                        alt="Chatbot Icon"
+                    />
 
                     {/* Pulso animado */}
                     <div className="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-20"></div>
@@ -125,9 +120,9 @@ const ChatWidget = () => {
             <div className="relative p-4">
                 <div
                     className={`
-            transform transition-all duration-500 ease-out
-            ${open ? "scale-100 opacity-100 translate-y-0" : "scale-95 opacity-0 translate-y-4"}
-          `}
+                    transform transition-all duration-500 ease-out
+                    ${open ? "scale-100 opacity-100 translate-y-0" : "scale-95 opacity-0 translate-y-4"}
+                    `}
                 >
                     <div className="relative bg-white rounded-3xl shadow-2xl border border-gray-100 backdrop-blur-sm">
                         {/* Botón de cerrar - ahora con posición ajustada */}
@@ -148,7 +143,7 @@ const ChatWidget = () => {
                         </button>
 
                         {/* Header mejorado */}
-                        <div className="relative px-6 py-5 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-600 rounded-t-3xl">
+                        <div className="relative px-6 py-5 bg-gradient-to-r from-[var(--principal-background-color)] via-[var(--principal-button-color)] to-indigo-600 rounded-t-3xl">
                             <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent rounded-t-3xl"></div>
                             <div className="relative flex items-center gap-3">
                                 <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
@@ -161,8 +156,8 @@ const ChatWidget = () => {
                                     </svg>
                                 </div>
                                 <div>
-                                    <h2 className="text-lg font-bold text-white">Asistente IA</h2>
-                                    <p className="text-white/80 text-sm">Siempre aquí para ayudarte</p>
+                                    <h2 className="text-lg font-bold text-white">Profesor</h2>
+                                    <p className="text-white/80 text-sm">Always here to help you</p>
                                 </div>
                             </div>
                         </div>
@@ -174,18 +169,17 @@ const ChatWidget = () => {
                         >
                             {responses.length === 0 && (
                                 <div className="text-center py-8">
-                                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
-                                        <svg className="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                                            />
-                                        </svg>
+                                    <div className="w-25 h-25 mx-auto mb-4 rounded-full bg-gradient-to-br from-[var(--principal-background-color)] via-[var(--principal-button-color)] flex items-center justify-center">
+                                        <Image
+                                            src="/base/profesor.gif"
+                                            className="w-20 h-auto text-white transition-transform duration-300 group-hover:scale-110"
+                                            width={100}
+                                            height={100}
+                                            alt="Chatbot Icon"
+                                        />
                                     </div>
-                                    <p className="text-gray-500 text-sm font-medium">¡Hola! ¿En qué puedo ayudarte?</p>
-                                    <p className="text-gray-400 text-xs mt-1">Escribe tu pregunta abajo</p>
+                                    <p className="text-gray-500 text-sm font-medium">Hello! How can I help you?</p>
+                                    <p className="text-gray-400 text-xs mt-1">Type your question below</p>
                                 </div>
                             )}
 
@@ -193,11 +187,17 @@ const ChatWidget = () => {
                                 <div key={index} className="space-y-3">
                                     {/* Pregunta del usuario */}
                                     <div className="flex gap-3 items-start justify-end">
-                                        <div className="rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-3 text-white text-sm max-w-[80%] shadow-lg">
+                                        <div className="rounded-2xl bg-gradient-to-r from-[var(--principal-background-color)] to-[var(--principal-button-color)] px-4 py-3 text-white text-sm max-w-[80%] shadow-lg">
                                             {res.question}
                                         </div>
-                                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs shadow-sm">
-                                            TÚ
+                                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[var(--principal-background-color)] to-[var(--principal-button-color)] flex items-center justify-center text-white font-bold text-xs shadow-sm">
+                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M10 2a4 4 0 100 8 4 4 0 000-8zm-6 14a6 6 0 1112 0H4z"
+                                                    clipRule="evenodd"
+                                                />
+                                            </svg>
                                         </div>
                                     </div>
 
@@ -233,7 +233,7 @@ const ChatWidget = () => {
                                 <div className="flex-grow relative">
                                     <input
                                         type="text"
-                                        placeholder="Escribe tu mensaje..."
+                                        placeholder="Type your question here..."
                                         value={question}
                                         onChange={(e) => setQuestion(e.target.value)}
                                         className="w-full px-4 py-3 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 placeholder:text-gray-400 text-sm transition-all duration-200 pr-12"
@@ -256,12 +256,12 @@ const ChatWidget = () => {
                                     onClick={handleSend}
                                     disabled={loading || isTyping || !question.trim()}
                                     className={`
-                    p-3 rounded-2xl font-medium transition-all duration-200 shadow-lg
-                    ${loading || isTyping || !question.trim()
-                                            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                                            : "bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:shadow-xl hover:scale-105 active:scale-95"
-                                        }
-                  `}
+                                        p-3 rounded-2xl font-medium transition-all duration-200 shadow-lg
+                                        ${loading || isTyping || !question.trim()
+                                                                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                                                                : "bg-gradient-to-r from-[var(--principal-background-color)] to-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
+                                                            }
+                                    `}
                                 >
                                     {loading ? (
                                         <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
