@@ -10,12 +10,22 @@ const ChatWidget = () => {
     const [loading, setLoading] = useState(false)
     const [isTyping, setIsTyping] = useState(false)
     const messagesEndRef = useRef<HTMLDivElement>(null)
+    const [isMobile, setIsMobile] = useState(false)
+
+    // Detect mobile on mount and on resize
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth <= 640)
+        }
+        checkMobile()
+        window.addEventListener("resize", checkMobile)
+        return () => window.removeEventListener("resize", checkMobile)
+    }, [])
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }, [responses, isTyping])
 
-    // NUEVO: Scroll al abrir si hay mensajes
     useEffect(() => {
         if (open && responses.length > 0) {
             messagesEndRef.current?.scrollIntoView({ behavior: "auto" })
@@ -92,42 +102,61 @@ const ChatWidget = () => {
     // Botón flotante
     if (!open) {
         return (
-            <div className="fixed bottom-6 right-6 z-50">
+            <div className="fixed bottom-6 right-6 z-50 sm:bottom-6 sm:right-6">
                 <button
-                    className="group relative bg-gradient-to-br from-[var(--principal-background-color)] via-[var(--principal-button-color)] to-indigo-600 shadow-2xl rounded-full w-25 h-25 flex items-center justify-center hover:shadow-3xl transition-all duration-300 ease-out hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-200"
+                    className="group relative bg-gradient-to-br from-[var(--principal-background-color)] via-[var(--principal-button-color)] to-indigo-600 shadow-2xl rounded-full w-20 h-20 flex items-center justify-center hover:shadow-3xl transition-all duration-300 ease-out hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-200"
                     onClick={() => setOpen(true)}
                     aria-label="Abrir chat de IA"
                 >
                     <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 to-transparent"></div>
                     <Image
                         src="/base/profesor.gif"
-                        className="w-20 h-auto text-white transition-transform duration-300 group-hover:scale-110"
-                        width={100}
-                        height={100}
+                        className="w-16 h-16 text-white transition-transform duration-300 group-hover:scale-110"
+                        width={64}
+                        height={64}
                         alt="Chatbot Icon"
                     />
-
-                    {/* Pulso animado */}
                     <div className="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-20"></div>
                 </button>
             </div>
         )
     }
 
+    // Responsive styles
+    // Mobile: full screen overlay, larger font, input sticks to bottom, header always visible, scrollable content
+    // Desktop: as before
     return (
-        <div className="fixed bottom-6 right-6 z-50 max-w-sm w-full">
-            {/* Contenedor con padding para el botón de cerrar */}
-            <div className="relative p-4">
+        <div
+            className={`
+                fixed z-50
+                ${isMobile
+                    ? "inset-0 w-full h-full max-w-full max-h-full"
+                    : "bottom-6 right-6 max-w-sm w-full"
+                }
+            `}
+            style={isMobile ? { padding: 0, margin: 0 } : {}}
+        >
+            <div className={`relative ${isMobile ? "h-full w-full" : "p-4"}`}>
                 <div
                     className={`
-                    transform transition-all duration-500 ease-out
-                    ${open ? "scale-100 opacity-100 translate-y-0" : "scale-95 opacity-0 translate-y-4"}
+                        transform transition-all duration-500 ease-out
+                        ${open ? "scale-100 opacity-100 translate-y-0" : "scale-95 opacity-0 translate-y-4"}
+                        ${isMobile ? "h-full w-full" : ""}
                     `}
                 >
-                    <div className="relative bg-white rounded-3xl shadow-2xl border border-gray-100 backdrop-blur-sm">
-                        {/* Botón de cerrar - ahora con posición ajustada */}
+                    <div className={`
+                        relative bg-white rounded-3xl shadow-2xl border border-gray-100 backdrop-blur-sm
+                        flex flex-col
+                        ${isMobile
+                            ? "rounded-none h-full w-full min-h-screen min-w-screen"
+                            : ""
+                        }
+                    `}>
+                        {/* Botón de cerrar */}
                         <button
-                            className="absolute -top-2 -right-2 bg-white border-2 border-gray-200 rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:bg-red-50 hover:border-red-200 hover:text-red-500 transition-all duration-200 z-10 group"
+                            className={`absolute ${isMobile ? "top-4 right-4" : "-top-2 -right-2"} 
+                                bg-white border-2 border-gray-200 rounded-full w-10 h-10 flex items-center justify-center shadow-lg 
+                                hover:bg-red-50 hover:border-red-200 hover:text-red-500 transition-all duration-200 z-10 group`}
                             onClick={handleClose}
                             aria-label="Cerrar chat"
                         >
@@ -142,9 +171,12 @@ const ChatWidget = () => {
                             </svg>
                         </button>
 
-                        {/* Header mejorado */}
-                        <div className="relative px-6 py-5 bg-gradient-to-r from-[var(--principal-background-color)] via-[var(--principal-button-color)] to-indigo-600 rounded-t-3xl">
-                            <div className="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent rounded-t-3xl"></div>
+                        {/* Header */}
+                        <div className={`
+                            relative px-6 py-5 bg-gradient-to-r from-[var(--principal-background-color)] via-[var(--principal-button-color)] to-indigo-600
+                            ${isMobile ? "" : "rounded-t-3xl"}
+                        `}>
+                            <div className={`absolute inset-0 bg-gradient-to-r from-white/10 to-transparent ${isMobile ? "" : "rounded-t-3xl"}`}></div>
                             <div className="relative flex items-center gap-3">
                                 <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                                     <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -162,19 +194,25 @@ const ChatWidget = () => {
                             </div>
                         </div>
 
-                        {/* Chat history mejorado */}
+                        {/* Chat history */}
                         <div
-                            className="px-5 py-4 space-y-4 max-h-80 overflow-y-auto bg-gradient-to-b from-gray-50/50 to-white custom-scrollbar"
-                            style={{ minHeight: 200 }}
+                            className={`
+                                flex-1 overflow-y-auto px-5 py-4 space-y-4 bg-gradient-to-b from-gray-50/50 to-white custom-scrollbar
+                                ${isMobile
+                                    ? "max-h-[calc(100dvh-142px)] min-h-0"
+                                    : "max-h-80"
+                                }
+                            `}
+                            style={isMobile ? { minHeight: 0 } : { minHeight: 200 }}
                         >
                             {responses.length === 0 && (
                                 <div className="text-center py-8">
-                                    <div className="w-25 h-25 mx-auto mb-4 rounded-full bg-gradient-to-br from-[var(--principal-background-color)] via-[var(--principal-button-color)] flex items-center justify-center">
+                                    <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-[var(--principal-background-color)] via-[var(--principal-button-color)] flex items-center justify-center">
                                         <Image
                                             src="/base/profesor.gif"
-                                            className="w-20 h-auto text-white transition-transform duration-300 group-hover:scale-110"
-                                            width={100}
-                                            height={100}
+                                            className="w-16 h-auto text-white transition-transform duration-300 group-hover:scale-110"
+                                            width={64}
+                                            height={64}
                                             alt="Chatbot Icon"
                                         />
                                     </div>
@@ -227,8 +265,14 @@ const ChatWidget = () => {
                             <div ref={messagesEndRef} />
                         </div>
 
-                        {/* Input mejorado */}
-                        <div className="px-5 py-4 border-t border-gray-100 bg-white rounded-b-3xl">
+                        {/* Input */}
+                        <div className={`
+                            px-5 py-4 border-t border-gray-100 bg-white
+                            ${isMobile
+                                ? "rounded-none sticky bottom-0 w-full"
+                                : "rounded-b-3xl"
+                            }
+                        `}>
                             <div className="flex gap-3 items-end">
                                 <div className="flex-grow relative">
                                     <input
@@ -236,10 +280,15 @@ const ChatWidget = () => {
                                         placeholder="Type your question here..."
                                         value={question}
                                         onChange={(e) => setQuestion(e.target.value)}
-                                        className="w-full px-4 py-3 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-50 placeholder:text-gray-400 text-sm transition-all duration-200 pr-12"
+                                        className={`
+                                            w-full px-4 py-3 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                                            bg-gray-50 placeholder:text-gray-400 text-sm transition-all duration-200 pr-12
+                                            ${isMobile ? "text-base py-4" : ""}
+                                        `}
                                         disabled={loading || isTyping}
                                         onKeyDown={(e) => e.key === "Enter" && !loading && !isTyping && handleSend()}
-                                        autoFocus
+                                        autoFocus={!isMobile}
+                                        inputMode="text"
                                     />
                                     {question.trim() && (
                                         <button
@@ -258,9 +307,10 @@ const ChatWidget = () => {
                                     className={`
                                         p-3 rounded-2xl font-medium transition-all duration-200 shadow-lg
                                         ${loading || isTyping || !question.trim()
-                                                                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                                                                : "bg-gradient-to-r from-[var(--principal-background-color)] to-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
-                                                            }
+                                            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                                            : "bg-gradient-to-r from-[var(--principal-background-color)] to-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
+                                        }
+                                        ${isMobile ? "text-base py-4 px-4" : ""}
                                     `}
                                 >
                                     {loading ? (
