@@ -43,12 +43,12 @@ const SatisfactionInline = ({
                             type="button"
                             aria-label={`Rate ${n} stars`}
                             className={`
-                text-lg px-1 transition-colors
-                ${selected === n
-                                    ? "text-yellow-400 scale-110"
-                                    : "text-gray-300 hover:text-yellow-400"
-                                }
-              `}
+                                text-lg px-1 transition-colors
+                                ${selected === n
+                                                    ? "text-yellow-400 scale-110"
+                                                    : "text-gray-300 hover:text-yellow-400"
+                                                }
+                            `}
                             key={n}
                             onClick={() => handleVote(n)}
                             disabled={loading || selected !== null}
@@ -313,7 +313,7 @@ const ChatWidget = () => {
 
     const TypingIndicator = () => (
         <div className="flex gap-2 items-start mt-3">
-            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-sm">
+            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--principal-button-color)] flex items-center justify-center shadow-sm">
                 <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                     <path
                         fillRule="evenodd"
@@ -322,11 +322,11 @@ const ChatWidget = () => {
                     />
                 </svg>
             </div>
-            <div className="rounded-2xl bg-gradient-to-r from-gray-100 to-gray-50 px-4 py-3 shadow-sm border border-gray-100">
+            <div className="rounded-2xl bg-white px-4 py-3 shadow-sm">
                 <div className="flex space-x-1">
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></div>
-                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></div>
+                    <div className="w-2 h-2 bg-[var(--principal-button-color)] rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></div>
+                    <div className="w-2 h-2 bg-[var(--principal-button-color)] rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></div>
+                    <div className="w-2 h-2 bg-[var(--principal-button-color)] rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></div>
                 </div>
             </div>
         </div>
@@ -337,11 +337,11 @@ const ChatWidget = () => {
         return (
             <div className="fixed bottom-6 right-6 z-50 sm:bottom-6 sm:right-6">
                 <button
-                    className="group relative bg-gradient-to-br from-[var(--principal-background-color)] via-[var(--principal-button-color)] to-indigo-600 shadow-2xl rounded-full w-20 h-20 flex items-center justify-center hover:shadow-3xl transition-all duration-300 ease-out hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-200"
+                    className="group relative bg-[var(--principal-button-color)] rounded-full w-20 h-20 flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-200"
                     onClick={() => setOpen(true)}
                     aria-label="Abrir chat de IA"
                 >
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/20 to-transparent"></div>
+                    <div className="absolute inset-0 rounded-full"></div>
                     <Image
                         src="/base/profesor.gif"
                         className="w-16 h-16 text-white transition-transform duration-300 group-hover:scale-110"
@@ -382,12 +382,12 @@ const ChatWidget = () => {
             <div className={`relative flex flex-col ${isMobile ? "h-full w-full" : "p-4"}`}>
                 <div
                     className={`
-            flex flex-col bg-white shadow-2xl border border-gray-100 backdrop-blur-sm
-            ${isMobile
-                            ? "h-full w-full max-w-full max-h-full rounded-none"
-                            : "rounded-3xl"
-                        }
-          `}
+                        flex flex-col shadow-2xl border border-[var(--secondary-border-color)] backdrop-blur-sm
+                        ${isMobile
+                                        ? "h-full w-full max-w-full max-h-full rounded-none"
+                                        : "rounded-3xl"
+                                    }
+                    `}
                     style={isMobile ? {
                         height: '100dvh',
                         width: '100vw',
@@ -400,8 +400,8 @@ const ChatWidget = () => {
                     {/* Botón de cerrar */}
                     <button
                         className={`absolute ${isMobile ? "top-4 right-4" : "-top-2 -right-2"} 
-                bg-white border-2 border-gray-200 rounded-full w-10 h-10 flex items-center justify-center shadow-lg 
-                hover:bg-red-50 hover:border-red-200 hover:text-red-500 transition-all duration-200 z-10 group`}
+                        bg-white border-2 border-gray-200 rounded-full w-10 h-10 flex items-center justify-center shadow-lg 
+                        hover:bg-red-50 hover:border-red-200 hover:text-red-500 transition-all duration-200 z-10 group`}
                         onClick={handleClose}
                         aria-label="Cerrar chat"
                     >
@@ -418,11 +418,11 @@ const ChatWidget = () => {
 
                     {/* Header */}
                     <div className={`
-              relative px-6 py-5 bg-gradient-to-r from-[var(--principal-background-color)] via-[var(--principal-button-color)] to-indigo-600
-              ${isMobile ? "" : "rounded-t-3xl"}
-              flex-shrink-0
-            `}>
-                        <div className={`absolute inset-0 bg-gradient-to-r from-white/10 to-transparent ${isMobile ? "" : "rounded-t-3xl"}`}></div>
+                        relative px-6 py-5 bg-[var(--principal-background-color)]
+                        ${isMobile ? "" : "rounded-t-3xl"}
+                        flex-shrink-0
+                    `}>
+                        <div className={`absolute inset-0 bg-gray-800/30 ${isMobile ? "" : "rounded-t-3xl"}`}></div>
                         <div className="relative flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                                 <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -444,7 +444,7 @@ const ChatWidget = () => {
                     {step === "form" && (
                         <form
                             onSubmit={handleFormSubmit}
-                            className="flex flex-col gap-3 px-6 py-6 flex-1"
+                            className="flex flex-col text-white gap-3 px-6 py-6 flex-1 bg-[var(--principal-background-color)] rounded-b-3xl"
                         >
                             <input
                                 type="text"
@@ -452,7 +452,7 @@ const ChatWidget = () => {
                                 value={form.name}
                                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                                 required
-                                className="border px-3 py-2 rounded"
+                                className="border border-[var(--secondary-border-color)] px-3 py-2 rounded"
                                 autoComplete="off"
                             />
                             <input
@@ -461,7 +461,7 @@ const ChatWidget = () => {
                                 value={form.email}
                                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                                 required
-                                className="border px-3 py-2 rounded"
+                                className="border border-[var(--secondary-border-color)] px-3 py-2 rounded"
                                 autoComplete="off"
                             />
                             <textarea
@@ -469,7 +469,7 @@ const ChatWidget = () => {
                                 value={form.message}
                                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                                 required
-                                className="border px-3 py-2 rounded"
+                                className="border border-[var(--secondary-border-color)] px-3 py-2 rounded"
                             />
                             <button
                                 type="submit"
@@ -487,12 +487,12 @@ const ChatWidget = () => {
                             {/* Chat history */}
                             <div
                                 className={`
-                flex-1 overflow-y-auto px-5 py-4 space-y-4 bg-gradient-to-b from-gray-50/50 to-white custom-scrollbar
-                ${isMobile
-                                        ? "max-h-none min-h-0"
-                                        : "max-h-80"
-                                    }
-              `}
+                                    flex-1 overflow-y-auto px-5 py-4 space-y-4 bg-[var(--principal-background-color)] custom-scrollbar
+                                    ${isMobile
+                                                            ? "max-h-none min-h-0"
+                                                            : "max-h-80"
+                                                        }
+                                `}
                                 style={isMobile ? {
                                     height: "1px",
                                     minHeight: 0,
@@ -502,7 +502,7 @@ const ChatWidget = () => {
                             >
                                 {responses.length === 0 && (
                                     <div className="text-center py-8">
-                                        <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-[var(--principal-background-color)] via-[var(--principal-button-color)] flex items-center justify-center">
+                                        <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-[var(--principal-background-color)] flex items-center justify-center">
                                             <Image
                                                 src="/base/profesor.gif"
                                                 className="w-16 h-auto text-white transition-transform duration-300 group-hover:scale-110"
@@ -521,10 +521,10 @@ const ChatWidget = () => {
                                         {/* Pregunta usuario */}
                                         {res.question && (
                                             <div className="flex gap-3 items-start justify-end">
-                                                <div className="rounded-2xl bg-gradient-to-r from-[var(--principal-background-color)] to-[var(--principal-button-color)] px-4 py-3 text-white text-sm max-w-[80%] shadow-lg">
+                                                <div className="rounded-2xl bg-[var(--principal-button-color)] px-4 py-3 text-white text-sm max-w-[80%] shadow-lg">
                                                     {res.question}
                                                 </div>
-                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[var(--principal-background-color)] to-[var(--principal-button-color)] flex items-center justify-center text-white font-bold text-xs shadow-sm">
+                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--principal-button-color)] flex items-center justify-center text-white font-bold text-xs shadow-sm">
                                                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                                         <path
                                                             fillRule="evenodd"
@@ -539,7 +539,7 @@ const ChatWidget = () => {
                                         {/* Respuesta bot */}
                                         {res.answer && (
                                             <div className="flex gap-3 items-start">
-                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center shadow-sm">
+                                                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--principal-button-color)] flex items-center justify-center shadow-sm">
                                                     <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
                                                         <path
                                                             fillRule="evenodd"
@@ -572,12 +572,12 @@ const ChatWidget = () => {
 
                             {/* Input */}
                             <div className={`
-              px-5 py-4 border-t border-gray-100 bg-white
-              ${isMobile
+                                px-5 py-4 border-t border-[var(--secondary-border-color)] bg-[var(--principal-background-color)]
+                                ${isMobile
                                     ? "rounded-none sticky bottom-0 w-full flex-shrink-0"
                                     : "rounded-b-3xl"
                                 }
-            `}>
+                                `}>
                                 <div className="flex gap-3 items-end">
                                     <div className="flex-grow relative">
                                         <input
@@ -586,10 +586,10 @@ const ChatWidget = () => {
                                             value={form.message}
                                             onChange={(e) => setForm({ ...form, message: e.target.value })}
                                             className={`
-                      w-full px-4 py-3 rounded-2xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                      bg-gray-50 placeholder:text-gray-400 text-sm transition-all duration-200 pr-12
-                      ${isMobile ? "text-base py-4" : ""}
-                    `}
+                                            w-full px-4 py-3 rounded-2xl border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                                            placeholder:text-gray-400 text-sm text-white transition-all duration-200 pr-12
+                                            ${isMobile ? "text-base py-4" : ""}
+                                            `}
                                             disabled={loading || isTyping || showSatisfactionInline}
                                             onKeyDown={(e) => e.key === "Enter" && !loading && !isTyping && !showSatisfactionInline && handleSend()}
                                             autoFocus={!isMobile}
@@ -610,13 +610,13 @@ const ChatWidget = () => {
                                         onClick={() => handleSend()}
                                         disabled={loading || isTyping || !form.message.trim() || showSatisfactionInline}
                                         className={`
-                    p-3 rounded-2xl font-medium transition-all duration-200 shadow-lg
-                    ${loading || isTyping || !form.message.trim() || showSatisfactionInline
-                                                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                                                : "bg-gradient-to-r from-[var(--principal-background-color)] to-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
-                                            }
-                    ${isMobile ? "text-base py-4 px-4" : ""}
-                  `}
+                                            p-3 rounded-2xl font-medium transition-all duration-200 shadow-lg
+                                            ${loading || isTyping || !form.message.trim() || showSatisfactionInline
+                                                                        ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                                                                        : "bg-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
+                                                                    }
+                                            ${isMobile ? "text-base py-4 px-4" : ""}
+                                        `}
                                     >
                                         {loading ? (
                                             <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -625,12 +625,14 @@ const ChatWidget = () => {
                                             </svg>
                                         ) : (
                                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path
+                                                <g transform="rotate(90 12 12)">
+                                                    <path
                                                     strokeLinecap="round"
                                                     strokeLinejoin="round"
                                                     strokeWidth={2}
                                                     d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                                                />
+                                                    />
+                                                </g>
                                             </svg>
                                         )}
                                     </button>
