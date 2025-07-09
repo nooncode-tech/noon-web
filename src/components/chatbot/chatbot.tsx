@@ -13,10 +13,10 @@ type Message = {
 const SatisfactionInline = ({
     conversationId,
     onDone,
-}: {
+    }: {
     conversationId: string
     onDone: () => void
-}) => {
+    }) => {
     const [loading, setLoading] = useState(false)
     const [selected, setSelected] = useState<number | null>(null)
     const [endedAt] = useState(new Date())
@@ -102,6 +102,10 @@ const ChatWidget = () => {
     const messagesEndRef = useRef<HTMLDivElement>(null)
     const [profile, setProfile] = useState<{ name: string; email: string } | null>(null)
     const [userMessage, setUserMessage] = useState("")
+    const [showSuggested, setShowSuggested] = useState(true);
+    const [bubbleVisible, setBubbleVisible] = useState(false);
+
+    const SUGGESTED_MESSAGE = "I need help";
 
     function parseJwt(token: string) {
         var base64Url = token.split('.')[1];
@@ -304,8 +308,26 @@ const ChatWidget = () => {
         setOpen(false)
         setShowSatisfactionInline(false)
         setUserMessage("")
-        // NO limpiamos perfil, responses ni conversationId para persistencia
     }
+
+    useEffect(() => {
+    if (!open) {
+        const showBubble = () => {
+        setBubbleVisible(true);
+        setTimeout(() => setBubbleVisible(false), 7000);
+        };
+        // Mostrar la primera vez tras 2 segundos
+        const initial = setTimeout(showBubble, 2000);
+        // Luego cada 25 segundos
+        const interval = setInterval(showBubble, 25000);
+        return () => {
+        clearInterval(interval);
+        clearTimeout(initial);
+        };
+    } else {
+        setBubbleVisible(false);
+    }
+    }, [open]);
 
     const TypingIndicator = () => (
         <div className="flex gap-2 items-start mt-3">
@@ -331,24 +353,38 @@ const ChatWidget = () => {
     // Botón flotante
     if (!open) {
         return (
-            <div className="fixed bottom-6 right-6 z-50 sm:bottom-6 sm:right-6">
-                <button
-                    className="group relative bg-[var(--principal-button-color)] rounded-full w-20 h-20 flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-200"
-                    onClick={() => setOpen(true)}
-                    aria-label="Abrir chat de IA"
-                >
-                    <div className="absolute inset-0 rounded-full"></div>
-                    <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                            fillRule="evenodd"
-                            d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-                            clipRule="evenodd"
-                        />
-                    </svg>
-                    <div className="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-20"></div>
-                </button>
+            <div className="fixed bottom-6 right-6 z-50 sm:bottom-6 sm:right-6 flex flex-col items-end gap-2">
+            {/* Burbuja animada */}
+            {bubbleVisible && (
+                <div className="mb-2 animate-fade-in-out bg-white border border-gray-200 px-4 py-2 rounded-2xl shadow text-gray-700 text-sm flex items-center gap-2">
+                <svg className="w-5 h-5 text-[var(--principal-button-color)]" fill="currentColor" viewBox="0 0 20 20">
+                    <path
+                    fillRule="evenodd"
+                    d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7z"
+                    clipRule="evenodd"
+                    />
+                </svg>
+                <span>Chat with me!</span>
+                </div>
+            )}
+            {/* Botón de abrir chat */}
+            <button
+                className="group relative bg-[var(--principal-button-color)] rounded-full w-20 h-20 flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-200"
+                onClick={() => setOpen(true)}
+                aria-label="Abrir chat de IA"
+            >
+                <div className="absolute inset-0 rounded-full"></div>
+                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path
+                    fillRule="evenodd"
+                    d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
+                    clipRule="evenodd"
+                />
+                </svg>
+                <div className="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-20"></div>
+            </button>
             </div>
-        )
+        );
     }
 
     return (
@@ -439,7 +475,7 @@ const ChatWidget = () => {
                     {/* LOGIN: Si no hay perfil, muestra mensaje de bienvenida y Google Login */}
                     {!profile && (
                         <div className="flex flex-col items-center justify-center flex-1 bg-[var(--principal-background-color)] rounded-b-3xl gap-6 p-8">
-                            <div className="text-lg font-bold text-gray-800">Welcome! I'm here for you</div>
+                            <div className="text-lg font-bold text-white">Welcome! I'm here for you</div>
                             <GoogleLogin
                                 onSuccess={handleGoogleSuccess}
                                 onError={() => alert("Google login failed")}
@@ -539,12 +575,30 @@ const ChatWidget = () => {
 
                             {/* Input */}
                             <div className={`
-                    px-5 py-4 border-t border-[var(--secondary-border-color)] bg-[var(--principal-background-color)]
-                    ${isMobile
-                                    ? "rounded-none sticky bottom-0 w-full flex-shrink-0"
-                                    : "rounded-b-3xl"
-                                }
-                    `}>
+                                        px-5 py-4 border-t border-[var(--secondary-border-color)] bg-[var(--principal-background-color)]
+                                        ${isMobile
+                                            ? "rounded-none sticky bottom-0 w-full flex-shrink-0"
+                                            : "rounded-b-3xl"
+                                        }
+                            `}>
+
+                                {profile && showSuggested && (
+                                    <div className="flex items-center gap-2 mb-3">
+                                        <button
+                                        className="bg-white/80 border border-gray-200 text-[var(--principal-button-color)] font-semibold px-4 py-2 rounded-2xl shadow hover:bg-white transition-colors duration-150"
+                                        onClick={() => {
+                                            setUserMessage(SUGGESTED_MESSAGE);
+                                            setShowSuggested(false); // ocultar mensaje sugerido tras click
+                                        }}
+                                        type="button"
+                                        >
+                                        {SUGGESTED_MESSAGE}
+                                        </button>
+                                    </div>
+                                )}
+                                
+
+
                                 <div className="flex gap-3 items-end">
                                     <div className="flex-grow relative">
                                         <input
@@ -553,10 +607,10 @@ const ChatWidget = () => {
                                             value={userMessage}
                                             onChange={(e) => setUserMessage(e.target.value)}
                                             className={`
-                            w-full px-4 py-3 rounded-2xl border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                            placeholder:text-gray-400 text-sm text-white transition-all duration-200 pr-12
-                            ${isMobile ? "text-base py-4" : ""}
-                            `}
+                                            w-full px-4 py-3 rounded-2xl border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                                            placeholder:text-gray-400 text-sm text-white transition-all duration-200 pr-12
+                                            ${isMobile ? "text-base py-4" : ""}
+                                            `}
                                             disabled={loading || isTyping || showSatisfactionInline}
                                             onKeyDown={(e) => e.key === "Enter" && !loading && !isTyping && !showSatisfactionInline && handleSend()}
                                             autoFocus={!isMobile}
