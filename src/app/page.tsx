@@ -207,34 +207,6 @@ export default function Home() {
               Backed by 500+ expert developers and a team fully committed to your goals, Noon turns vision into reality—with precision, speed, and long-term partnership.
             </p>
 
-            {/* Semi-Arc
-            <div className="relative w-full flex justify-center items-center" style={{ minHeight: '150px' }}>
-              <div className="absolute top-0 left-0 right-0 w-full max-w-[1440px] overflow-hidden m-auto">
-                <svg
-                  className="w-full h-auto"
-                  viewBox="0 0 1440 300"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  preserveAspectRatio="none"
-                >
-                  <path
-                    d="M0,300 
-                    C360,0 1080,0 1440,300" 
-                    stroke="url(#gradient)" 
-                    strokeWidth="7" 
-                    fill="none"
-                  />
-                  <defs>
-                    <linearGradient id="gradient" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
-                      <stop offset="0" stopColor="#FFF" stopOpacity="0" />
-                      <stop offset="0.5" stopColor="#FFF" />
-                      <stop offset="1" stopColor="#FFF" stopOpacity="0" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-            </div>
-            */}
             </MotionEffect>
 
           </div>

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import { supabase } from "@/lib/supabaseClient"
+import { GoogleLogin, googleLogout } from '@react-oauth/google';
 
 type Message = {
     question: string
@@ -45,9 +46,9 @@ const SatisfactionInline = ({
                             className={`
                                 text-lg px-1 transition-colors
                                 ${selected === n
-                                                    ? "text-yellow-400 scale-110"
-                                                    : "text-gray-300 hover:text-yellow-400"
-                                                }
+                                    ? "text-yellow-400 scale-110"
+                                    : "text-gray-300 hover:text-yellow-400"
+                                }
                             `}
                             key={n}
                             onClick={() => handleVote(n)}
@@ -92,8 +93,6 @@ const setLocalUser = (profile: { name: string; email: string }) => {
 
 const ChatWidget = () => {
     const [open, setOpen] = useState(false)
-    const [step, setStep] = useState<"form" | "chat">("form")
-    const [form, setForm] = useState({ name: "", email: "", message: "" })
     const [responses, setResponses] = useState<Message[]>([])
     const [loading, setLoading] = useState(false)
     const [conversationId, setConversationId] = useState<string | null>(null)
@@ -102,6 +101,16 @@ const ChatWidget = () => {
     const [showSatisfactionInline, setShowSatisfactionInline] = useState(false)
     const messagesEndRef = useRef<HTMLDivElement>(null)
     const [profile, setProfile] = useState<{ name: string; email: string } | null>(null)
+    const [userMessage, setUserMessage] = useState("")
+
+    function parseJwt(token: string) {
+        var base64Url = token.split('.')[1];
+        var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload);
+    }
 
     // Detect mobile
     useEffect(() => {
@@ -123,13 +132,11 @@ const ChatWidget = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }, [responses, isTyping, showSatisfactionInline])
 
-    // Cargar perfil de usuario (localStorage)
+    // Cargar perfil de usuario (localStorage o Google)
     useEffect(() => {
         const local = getLocalUser()
         if (local && local.name && local.email) {
             setProfile(local)
-            setForm((f) => ({ ...f, name: local.name, email: local.email }))
-            setStep("chat")
         }
     }, [])
 
@@ -172,47 +179,59 @@ const ChatWidget = () => {
         // eslint-disable-next-line
     }, [open, profile])
 
-    // Al enviar el formulario, crear conversación, guardar usuario en localStorage y enviar el primer mensaje (y obtener respuesta)
-    const handleFormSubmit = async (e: React.FormEvent) => {
-        e.preventDefault()
-        setLoading(true)
-        setLocalUser({ name: form.name, email: form.email })
-        setProfile({ name: form.name, email: form.email })
+    // Detectar afirmativo para finalizar chat y mostrar puntuación
+    useEffect(() => {
+        if (
+            showSatisfactionInline &&
+            responses.length > 0 &&
+            conversationId
+        ) {
+            const lastUserMsg = responses[responses.length - 1]?.question?.toLowerCase() || ""
+            if (
+                /(sí|si|yes|finalizar|cerrar|terminar)/i.test(lastUserMsg)
+            ) {
+                setShowSatisfactionInline(false)
+                setResponses((prev) => [
+                    ...prev,
+                    { question: "", answer: "¡Gracias por conversar con nosotros!" },
+                ])
+                setTimeout(() => setShowSatisfactionInline(true), 500)
+            }
+        }
+        // eslint-disable-next-line
+    }, [responses, showSatisfactionInline])
 
-        // Buscar conversación existente por email
+    const handleGoogleSuccess = async (credentialResponse: any) => {
+        const { credential } = credentialResponse;
+        const userInfo = parseJwt(credential);
+        const { name, email } = userInfo;
+        setProfile({ name, email });
+        setLocalUser({ name, email });
+        // Buscar o crear conversación
         const { data: existing } = await supabase
             .from("conversations")
             .select("id")
-            .eq("email", form.email)
+            .eq("email", email)
             .order("created_at", { ascending: false })
             .limit(1)
         let convId = existing?.[0]?.id
         if (!convId) {
-            // Crear conversación y guardar el primer mensaje
             const { data: inserted } = await supabase
                 .from("conversations")
-                .insert([{ name: form.name, email: form.email }])
+                .insert([{ name, email }])
                 .select("id")
                 .single()
             convId = inserted?.id
         }
         setConversationId(convId)
-        setStep("chat")
-        setLoading(false)
-        // Enviar primer mensaje como si fuera handleSend
-        if (form.message) {
-            await handleSend(form.message, convId)
-            setForm((f) => ({ ...f, message: "" }))
-        }
     }
 
-    // Enviar mensaje y obtener respuesta del bot
     const handleSend = async (message?: string, convIdParam?: string | null) => {
-        const msg = typeof message === "string" ? message : form.message
+        const msg = typeof message === "string" ? message : userMessage
         const convId = convIdParam || conversationId
         if (!profile?.email || !convId || !msg) return
 
-        setForm((f) => ({ ...f, message: "" }))
+        setUserMessage("")
         setLoading(true)
         setResponses((prev) => [...prev, { question: msg, answer: "" }])
 
@@ -234,7 +253,9 @@ const ChatWidget = () => {
                 body: JSON.stringify({ prompt: msg, conversationId: convId }),
             })
             const data = await res.json()
-            const botAnswer = data.reply
+            // Ocultar [END_CHAT] pero disparar lógica
+            const isChatEnd = /\[END_CHAT\]/i.test(data.reply)
+            const botAnswer = data.reply.replace(/\[END_CHAT\]/gi, '').trim()
 
             // Guardar respuesta bot en supabase
             await supabase.from("messages").insert([
@@ -248,14 +269,13 @@ const ChatWidget = () => {
                     )
                 )
                 setIsTyping(false)
-                // Detectar si el bot pregunta si desea finalizar
-                if (/\[END_CHAT\]/i.test(botAnswer)) {
+                // Detectar finalización de chat
+                if (isChatEnd) {
                     const chatEndedMsg = `Chat Ended · ${new Date().toLocaleString()}`;
                     setResponses((prev) => [
                         ...prev,
                         { question: "", answer: chatEndedMsg }
                     ]);
-                    // Usa una función async IIFE para poder usar await aquí:
                     (async () => {
                         await supabase.from("messages").insert([
                             {
@@ -280,34 +300,10 @@ const ChatWidget = () => {
         }
     }
 
-    // Detectar "sí" o afirmativo del usuario para finalizar el chat y mostrar puntuación
-    useEffect(() => {
-        if (
-            showSatisfactionInline &&
-            responses.length > 0 &&
-            conversationId
-        ) {
-            const lastUserMsg = responses[responses.length - 1]?.question?.toLowerCase() || ""
-            if (
-                /(sí|si|yes|finalizar|cerrar|terminar)/i.test(lastUserMsg)
-            ) {
-                setShowSatisfactionInline(false)
-                setResponses((prev) => [
-                    ...prev,
-                    { question: "", answer: "¡Gracias por conversar con nosotros!" },
-                ])
-                // Insertar mensaje de agradecimiento del bot
-                setTimeout(() => setShowSatisfactionInline(true), 500)
-            }
-        }
-        // eslint-disable-next-line
-    }, [responses, showSatisfactionInline])
-
     const handleClose = () => {
         setOpen(false)
         setShowSatisfactionInline(false)
-        setStep(profile ? "chat" : "form")
-        setForm({ ...form, message: "" })
+        setUserMessage("")
         // NO limpiamos perfil, responses ni conversationId para persistencia
     }
 
@@ -342,13 +338,13 @@ const ChatWidget = () => {
                     aria-label="Abrir chat de IA"
                 >
                     <div className="absolute inset-0 rounded-full"></div>
-                        <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                fillRule="evenodd"
-                                d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-                                clipRule="evenodd"
-                            />
-                        </svg>
+                    <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            fillRule="evenodd"
+                            d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
+                            clipRule="evenodd"
+                        />
+                    </svg>
                     <div className="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-20"></div>
                 </button>
             </div>
@@ -358,11 +354,11 @@ const ChatWidget = () => {
     return (
         <div
             className={`
-                fixed z-50
-                ${isMobile
-                            ? "inset-0 w-full h-full max-w-full max-h-full"
-                            : "bottom-6 right-6 max-w-sm w-full"
-                        }
+            fixed z-50
+            ${isMobile
+                    ? "inset-0 w-full h-full max-w-full max-h-full"
+                    : "bottom-6 right-6 max-w-sm w-full"
+                }
             `}
             style={isMobile ? {
                 padding: 0,
@@ -382,12 +378,12 @@ const ChatWidget = () => {
             <div className={`relative flex flex-col ${isMobile ? "h-full w-full" : "p-4"}`}>
                 <div
                     className={`
-                        flex flex-col shadow-2xl border border-[var(--secondary-border-color)] backdrop-blur-sm
-                        ${isMobile
-                                        ? "h-full w-full max-w-full max-h-full rounded-none"
-                                        : "rounded-3xl"
-                                    }
-                    `}
+                flex flex-col shadow-2xl border border-[var(--secondary-border-color)] backdrop-blur-sm
+                ${isMobile
+                            ? "h-full w-full max-w-full max-h-full rounded-none"
+                            : "rounded-3xl"
+                        }
+                `}
                     style={isMobile ? {
                         height: '100dvh',
                         width: '100vw',
@@ -400,8 +396,8 @@ const ChatWidget = () => {
                     {/* Botón de cerrar */}
                     <button
                         className={`absolute ${isMobile ? "top-4 right-4" : "-top-2 -right-2"} 
-                        bg-white border-2 border-gray-200 rounded-full w-10 h-10 flex items-center justify-center shadow-lg 
-                        hover:bg-red-50 hover:border-red-200 hover:text-red-500 transition-all duration-200 z-10 group`}
+                    bg-white border-2 border-gray-200 rounded-full w-10 h-10 flex items-center justify-center shadow-lg 
+                    hover:bg-red-50 hover:border-red-200 hover:text-red-500 transition-all duration-200 z-10 group`}
                         onClick={handleClose}
                         aria-label="Cerrar chat"
                     >
@@ -418,10 +414,10 @@ const ChatWidget = () => {
 
                     {/* Header */}
                     <div className={`
-                        relative px-6 py-5 bg-[var(--principal-background-color)]
-                        ${isMobile ? "" : "rounded-t-3xl"}
-                        flex-shrink-0
-                    `}>
+                    relative px-6 py-5 bg-[var(--principal-background-color)]
+                    ${isMobile ? "" : "rounded-t-3xl"}
+                    flex-shrink-0
+                `}>
                         <div className={`absolute inset-0 bg-gray-800/30 ${isMobile ? "" : "rounded-t-3xl"}`}></div>
                         <div className="relative flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
@@ -440,59 +436,30 @@ const ChatWidget = () => {
                         </div>
                     </div>
 
-                    {/* Formulario dentro del widget */}
-                    {step === "form" && (
-                        <form
-                            onSubmit={handleFormSubmit}
-                            className="flex flex-col text-white gap-3 px-6 py-6 flex-1 bg-[var(--principal-background-color)] rounded-b-3xl"
-                        >
-                            <input
-                                type="text"
-                                placeholder="Tu nombre"
-                                value={form.name}
-                                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                                required
-                                className="border border-[var(--secondary-border-color)] px-3 py-2 rounded"
-                                autoComplete="off"
+                    {/* LOGIN: Si no hay perfil, muestra mensaje de bienvenida y Google Login */}
+                    {!profile && (
+                        <div className="flex flex-col items-center justify-center flex-1 bg-[var(--principal-background-color)] rounded-b-3xl gap-6 p-8">
+                            <div className="text-lg font-bold text-gray-800">Welcome! I'm here for you</div>
+                            <GoogleLogin
+                                onSuccess={handleGoogleSuccess}
+                                onError={() => alert("Google login failed")}
+                                useOneTap
                             />
-                            <input
-                                type="email"
-                                placeholder="Tu email"
-                                value={form.email}
-                                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                                required
-                                className="border border-[var(--secondary-border-color)] px-3 py-2 rounded"
-                                autoComplete="off"
-                            />
-                            <textarea
-                                placeholder="¿En qué te puedo ayudar?"
-                                value={form.message}
-                                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                                required
-                                className="border border-[var(--secondary-border-color)] px-3 py-2 rounded"
-                            />
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className="bg-blue-600 text-white rounded px-4 py-2 mt-2"
-                            >
-                                {loading ? "Cargando..." : "Comenzar chat"}
-                            </button>
-                        </form>
+                        </div>
                     )}
 
-                    {/* Chat normal */}
-                    {step === "chat" && (
+                    {/* CHAT: Si hay perfil, muestra el chat */}
+                    {profile && (
                         <>
                             {/* Chat history */}
                             <div
                                 className={`
-                                    flex-1 overflow-y-auto px-5 py-4 space-y-4 bg-[var(--principal-background-color)] custom-scrollbar
-                                    ${isMobile
-                                                            ? "max-h-none min-h-0"
-                                                            : "max-h-80"
-                                                        }
-                                `}
+                        flex-1 overflow-y-auto px-5 py-4 space-y-4 bg-[var(--principal-background-color)] custom-scrollbar
+                        ${isMobile
+                                        ? "max-h-none min-h-0"
+                                        : "max-h-80"
+                                    }
+                    `}
                                 style={isMobile ? {
                                     height: "1px",
                                     minHeight: 0,
@@ -572,32 +539,32 @@ const ChatWidget = () => {
 
                             {/* Input */}
                             <div className={`
-                                px-5 py-4 border-t border-[var(--secondary-border-color)] bg-[var(--principal-background-color)]
-                                ${isMobile
+                    px-5 py-4 border-t border-[var(--secondary-border-color)] bg-[var(--principal-background-color)]
+                    ${isMobile
                                     ? "rounded-none sticky bottom-0 w-full flex-shrink-0"
                                     : "rounded-b-3xl"
                                 }
-                                `}>
+                    `}>
                                 <div className="flex gap-3 items-end">
                                     <div className="flex-grow relative">
                                         <input
                                             type="text"
                                             placeholder="Type your question here..."
-                                            value={form.message}
-                                            onChange={(e) => setForm({ ...form, message: e.target.value })}
+                                            value={userMessage}
+                                            onChange={(e) => setUserMessage(e.target.value)}
                                             className={`
-                                            w-full px-4 py-3 rounded-2xl border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                                            placeholder:text-gray-400 text-sm text-white transition-all duration-200 pr-12
-                                            ${isMobile ? "text-base py-4" : ""}
-                                            `}
+                            w-full px-4 py-3 rounded-2xl border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
+                            placeholder:text-gray-400 text-sm text-white transition-all duration-200 pr-12
+                            ${isMobile ? "text-base py-4" : ""}
+                            `}
                                             disabled={loading || isTyping || showSatisfactionInline}
                                             onKeyDown={(e) => e.key === "Enter" && !loading && !isTyping && !showSatisfactionInline && handleSend()}
                                             autoFocus={!isMobile}
                                             inputMode="text"
                                         />
-                                        {form.message.trim() && (
+                                        {userMessage.trim() && (
                                             <button
-                                                onClick={() => setForm({ ...form, message: "" })}
+                                                onClick={() => setUserMessage("")}
                                                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                                             >
                                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -608,15 +575,15 @@ const ChatWidget = () => {
                                     </div>
                                     <button
                                         onClick={() => handleSend()}
-                                        disabled={loading || isTyping || !form.message.trim() || showSatisfactionInline}
+                                        disabled={loading || isTyping || !userMessage.trim() || showSatisfactionInline}
                                         className={`
-                                            p-3 rounded-2xl font-medium transition-all duration-200 shadow-lg
-                                            ${loading || isTyping || !form.message.trim() || showSatisfactionInline
-                                                                        ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                                                                        : "bg-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
-                                                                    }
-                                            ${isMobile ? "text-base py-4 px-4" : ""}
-                                        `}
+                            p-3 rounded-2xl font-medium transition-all duration-200 shadow-lg
+                            ${loading || isTyping || !userMessage.trim() || showSatisfactionInline
+                                                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                                                : "bg-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
+                                            }
+                            ${isMobile ? "text-base py-4 px-4" : ""}
+                        `}
                                     >
                                         {loading ? (
                                             <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
@@ -627,10 +594,10 @@ const ChatWidget = () => {
                                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <g transform="rotate(90 12 12)">
                                                     <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    strokeWidth={2}
-                                                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                                                        strokeLinecap="round"
+                                                        strokeLinejoin="round"
+                                                        strokeWidth={2}
+                                                        d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
                                                     />
                                                 </g>
                                             </svg>

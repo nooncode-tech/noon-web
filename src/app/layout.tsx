@@ -3,7 +3,8 @@ import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar"; 
 import Footer from "@/components/layout/Footer";
-import ChatWidget from "@/components/chatbot/chatbot"; // Importa el componente del chatbot
+import ChatWidget from "@/components/chatbot/chatbot"; 
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -74,7 +75,9 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
-        <ChatWidget />
+        <GoogleOAuthProvider clientId="401626119144-kjh1sog47377958q8rsusv9393vib6b0.apps.googleusercontent.com">
+          <ChatWidget />
+        </GoogleOAuthProvider>
         <Footer />
       </body>
     </html>
