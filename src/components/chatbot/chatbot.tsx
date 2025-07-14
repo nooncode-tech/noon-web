@@ -259,9 +259,25 @@ const ChatWidget = () => {
             const data = await res.json()
             // Ocultar [END_CHAT] pero disparar lógica
             const isChatEnd = /\[END_CHAT\]/i.test(data.reply)
-            const botAnswer = data.reply.replace(/\[END_CHAT\]/gi, '').trim()
+            const isPrototype = /\[ADD_PROTOTYPE\]/i.test(data.reply)
+            let botAnswer = data.reply.replace(/\[END_CHAT\]/gi, "").replace(/\[ADD_PROTOTYPE\]/gi, "").trim()
 
-            // Guardar respuesta bot en supabase
+            function ensureAppDiv(htmlCode: string) {
+                if (!/<div\s+id=["']app["']/.test(htmlCode)) {
+                    return htmlCode.replace(/<\/body>/i, '<div id="app"></div></body>');
+                }
+                return htmlCode;
+            }
+
+            let htmlCode = ""
+            if (isPrototype) {
+                const codeMatch = data.reply.match(/```(?:html)?\s*([\s\S]*?)```/i)
+                if (codeMatch) {
+                    htmlCode = codeMatch[1].trim()
+                    htmlCode = ensureAppDiv(htmlCode);
+                }
+            }
+            
             await supabase.from("messages").insert([
                 { conversation_id: convId, role: "bot", content: botAnswer },
             ])
@@ -274,6 +290,11 @@ const ChatWidget = () => {
                 )
                 setIsTyping(false)
                 // Detectar finalización de chat
+
+                if (isPrototype && htmlCode) {
+                    handlePrototypeSave();
+                }
+                
                 if (isChatEnd) {
                     const chatEndedMsg = `Chat Ended · ${new Date().toLocaleString()}`;
                     setResponses((prev) => [
@@ -292,6 +313,39 @@ const ChatWidget = () => {
                     setShowSatisfactionInline(true);
                 }
             }, 1000)
+
+            async function handlePrototypeSave() {
+                // 1. Genera un UUID (usa crypto.randomUUID o uuidv4)
+                const uuid =
+                    typeof crypto !== "undefined" && crypto.randomUUID
+                    ? crypto.randomUUID()
+                    : (await import("uuid")).v4();
+
+                // 2. Nombre y email
+                const protoName = `Prototype by ${profile?.name || "User"}`;
+                const protoEmail = profile?.email || "";
+
+                // 3. Guarda en Supabase
+                const { data: inserted, error } = await supabase.from("prototypes").insert([
+                    {
+                    id: uuid,
+                    name: protoName,
+                    email: protoEmail,
+                    code: htmlCode,
+                    preview_url: `/prototype/${uuid}`,
+                    },
+                ]);
+
+                // 4. Muestra la url al usuario
+                setResponses((prev) => [
+                    ...prev,
+                    {
+                    question: "",
+                    answer: `✅ Prototype created!<br/>Preview it <a href="/prototype/${uuid}" class="underline text-blue-600" target="_blank">here</a>.`,
+                    },
+                ]);
+            }
+
         } catch (error) {
             setResponses((prev) =>
                 prev.map((item, index) =>
