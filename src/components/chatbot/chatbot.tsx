@@ -408,7 +408,7 @@ const ChatWidget = () => {
     if (!open) {
         return (
             <div className="fixed bottom-6 right-6 z-50 sm:bottom-6 sm:right-6 flex flex-col items-end gap-2">
-            {/* Burbuja animada */}
+            {/* Burbuja animada  */}
             {bubbleVisible && (
                 <div className="mb-2 animate-fade-in-out bg-white border border-gray-200 px-4 py-2 rounded-2xl shadow text-gray-700 text-sm flex items-center gap-2">
                 <div className="w-8 h-8 rounded-full bg-[var(--principal-button-color)] flex items-center justify-center">
