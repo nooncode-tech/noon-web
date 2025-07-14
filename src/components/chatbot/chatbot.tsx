@@ -357,13 +357,15 @@ const ChatWidget = () => {
             {/* Burbuja animada */}
             {bubbleVisible && (
                 <div className="mb-2 animate-fade-in-out bg-white border border-gray-200 px-4 py-2 rounded-2xl shadow text-gray-700 text-sm flex items-center gap-2">
-                <svg className="w-5 h-5 text-[var(--principal-button-color)]" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                    fillRule="evenodd"
-                    d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7z"
-                    clipRule="evenodd"
+                <div className="w-8 h-8 rounded-full bg-[var(--principal-button-color)] flex items-center justify-center">
+                    <Image
+                        src="/base/LOGO-N-WHITE.png"
+                        className="w-4 h-auto text-white transition-transform duration-300 group-hover:scale-110"
+                        width={20}
+                        height={20}
+                        alt="Chatbot Icon"
                     />
-                </svg>
+                </div>
                 <span>Chat with me!</span>
                 </div>
             )}
@@ -432,8 +434,8 @@ const ChatWidget = () => {
                     {/* Botón de cerrar */}
                     <button
                         className={`absolute ${isMobile ? "top-4 right-4" : "-top-2 -right-2"} 
-                    bg-white border-2 border-gray-200 rounded-full w-10 h-10 flex items-center justify-center shadow-lg 
-                    hover:bg-red-50 hover:border-red-200 hover:text-red-500 transition-all duration-200 z-10 group`}
+                        bg-white border-2 border-gray-200 rounded-full w-10 h-10 flex items-center justify-center shadow-lg 
+                        hover:bg-red-50 hover:border-red-200 hover:text-red-500 transition-all duration-200 z-10 group`}
                         onClick={handleClose}
                         aria-label="Cerrar chat"
                     >
@@ -457,16 +459,16 @@ const ChatWidget = () => {
                         <div className={`absolute inset-0 bg-gray-800/30 ${isMobile ? "" : "rounded-t-3xl"}`}></div>
                         <div className="relative flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-                                        clipRule="evenodd"
-                                    />
-                                </svg>
+                                <Image
+                                    src="/base/LOGO-N-WHITE.png"
+                                    className="w-5 h-auto text-white transition-transform duration-300 group-hover:scale-110"
+                                    width={20}
+                                    height={20}
+                                    alt="Chatbot Icon"
+                                />
                             </div>
                             <div>
-                                <h2 className="text-lg font-bold text-white">Profesor</h2>
+                                <h2 className="text-lg font-bold text-white">Professor</h2>
                                 <p className="text-white/80 text-sm">Always here to help you</p>
                             </div>
                         </div>
@@ -543,13 +545,13 @@ const ChatWidget = () => {
                                         {res.answer && (
                                             <div className="flex gap-3 items-start">
                                                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--principal-button-color)] flex items-center justify-center shadow-sm">
-                                                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                                        <path
-                                                            fillRule="evenodd"
-                                                            d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-                                                            clipRule="evenodd"
-                                                        />
-                                                    </svg>
+                                                    <Image
+                                                        src="/base/LOGO-N-WHITE.png"
+                                                        className="w-4 h-auto text-white transition-transform duration-300 group-hover:scale-110"
+                                                        width={20}
+                                                        height={20}
+                                                        alt="Chatbot Icon"
+                                                    />
                                                 </div>
                                                 <div className="rounded-2xl bg-white border border-gray-200 px-4 py-3 text-gray-800 text-sm max-w-[80%] shadow-sm">
                                                     {res.answer}
