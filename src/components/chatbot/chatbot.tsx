@@ -259,8 +259,7 @@ const ChatWidget = () => {
             const data = await res.json()
             // Ocultar [END_CHAT] pero disparar lógica
             const isChatEnd = /\[END_CHAT\]/i.test(data.reply)
-            const isPrototype = /\[ADD_PROTOTYPE\]/i.test(data.reply)
-            let botAnswer = data.reply.replace(/\[END_CHAT\]/gi, "").replace(/\[ADD_PROTOTYPE\]/gi, "").trim()
+            const isPrototype = /\[PROTOTYPE\]/i.test(data.reply)
 
             function ensureAppDiv(htmlCode: string) {
                 if (!/<div\s+id=["']app["']/.test(htmlCode)) {
@@ -270,14 +269,14 @@ const ChatWidget = () => {
             }
 
             let htmlCode = ""
-            if (isPrototype) {
-                const codeMatch = data.reply.match(/```(?:html)?\s*([\s\S]*?)```/i)
-                if (codeMatch) {
-                    htmlCode = codeMatch[1].trim()
-                    htmlCode = ensureAppDiv(htmlCode);
-                }
+            const codeMatch = data.reply.match(/```(?:html)?\s*([\s\S]*?)```/i)
+            if (codeMatch) {
+                htmlCode = codeMatch[1].trim()
+                htmlCode = ensureAppDiv(htmlCode);
             }
-            
+
+            let botAnswer = data.reply.replace(/\[END_CHAT\]/gi, "").replace(/\[PROTOTYPE\]/gi, "").replace(/```(?:html)?\s*([\s\S]*?)```/i, "").trim()
+
             await supabase.from("messages").insert([
                 { conversation_id: convId, role: "bot", content: botAnswer },
             ])
@@ -291,7 +290,7 @@ const ChatWidget = () => {
                 setIsTyping(false)
                 // Detectar finalización de chat
 
-                if (isPrototype && htmlCode) {
+                if (htmlCode) {
                     handlePrototypeSave();
                 }
                 
@@ -336,13 +335,22 @@ const ChatWidget = () => {
                     },
                 ]);
 
-                // 4. Muestra la url al usuario
+                const protoMsg = `✅ Prototype created! Preview it here: /prototype/${uuid}`;
+
                 setResponses((prev) => [
-                    ...prev,
-                    {
+                ...prev,
+                {
                     question: "",
-                    answer: `✅ Prototype created!<br/>Preview it <a href="/prototype/${uuid}" class="underline text-blue-600" target="_blank">here</a>.`,
-                    },
+                    answer: protoMsg,
+                },
+                ]);
+
+                await supabase.from("messages").insert([
+                {
+                    conversation_id: convId,
+                    role: "bot",
+                    content: protoMsg,
+                }
                 ]);
             }
 
@@ -441,6 +449,26 @@ const ChatWidget = () => {
             </button>
             </div>
         );
+    }
+
+    function linkify(text: string) {
+        const urlRegex = /((https?:\/\/[^\s]+)|\/[^\s]+)/g;
+        return text.split(urlRegex).map((part, i) => {
+            if (/^(https?:\/\/|\/)/.test(part)) {
+                return (
+                    <a
+                    key={i}
+                    href={part}
+                    className="underline text-blue-600"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >
+                    Link
+                    </a>
+                );
+            }
+            return part;
+        });
     }
 
     return (
@@ -546,12 +574,12 @@ const ChatWidget = () => {
                             {/* Chat history */}
                             <div
                                 className={`
-                        flex-1 overflow-y-auto px-5 py-4 space-y-4 bg-[var(--principal-background-color)] custom-scrollbar
-                        ${isMobile
-                                        ? "max-h-none min-h-0"
-                                        : "max-h-80"
-                                    }
-                    `}
+                                flex-1 overflow-y-auto px-5 py-4 space-y-4 bg-[var(--principal-background-color)] custom-scrollbar
+                                ${isMobile
+                                                ? "max-h-none min-h-0"
+                                                : "max-h-80"
+                                            }
+                            `}
                                 style={isMobile ? {
                                     height: "1px",
                                     minHeight: 0,
@@ -607,8 +635,10 @@ const ChatWidget = () => {
                                                         alt="Chatbot Icon"
                                                     />
                                                 </div>
-                                                <div className="rounded-2xl bg-white border border-gray-200 px-4 py-3 text-gray-800 text-sm max-w-[80%] shadow-sm">
-                                                    {res.answer}
+                                                <div
+                                                    className="rounded-2xl bg-white border border-gray-200 px-4 py-3 text-gray-800 text-sm max-w-[80%] shadow-sm"
+                                                >
+                                                    {linkify(res.answer)}
                                                 </div>
                                             </div>
                                         )}
@@ -687,13 +717,13 @@ const ChatWidget = () => {
                                         onClick={() => handleSend()}
                                         disabled={loading || isTyping || !userMessage.trim() || showSatisfactionInline}
                                         className={`
-                            p-3 rounded-2xl font-medium transition-all duration-200 shadow-lg
-                            ${loading || isTyping || !userMessage.trim() || showSatisfactionInline
-                                                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                                                : "bg-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
-                                            }
-                            ${isMobile ? "text-base py-4 px-4" : ""}
-                        `}
+                                            p-3 rounded-2xl font-medium transition-all duration-200 shadow-lg
+                                            ${loading || isTyping || !userMessage.trim() || showSatisfactionInline
+                                                                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                                                                : "bg-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
+                                                            }
+                                            ${isMobile ? "text-base py-4 px-4" : ""}
+                                        `}
                                     >
                                         {loading ? (
                                             <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">

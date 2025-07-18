@@ -86,6 +86,8 @@ export async function POST(request: NextRequest) {
 
         const reply = completion.choices[0]?.message?.content || 'No response'
 
+        console.log('OpenAI response:', reply)
+
         return new Response(JSON.stringify({ reply }), {
             status: 200,
             headers: { 'Content-Type': 'application/json' },

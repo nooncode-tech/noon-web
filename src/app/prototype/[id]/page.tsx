@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import { supabase } from "@/lib/supabaseClient";
-import { Sandpack } from "@codesandbox/sandpack-react";
 
 export default function PrototypePreview() {
     const params = useParams();
@@ -25,19 +24,26 @@ export default function PrototypePreview() {
     if (!code) return <div className="p-8 text-center">Loading prototype...</div>;
 
     return (
-        <div style={{ height: "100vh", background: "#f7f7f7" }}>
-            <Sandpack
-                template="static"
-                files={{
-                    "/index.html": { code, active: true }
+        <div className="w-full h-screen flex justify-center items-center">
+            <div
+                style={{
+                    width: "90vw",
+                    height: "90vh",
+                    boxShadow: "0 4px 24px rgba(0,0,0,0.08)",
+                    borderRadius: "16px",
+                    overflow: "hidden",
+                    border: "1px solid var(--secondary-border-color)",
+                    background: "#fff"
                 }}
-                options={{
-                    showTabs: false,
-                    showNavigator: true,
-                    showLineNumbers: true,
-                    wrapContent: true,
-                }}
-            />
+            >
+                <iframe
+                    srcDoc={code}
+                    title="Prototype Preview"
+                    sandbox="allow-scripts allow-same-origin allow-popups"
+                    frameBorder={0}
+                    style={{ width: "100%", height: "100%" }}
+                />
+            </div>
         </div>
     );
 }
