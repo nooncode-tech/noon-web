@@ -259,7 +259,7 @@ const ChatWidget = () => {
             const data = await res.json()
             // Ocultar [END_CHAT] pero disparar lógica
             const isChatEnd = /\[END_CHAT\]/i.test(data.reply)
-            const isPrototype = /\[PROTOTYPE\]/i.test(data.reply)
+            const isPrototype = /\[ADD_PROTOTYPE\]/i.test(data.reply)
 
             function ensureAppDiv(htmlCode: string) {
                 if (!/<div\s+id=["']app["']/.test(htmlCode)) {
@@ -275,7 +275,7 @@ const ChatWidget = () => {
                 htmlCode = ensureAppDiv(htmlCode);
             }
 
-            let botAnswer = data.reply.replace(/\[END_CHAT\]/gi, "").replace(/\[PROTOTYPE\]/gi, "").replace(/```(?:html)?\s*([\s\S]*?)```/i, "").trim()
+            let botAnswer = data.reply.replace(/\[END_CHAT\]/gi, "").replace(/\[ADD_PROTOTYPE\]/gi, "").replace(/```(?:html)?\s*([\s\S]*?)```/i, "").trim()
 
             await supabase.from("messages").insert([
                 { conversation_id: convId, role: "bot", content: botAnswer },
