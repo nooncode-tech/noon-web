@@ -7,21 +7,21 @@ import { supabase } from "@/lib/supabaseClient";
 export default function PrototypePreview() {
     const params = useParams();
     const id = params?.id as string;
-    const [code, setCode] = useState<string | null>(null);
+    const [preview, setPreview] = useState<string | null>(null);
 
     useEffect(() => {
         if (!id) return;
         (async () => {
             const { data, error } = await supabase
                 .from("prototypes")
-                .select("code")
+                .select("preview_url")
                 .eq("id", id)
                 .single();
-            if (data?.code) setCode(data.code);
+            if (data?.preview_url) setPreview(data.preview_url);
         })();
     }, [id]);
 
-    if (!code) return <div className="p-8 text-center">Loading prototype...</div>;
+    if (!preview) return <div className="p-8 text-center">Loading prototype...</div>;
 
     return (
         <div className="w-full h-screen flex justify-center items-center">
@@ -37,7 +37,7 @@ export default function PrototypePreview() {
                 }}
             >
                 <iframe
-                    srcDoc={code}
+                    src={preview}
                     title="Prototype Preview"
                     sandbox="allow-scripts allow-same-origin allow-popups"
                     frameBorder={0}

@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import Image from "next/image"
 import { supabase } from "@/lib/supabaseClient"
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
+import React from "react"
 
 type Message = {
     question: string
@@ -13,10 +14,10 @@ type Message = {
 const SatisfactionInline = ({
     conversationId,
     onDone,
-    }: {
+}: {
     conversationId: string
     onDone: () => void
-    }) => {
+}) => {
     const [loading, setLoading] = useState(false)
     const [selected, setSelected] = useState<number | null>(null)
     const [endedAt] = useState(new Date())
@@ -104,6 +105,7 @@ const ChatWidget = () => {
     const [userMessage, setUserMessage] = useState("")
     const [showSuggested, setShowSuggested] = useState(true);
     const [bubbleVisible, setBubbleVisible] = useState(false);
+    const [isCoding, setIsCoding] = useState(false);
 
     const SUGGESTED_MESSAGE = "I need help";
 
@@ -261,20 +263,6 @@ const ChatWidget = () => {
             const isChatEnd = /\[END_CHAT\]/i.test(data.reply)
             const isPrototype = /\[ADD_PROTOTYPE\]/i.test(data.reply)
 
-            function ensureAppDiv(htmlCode: string) {
-                if (!/<div\s+id=["']app["']/.test(htmlCode)) {
-                    return htmlCode.replace(/<\/body>/i, '<div id="app"></div></body>');
-                }
-                return htmlCode;
-            }
-
-            let htmlCode = ""
-            const codeMatch = data.reply.match(/```(?:html)?\s*([\s\S]*?)```/i)
-            if (codeMatch) {
-                htmlCode = codeMatch[1].trim()
-                htmlCode = ensureAppDiv(htmlCode);
-            }
-
             let botAnswer = data.reply.replace(/\[END_CHAT\]/gi, "").replace(/\[ADD_PROTOTYPE\]/gi, "").replace(/```(?:html)?\s*([\s\S]*?)```/i, "").trim()
 
             await supabase.from("messages").insert([
@@ -290,10 +278,10 @@ const ChatWidget = () => {
                 setIsTyping(false)
                 // Detectar finalización de chat
 
-                if (htmlCode) {
-                    handlePrototypeSave();
+                if (isPrototype) {
+                    handlePrototypeSave(msg);
                 }
-                
+
                 if (isChatEnd) {
                     const chatEndedMsg = `Chat Ended · ${new Date().toLocaleString()}`;
                     setResponses((prev) => [
@@ -313,45 +301,89 @@ const ChatWidget = () => {
                 }
             }, 1000)
 
-            async function handlePrototypeSave() {
+            async function handlePrototypeSave(userPrompt: string) {
+
+                setIsCoding(true);
                 // 1. Genera un UUID (usa crypto.randomUUID o uuidv4)
                 const uuid =
                     typeof crypto !== "undefined" && crypto.randomUUID
-                    ? crypto.randomUUID()
-                    : (await import("uuid")).v4();
+                        ? crypto.randomUUID()
+                        : (await import("uuid")).v4();
 
                 // 2. Nombre y email
                 const protoName = `Prototype by ${profile?.name || "User"}`;
                 const protoEmail = profile?.email || "";
 
-                // 3. Guarda en Supabase
-                const { data: inserted, error } = await supabase.from("prototypes").insert([
+                // 3. Llama a tu endpoint que integra v0.dev
+                let preview_url = "";
+                let chat_id = "";
+                let prototype_id = "";
+                try {
+                    const v0res = await fetch("/api/v0", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ prompt: userPrompt, email: protoEmail, name: protoName }),
+                    });
+                    const v0json = await v0res.json();
+                    preview_url = v0json.preview_url;
+                    chat_id = v0json.chat_id;
+                } catch (e) {
+                    preview_url = `/prototype/${uuid}`; // fallback local
+                }
+
+                let prototype;
+                if (chat_id) {
+                    // Buscar el prototipo usando chat_id (más confiable que email por si hay varios)
+                    const { data, error } = await supabase
+                        .from("prototypes")
+                        .select("id")
+                        .eq("chat_id", chat_id)
+                        .order("created_at", { ascending: false })
+                        .limit(1);
+
+                    if (data && data.length > 0) {
+                        prototype_id = data[0].id;
+                    }
+                }
+
+                // Fallback si no hay chat_id (raro, pero posible)
+                if (!prototype_id) {
+                    // Buscar por email y preview_url como backup
+                    const { data } = await supabase
+                        .from("prototypes")
+                        .select("id")
+                        .eq("email", protoEmail)
+                        .eq("preview_url", preview_url)
+                        .order("created_at", { ascending: false })
+                        .limit(1);
+
+                    if (data && data.length > 0) {
+                        prototype_id = data[0].id;
+                    }
+                }
+
+                // 5. Envía mensaje de respuesta al usuario con el link real
+                const protoMsg = prototype_id && preview_url
+                    ? `✅ Prototype created! Preview it here: /prototype/${prototype_id}`
+                    : `❌ Error creating prototype.`;
+
+                setResponses((prev) => [
+                    ...prev,
                     {
-                    id: uuid,
-                    name: protoName,
-                    email: protoEmail,
-                    code: htmlCode,
-                    preview_url: `/prototype/${uuid}`,
+                        question: "",
+                        answer: protoMsg,
                     },
                 ]);
 
-                const protoMsg = `✅ Prototype created! Preview it here: /prototype/${uuid}`;
-
-                setResponses((prev) => [
-                ...prev,
-                {
-                    question: "",
-                    answer: protoMsg,
-                },
-                ]);
-
                 await supabase.from("messages").insert([
-                {
-                    conversation_id: convId,
-                    role: "bot",
-                    content: protoMsg,
-                }
+                    {
+                        conversation_id: conversationId,
+                        role: "bot",
+                        content: protoMsg,
+                    },
                 ]);
+
+                setIsCoding(false);
             }
 
         } catch (error) {
@@ -373,34 +405,34 @@ const ChatWidget = () => {
     }
 
     useEffect(() => {
-    if (!open) {
-        const showBubble = () => {
-        setBubbleVisible(true);
-        setTimeout(() => setBubbleVisible(false), 7000);
-        };
-        // Mostrar la primera vez tras 2 segundos
-        const initial = setTimeout(showBubble, 2000);
-        // Luego cada 25 segundos
-        const interval = setInterval(showBubble, 25000);
-        return () => {
-        clearInterval(interval);
-        clearTimeout(initial);
-        };
-    } else {
-        setBubbleVisible(false);
-    }
+        if (!open) {
+            const showBubble = () => {
+                setBubbleVisible(true);
+                setTimeout(() => setBubbleVisible(false), 7000);
+            };
+            // Mostrar la primera vez tras 2 segundos
+            const initial = setTimeout(showBubble, 2000);
+            // Luego cada 25 segundos
+            const interval = setInterval(showBubble, 25000);
+            return () => {
+                clearInterval(interval);
+                clearTimeout(initial);
+            };
+        } else {
+            setBubbleVisible(false);
+        }
     }, [open]);
 
     const TypingIndicator = () => (
         <div className="flex gap-2 items-start mt-3">
             <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--principal-button-color)] flex items-center justify-center shadow-sm">
-                <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        fillRule="evenodd"
-                        d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-                        clipRule="evenodd"
-                    />
-                </svg>
+                <Image
+                    src="/base/LOGO-N-WHITE.svg"
+                    className="w-4 h-auto text-white transition-transform duration-300 group-hover:scale-110"
+                    width={20}
+                    height={20}
+                    alt="Chatbot Icon"
+                />
             </div>
             <div className="rounded-2xl bg-white px-4 py-3 shadow-sm">
                 <div className="flex space-x-1">
@@ -412,63 +444,129 @@ const ChatWidget = () => {
         </div>
     )
 
+    const CodingIndicator = () => (
+        <div className="flex gap-2 items-start mt-3">
+            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--principal-button-color)] flex items-center justify-center shadow-sm">
+                <Image
+                    src="/base/LOGO-N-WHITE.svg"
+                    className="w-4 h-auto text-white transition-transform duration-300 group-hover:scale-110"
+                    width={20}
+                    height={20}
+                    alt="Chatbot Icon"
+                />
+            </div>
+            <div className="rounded-2xl bg-white px-4 py-3 shadow-sm flex flex-col items-start min-w-[180px]">
+                <div className="flex gap-1 items-center mb-1">
+                    <span className="text-xs font-semibold text-[var(--principal-button-color)] tracking-wide uppercase">
+                        Generating code
+                    </span>
+                    <span className="ml-1 animate-pulse text-[var(--principal-button-color)]">
+                        <AnimatedDots />
+                    </span>
+                </div>
+                {/* Animated Skeleton Lines */}
+                <div className="space-y-1 w-full">
+                    <div className="h-2 w-3/4 bg-gradient-to-r from-gray-200 via-[var(--principal-button-color)] to-gray-200 rounded animate-coding-bar"></div>
+                    <div className="h-2 w-1/2 bg-gradient-to-r from-gray-200 via-[var(--principal-button-color)] to-gray-200 rounded animate-coding-bar delay-150"></div>
+                    <div className="h-2 w-2/3 bg-gradient-to-r from-gray-200 via-[var(--principal-button-color)] to-gray-200 rounded animate-coding-bar delay-300"></div>
+                </div>
+                <style jsx global>{`
+                    @keyframes coding-bar {
+                        0% {
+                            background-position: -200px 0;
+                        }
+                        100% {
+                            background-position: calc(200px + 100%) 0;
+                        }
+                    }
+                    .animate-coding-bar {
+                        background-size: 200px 100%;
+                        animation: coding-bar 1.2s linear infinite;
+                    }
+                `}</style>
+            </div>
+        </div>
+    );
+
+    const AnimatedDots = () => (
+        <span>
+            <span className="animate-bounce">.</span>
+            <span className="animate-bounce delay-150">.</span>
+            <span className="animate-bounce delay-300">.</span>
+        </span>
+    );
+
     // Botón flotante
     if (!open) {
         return (
             <div className="fixed bottom-6 right-6 z-50 sm:bottom-6 sm:right-6 flex flex-col items-end gap-2">
-            {/* Burbuja animada  */}
-            {bubbleVisible && (
-                <div className="mb-2 animate-fade-in-out bg-white border border-gray-200 px-4 py-2 rounded-2xl shadow text-gray-700 text-sm flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-[var(--principal-button-color)] flex items-center justify-center">
-                    <Image
-                        src="/base/LOGO-N-WHITE.png"
-                        className="w-4 h-auto text-white transition-transform duration-300 group-hover:scale-110"
-                        width={20}
-                        height={20}
-                        alt="Chatbot Icon"
-                    />
-                </div>
-                <span>Chat with me!</span>
-                </div>
-            )}
-            {/* Botón de abrir chat */}
-            <button
-                className="group relative bg-[var(--principal-button-color)] rounded-full w-20 h-20 flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-200"
-                onClick={() => setOpen(true)}
-                aria-label="Abrir chat de IA"
-            >
-                <div className="absolute inset-0 rounded-full"></div>
-                <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                    fillRule="evenodd"
-                    d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
-                    clipRule="evenodd"
-                />
-                </svg>
-                <div className="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-20"></div>
-            </button>
+                {/* Burbuja animada  */}
+                {bubbleVisible && (
+                    <div className="mb-2 animate-fade-in-out bg-white border border-gray-200 px-4 py-2 rounded-2xl shadow text-gray-700 text-sm flex items-center gap-2">
+                        <div className="w-8 h-8 rounded-full bg-[var(--principal-button-color)] flex items-center justify-center">
+                            <Image
+                                src="/base/LOGO-N-WHITE.svg"
+                                className="w-4 h-auto text-white transition-transform duration-300 group-hover:scale-110"
+                                width={20}
+                                height={20}
+                                alt="Chatbot Icon"
+                            />
+                        </div>
+                        <span>Chat with me!</span>
+                    </div>
+                )}
+                {/* Botón de abrir chat */}
+                <button
+                    className="group relative bg-[var(--principal-button-color)] rounded-full w-20 h-20 flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-200"
+                    onClick={() => setOpen(true)}
+                    aria-label="Abrir chat de IA"
+                >
+                    <div className="absolute inset-0 rounded-full"></div>
+                    <svg className="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            fillRule="evenodd"
+                            d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
+                            clipRule="evenodd"
+                        />
+                    </svg>
+                    <div className="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-20"></div>
+                </button>
             </div>
         );
     }
 
-    function linkify(text: string) {
+    function linkify(text: string): (string | React.JSX.Element)[] {
         const urlRegex = /((https?:\/\/[^\s]+)|\/[^\s]+)/g;
-        return text.split(urlRegex).map((part, i) => {
-            if (/^(https?:\/\/|\/)/.test(part)) {
-                return (
-                    <a
-                    key={i}
-                    href={part}
+        const elements: (string | React.JSX.Element)[] = [];
+        let lastIndex = 0;
+
+        // Usamos replace solo para iterar las coincidencias, NO para modificar el texto
+        text.replace(urlRegex, (url, _group, _group2, offset) => {
+            // Agrega el texto previo al link
+            if (lastIndex < offset) {
+                elements.push(text.slice(lastIndex, offset));
+            }
+            elements.push(
+                <a
+                    key={offset}
+                    href={url}
                     className="underline text-blue-600"
                     target="_blank"
                     rel="noopener noreferrer"
-                    >
+                >
                     Link
-                    </a>
-                );
-            }
-            return part;
+                </a>
+            );
+            lastIndex = offset + url.length;
+            return url;
         });
+
+        // Agrega el texto que queda después del último link
+        if (lastIndex < text.length) {
+            elements.push(text.slice(lastIndex));
+        }
+
+        return elements;
     }
 
     return (
@@ -542,7 +640,7 @@ const ChatWidget = () => {
                         <div className="relative flex items-center gap-3">
                             <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                                 <Image
-                                    src="/base/LOGO-N-WHITE.png"
+                                    src="/base/LOGO-N-WHITE.svg"
                                     className="w-5 h-auto text-white transition-transform duration-300 group-hover:scale-110"
                                     width={20}
                                     height={20}
@@ -576,9 +674,9 @@ const ChatWidget = () => {
                                 className={`
                                 flex-1 overflow-y-auto px-5 py-4 space-y-4 bg-[var(--principal-background-color)] custom-scrollbar
                                 ${isMobile
-                                                ? "max-h-none min-h-0"
-                                                : "max-h-80"
-                                            }
+                                        ? "max-h-none min-h-0"
+                                        : "max-h-80"
+                                    }
                             `}
                                 style={isMobile ? {
                                     height: "1px",
@@ -628,7 +726,7 @@ const ChatWidget = () => {
                                             <div className="flex gap-3 items-start">
                                                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--principal-button-color)] flex items-center justify-center shadow-sm">
                                                     <Image
-                                                        src="/base/LOGO-N-WHITE.png"
+                                                        src="/base/LOGO-N-WHITE.svg"
                                                         className="w-4 h-auto text-white transition-transform duration-300 group-hover:scale-110"
                                                         width={20}
                                                         height={20}
@@ -648,6 +746,9 @@ const ChatWidget = () => {
                                 {/* Indicador de escritura */}
                                 {isTyping && <TypingIndicator />}
 
+                                {/* Indicador de coding */}
+                                {isCoding && <CodingIndicator />}
+
                                 {/* Puntuación de satisfacción inline */}
                                 {showSatisfactionInline && conversationId && (
                                     <SatisfactionInline
@@ -663,26 +764,26 @@ const ChatWidget = () => {
                             <div className={`
                                         px-5 py-4 border-t border-[var(--secondary-border-color)] bg-[var(--principal-background-color)]
                                         ${isMobile
-                                            ? "rounded-none sticky bottom-0 w-full flex-shrink-0"
-                                            : "rounded-b-3xl"
-                                        }
+                                    ? "rounded-none sticky bottom-0 w-full flex-shrink-0"
+                                    : "rounded-b-3xl"
+                                }
                             `}>
 
                                 {profile && showSuggested && (
                                     <div className="flex items-center gap-2 mb-3">
                                         <button
-                                        className="bg-white/80 border border-gray-200 text-[var(--principal-button-color)] font-semibold px-4 py-2 rounded-2xl shadow hover:bg-white transition-colors duration-150"
-                                        onClick={() => {
-                                            setUserMessage(SUGGESTED_MESSAGE);
-                                            setShowSuggested(false); // ocultar mensaje sugerido tras click
-                                        }}
-                                        type="button"
+                                            className="bg-white/80 border border-gray-200 text-[var(--principal-button-color)] font-semibold px-4 py-2 rounded-2xl shadow hover:bg-white transition-colors duration-150"
+                                            onClick={() => {
+                                                setUserMessage(SUGGESTED_MESSAGE);
+                                                setShowSuggested(false); // ocultar mensaje sugerido tras click
+                                            }}
+                                            type="button"
                                         >
-                                        {SUGGESTED_MESSAGE}
+                                            {SUGGESTED_MESSAGE}
                                         </button>
                                     </div>
                                 )}
-                                
+
 
 
                                 <div className="flex gap-3 items-end">
@@ -719,9 +820,9 @@ const ChatWidget = () => {
                                         className={`
                                             p-3 rounded-2xl font-medium transition-all duration-200 shadow-lg
                                             ${loading || isTyping || !userMessage.trim() || showSatisfactionInline
-                                                                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                                                                : "bg-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
-                                                            }
+                                                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                                                : "bg-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
+                                            }
                                             ${isMobile ? "text-base py-4 px-4" : ""}
                                         `}
                                     >
