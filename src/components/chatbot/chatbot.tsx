@@ -263,7 +263,15 @@ const ChatWidget = () => {
             const isChatEnd = /\[END_CHAT\]/i.test(data.reply)
             const isPrototype = /\[ADD_PROTOTYPE\]/i.test(data.reply)
 
-            let botAnswer = data.reply.replace(/\[END_CHAT\]/gi, "").replace(/\[ADD_PROTOTYPE\]/gi, "").replace(/```(?:html)?\s*([\s\S]*?)```/i, "").trim()
+            const prototypeMatch = /'''([\s\S]+?)'''/i.exec(data.reply);
+            const prototypePrompt = prototypeMatch ? prototypeMatch[1].trim() : "";
+
+            let botAnswer = data.reply
+            // Extrae el prompt y lo elimina de la respuesta
+            .replace(/'''([\s\S]+?)'''/gi, "")
+            .replace(/\[END_CHAT\]/gi, "")
+            .replace(/\[ADD_PROTOTYPE\]/gi, "")
+            .trim();
 
             await supabase.from("messages").insert([
                 { conversation_id: convId, role: "bot", content: botAnswer },
@@ -279,7 +287,7 @@ const ChatWidget = () => {
                 // Detectar finalización de chat
 
                 if (isPrototype) {
-                    handlePrototypeSave(msg);
+                    handlePrototypeSave(prototypePrompt);
                 }
 
                 if (isChatEnd) {
@@ -569,6 +577,29 @@ const ChatWidget = () => {
         return elements;
     }
 
+    function formatBotResponse(text: string): React.ReactNode {
+        const parts = text.split(/(?=\d+\.\s)/g);
+
+        if (parts.length > 1) {
+            return (
+            <div>
+                {parts.map((part, idx) => (
+                <div key={idx}>{linkify(part.trim())}</div>
+                ))}
+            </div>
+            );
+        }
+
+        // Para saltos de línea normales:
+        return (
+            <div>
+            {text.split('\n').map((line, idx) => (
+                <div key={idx}>{linkify(line)}</div>
+            ))}
+            </div>
+        );
+    }
+
     return (
         <div
             className={`
@@ -736,7 +767,7 @@ const ChatWidget = () => {
                                                 <div
                                                     className="rounded-2xl bg-white border border-gray-200 px-4 py-3 text-gray-800 text-sm max-w-[80%] shadow-sm"
                                                 >
-                                                    {linkify(res.answer)}
+                                                    {formatBotResponse(res.answer)}
                                                 </div>
                                             </div>
                                         )}
