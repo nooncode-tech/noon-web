@@ -22,7 +22,10 @@ export async function POST(request: NextRequest) {
         // 1. Prompt de la empresa
         const companyPrompt = fs.readFileSync(companyPromptPath, 'utf8')
 
-        // 2. Historial de la conversación actual
+        // 2. Contenido de los PDFs (info de la empresa)
+        const txtInfoText = getAllTxtContent();
+
+        // 3. Historial de la conversación actual (igual que antes)
         let messages: Array<{ role: 'user' | 'assistant', content: string }> = []
         if (conversationId) {
             const { data: msgs } = await supabase
@@ -38,7 +41,7 @@ export async function POST(request: NextRequest) {
             }
         }
 
-        // 3. Ejemplos de buenas conversaciones
+        // 4. Ejemplos de buenas conversaciones (igual que antes)
         const { data: satConvs } = await supabase
             .from('conversations')
             .select('id')
@@ -55,7 +58,6 @@ export async function POST(request: NextRequest) {
                     .eq('conversation_id', conv.id)
                     .order('created_at', { ascending: true })
                 if (msgs && msgs.length) {
-                    // Puedes formatear como quieras, aquí simple
                     satisfactionExamples.push(
                         msgs.map(m => `${m.role === 'user' ? 'Usuario' : 'Bot'}: ${m.content}`).join('\n')
                     )
@@ -63,23 +65,24 @@ export async function POST(request: NextRequest) {
             }
         }
 
-        // 4. Construir el contexto para el modelo
-        // Comienza con el prompt de empresa y ejemplos de satisfacción
-        let systemPrompt = companyPrompt
+        // 5. Construir el contexto para el modelo
+        let systemPrompt = companyPrompt;
+        // Añade la información de los PDFs:
+        systemPrompt += `\n\nINFORMACIÓN DE LA EMPRESA (extraída de documentos oficiales):\n${txtInfoText}\n`;
         if (satisfactionExamples.length > 0) {
             systemPrompt +=
                 '\n\nEjemplos de buenas conversaciones anteriores:\n' +
                 satisfactionExamples.join('\n---\n')
         }
 
-        // 5. Armar el array de mensajes para OpenAI (primero el system, luego historial)
+        // 6. Armar el array de mensajes para OpenAI (igual)
         const openaiMessages: any[] = [
             { role: 'system', content: systemPrompt },
             ...(messages ?? []),
             { role: 'user', content: prompt }
         ]
 
-        // 6. Obtener respuesta de OpenAI
+        // 7. Obtener respuesta de OpenAI
         const completion = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo', // o "gpt-4"
             messages: openaiMessages

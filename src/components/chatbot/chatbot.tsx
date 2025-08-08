@@ -271,6 +271,7 @@ const ChatWidget = () => {
             .replace(/'''([\s\S]+?)'''/gi, "")
             .replace(/\[END_CHAT\]/gi, "")
             .replace(/\[ADD_PROTOTYPE\]/gi, "")
+            .replace(/\[TALK_WITH_AGENT]/gi, "")
             .trim();
 
             await supabase.from("messages").insert([
@@ -679,7 +680,7 @@ const ChatWidget = () => {
                                 />
                             </div>
                             <div>
-                                <h2 className="text-lg font-bold text-white">Professor</h2>
+                                <h2 className="text-lg font-bold text-white">Maxwell Aldridge</h2>
                                 <p className="text-white/80 text-sm">Always here to help you</p>
                             </div>
                         </div>
