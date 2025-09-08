@@ -245,6 +245,7 @@ const ChatWidget = () => {
         await supabase.from("messages").insert([
             { conversation_id: convId, role: "user", content: msg },
         ])
+
         setTimeout(() => {
             setIsTyping(true)
             setLoading(false)
@@ -545,7 +546,7 @@ const ChatWidget = () => {
     }
 
     function linkify(text: string): (string | React.JSX.Element)[] {
-        const urlRegex = /((https?:\/\/[^\s]+)|\/[^\s]+)/g;
+        const urlRegex = /(https?:\/\/[^\s]+)|(\/prototype[^\s]*)/g;
         const elements: (string | React.JSX.Element)[] = [];
         let lastIndex = 0;
 
@@ -718,7 +719,7 @@ const ChatWidget = () => {
                                 } : { minHeight: 200, overflowX: 'hidden' }}
                             >
                                 {responses.length === 0 && (
-                                    <div className="text-center py-8">
+                                    <div className="m-auto">
                                         <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-[var(--principal-background-color)] flex items-center justify-center">
                                             <Image
                                                 src="/base/profesor.gif"
@@ -728,8 +729,12 @@ const ChatWidget = () => {
                                                 alt="Chatbot Icon"
                                             />
                                         </div>
-                                        <p className="text-gray-500 text-sm font-medium">Hello! How can I help you?</p>
-                                        <p className="text-gray-400 text-xs mt-1">Type your question below</p>
+                                        <p className="text-white text-sm font-medium text-center ">Hello! I'm Maxwell Aldridge. How can I assist you today? Here are the options you can choose from:</p>
+                                        <ul className="text-gray-400 text-xs mt-1 list-decimal px-6">
+                                            <li className="ml-4">If you have any questions about the company, please let me know.</li>
+                                            <li className="ml-4">If you would like me to create a project prototype for you, just tell me your specifications.</li>
+                                            <li className="ml-4">If you would like to speak directly with a human agent, please let me know.</li>
+                                        </ul>
                                     </div>
                                 )}
 
