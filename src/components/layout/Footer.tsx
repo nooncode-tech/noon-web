@@ -133,28 +133,36 @@ const Footer: React.FC = () => {
           <div className="flex flex-col justify-center lg:col-span-1 px-0 sm:px-6 sm:border-l-0 lg:border-l lg:border-[var(--secondary-border-color)]">
             <div className="flex space-x-6 justify-start lg:justify-end">
               <Link
-                href="#"
+                href="https://www.tiktok.com/@nooncode.dev?_t=ZS-8ztpxIfHgHw&_r=1"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="TikTok"
                 className="text-gray-400 hover:text-white transition-colors duration-200"
               >
                 <FaTiktok className="size-6" />
               </Link>
               <Link
-                href="#"
+                href="https://www.facebook.com/profile.php?id=61571938881520"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Facebook"
                 className="text-gray-400 hover:text-white transition-colors duration-200"
               >
                 <FaFacebook className="size-6" />
               </Link>
               <Link
-                href="#"
+                href="https://www.instagram.com/nooncode.dev?igsh=MWR1djY1bHJidWxuZA=="
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="text-gray-400 hover:text-white transition-colors duration-200"
               >
                 <FaInstagram className="size-6" />
               </Link>
               <Link
-                href="#"
+                href="https://x.com/"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="X (Twitter)"
                 className="text-gray-400 hover:text-white transition-colors duration-200"
               >

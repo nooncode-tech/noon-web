@@ -163,13 +163,28 @@ export default function Contact() {
                                 </span>
 
                                 <div className="flex space-x-6 justify-center md:justify-start text-white mt-4 md:mt-0"> {/* Ajuste de alineación y margin top para mobile */}
-                                    <Link href="#" aria-label="TikTok">
+                                    <Link 
+                                      href="https://www.tiktok.com/@nooncode.dev?_t=ZS-8ztpxIfHgHw&_r=1" 
+                                      target="_blank" 
+                                      rel="noopener noreferrer" 
+                                      aria-label="TikTok"
+                                    >
                                         <FaTiktok className="size-6" />
                                     </Link>
-                                    <Link href="#" aria-label="Facebook">
+                                    <Link 
+                                      href="https://www.facebook.com/profile.php?id=61571938881520"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      aria-label="Facebook"
+                                    >
                                         <FaFacebook className="size-6" />
                                     </Link>
-                                    <Link href="#" aria-label="Instagram">
+                                    <Link 
+                                      href="https://www.instagram.com/nooncode.dev?igsh=MWR1djY1bHJidWxuZA=="
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      aria-label="Instagram"
+                                    >
                                         <FaInstagram className="size-6" />
                                     </Link>
                                     <Link href="#" aria-label="X (Twitter)">
