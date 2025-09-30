@@ -147,7 +147,7 @@ export default function Contact() {
                                     >
                                         <Phone className="size-6 md:size-7" /> {/* Ajuste de tamaño de icono */}
                                         <span className="Riosark">Phone</span>
-                                        <span>+000 123 (8426) 000</span>
+                                        <span>+1 (786) 557-6079</span>
                                     </Link>
                                 </span>
 

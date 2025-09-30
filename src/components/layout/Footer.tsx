@@ -115,7 +115,7 @@ const Footer: React.FC = () => {
                 className="flex items-center gap-3 hover:text-white transition-colors duration-200"
               >
                 <Phone className="size-5 text-gray-400" />
-                <span className="text-white text-sm">+000 123 (8426) 000</span>
+                <span className="text-white text-sm">+1 (786) 557-6079</span>
               </Link>
             </div>
             <div className="flex items-center space-x-3">
