@@ -729,11 +729,21 @@ const ChatWidget = () => {
                                                 alt="Chatbot Icon"
                                             />
                                         </div>
-                                        <p className="text-white text-sm font-medium text-center ">Hello! I'm Maxwell Aldridge. How can I assist you today? Here are the options you can choose from:</p>
-                                        <ul className="text-gray-400 text-xs mt-1 list-decimal px-6">
-                                            <li className="ml-4">If you have any questions about the company, please let me know.</li>
-                                            <li className="ml-4">If you would like me to create a project prototype for you, just tell me your specifications.</li>
-                                            <li className="ml-4">If you would like to speak directly with a human agent, please let me know.</li>
+                                        <h4 className="text-white text-base font-medium text-center ">What can Maxwell do for you?</h4>
+                                        <p className="text-gray-200 text-xs text-center mb-4">He creates ultra-efficient tech solutions for any sector and delivers 100% interactive, tailor-made prototypes.</p>
+                                        <ul className="text-gray-400 text-xs mt-1 list-decimal px-2">
+                                            <li className="ml-4 mb-5">State your goal in one sentence. Examples: <br/>
+                                              <span className="italic">“Create an Amazon/Shopify–style store with catalog, cart, and shipping, so we centralize sales and automate invoicing.”</span><br/><br/>
+                                              <span className="italic">“Launch an Airbnb–style marketplace to rent spaces/rooms/equipment with calendar and secure payments, so we monetize idle inventory.”</span>
+                                            </li>
+
+                                            <li className="ml-4 mb-5">Answer one question at a time</li>
+
+                                            <li className="ml-4 mb-5">Share links/assets and metrics (if you have them).</li>
+
+                                            <li className="ml-4 mb-5">Ask for the prototype or the project summary.</li>
+
+                                            <li className="ml-4">List your change requests for the project (1, 2, 3).</li>
                                         </ul>
                                     </div>
                                 )}
