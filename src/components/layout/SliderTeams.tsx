@@ -43,51 +43,50 @@ function getOnlineStatus(memberId: number, date = new Date()) {
 const teamMembers = [
     {
         id: 1,
-        name: "John Jones",
-        role: "Developer",
-        description:
-            "Lorem ipsum dolor sit amet consectetur. Nisl non porttitor consequat pellentesque at felis posuere eleifend orci.",
-        image: "/placeholder.png",
+        name: "Mel Rodríguez",
+        role: "Chief Executive Officer (CEO)",
+        description: "Responsible for Noon's vision and scaling",
+        image: "/team/1.png",
     },
     {
         id: 2,
-        name: "Rafael Brown",
-        role: "Developer",
+        name: "Andrés Velasco",
+        role: "Chief Operating Officer (COO)",
         description:
-            "Lorem ipsum dolor sit amet consectetur. Nisl non porttitor consequat pellentesque at felis posuere eleifend orci.",
-        image: "/placeholder.png",
+            "Leads operations and ensures execution as planned",
+        image: "/team/2.png",
     },
     {
         id: 3,
-        name: "Nolan Smith",
-        role: "Developer",
+        name: "Rafael Jiménez",
+        role: "Business Development Executive (BDE)",
         description:
-            "Lorem ipsum dolor sit amet consectetur. Nisl non porttitor consequat pellentesque at felis posuere eleifend orci.",
-        image: "/placeholder.png",
+            "Builds relationships and negotiates deals that help Noon grow",
+        image: "/team/3.png",
     },
     {
         id: 4,
-        name: "Sarah Wilson",
-        role: "Designer",
+        name: "Mel Alejandro Rodríguez",
+        role: "Business Development Executive (BDE)",
         description:
-            "Lorem ipsum dolor sit amet consectetur. Nisl non porttitor consequat pellentesque at felis posuere eleifend orci.",
-        image: "/placeholder.png",
+            "“Builds relationships and negotiates deals that help Noon grow”",
+        image: "/team/4.png",
     },
     {
         id: 5,
-        name: "Mike Johnson",
-        role: "Developer",
+        name: "Javier Escobar",
+        role: "Business Development Executive (BDE)",
         description:
-            "Lorem ipsum dolor sit amet consectetur. Nisl non porttitor consequat pellentesque at felis posuere eleifend orci.",
-        image: "/placeholder.png",
+            "Builds relationships and negotiates deals that help Noon grow",
+        image: "/team/5.png",
     },
     {
         id: 6,
-        name: "Emma Davis",
-        role: "Designer",
+        name: "José M. García",
+        role: "Software Developer",
         description:
-            "Lorem ipsum dolor sit amet consectetur. Nisl non porttitor consequat pellentesque at felis posuere eleifend orci.",
-        image: "/placeholder.png",
+            "Designs, develops, and maintains software end-to-end with a focus on quality and delivery",
+        image: "/team/6.png",
     },
 ];
 
