@@ -139,8 +139,8 @@ export default function TeamSlider() {
                                 <Image
                                 src={member.image || "/placeholder.png"}
                                 alt={member.name}
-                                width={200}
-                                height={200}
+                                width={250}
+                                height={380}
                                 className="w-[150%] h-[150%] object-cover rounded-lg transition-opacity duration-300 hover:opacity-100"
                                 />
                                 <div className="absolute bottom-[-10px] left-3 flex items-center justify-center">
