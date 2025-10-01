@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar"; 
+import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import ChatWidget from "@/components/chatbot/chatbot"; 
-import { GoogleOAuthProvider } from '@react-oauth/google';
+import UiGrapper from "@/components/layout/UiGrapper";
+import ChatWidget from "@/components/chatbot/chatbot";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -71,14 +72,16 @@ export default function RootLayout({
         <link href="https://fonts.cdnfonts.com/css/riosark" rel="stylesheet" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased relative`}
+        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased relative h-dvh flex flex-col`}
       >
         <Navbar />
-        {children}
+        <UiGrapper>
+          {children}
+          <Footer />
+        </UiGrapper>
         <GoogleOAuthProvider clientId="401626119144-kjh1sog47377958q8rsusv9393vib6b0.apps.googleusercontent.com">
           <ChatWidget />
         </GoogleOAuthProvider>
-        <Footer />
       </body>
     </html>
   );
