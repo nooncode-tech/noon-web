@@ -1,10 +1,11 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useContext } from "react"
 import Image from "next/image"
 import { supabase } from "@/lib/supabaseClient"
 import { GoogleLogin, googleLogout } from '@react-oauth/google';
 import React from "react"
+import {ChatContext, ChatContextType} from "@/context/ChatContext"
 
 type Message = {
     question: string
@@ -106,6 +107,7 @@ const ChatWidget = () => {
     const [showSuggested, setShowSuggested] = useState(true);
     const [bubbleVisible, setBubbleVisible] = useState(false);
     const [isCoding, setIsCoding] = useState(false);
+    const {contextMessage} = useContext(ChatContext);
 
     const SUGGESTED_MESSAGE = "I need help";
 
@@ -261,8 +263,8 @@ const ChatWidget = () => {
             })
             const data = await res.json()
             // Ocultar [END_CHAT] pero disparar lógica
-            const isChatEnd = /\[END_CHAT\]/i.test(data.reply)
-            const isPrototype = /\[ADD_PROTOTYPE\]/i.test(data.reply)
+            const isChatEnd = /\[END_CHAT\]/gi.test(data.reply)
+            const isPrototype = /\[ADD_PROTOTYPE\]/gi.test(data.reply)
 
             const prototypeMatch = /'''([\s\S]+?)'''/i.exec(data.reply);
             const prototypePrompt = prototypeMatch ? prototypeMatch[1].trim() : "";
