@@ -20,8 +20,8 @@ export default function HeroChat() {
     setMessage(message);
   }
 
-  const promptMsg1 = "NooN"
-  const promptMsg2 = "Proto"
+  const promptMsg1 = "NooN";
+  const promptMsg2 = "Proto";
 
   return (
     <div className={styles.form}>
@@ -34,7 +34,7 @@ export default function HeroChat() {
 
       <div className={styles.buttons}>
         <div className={styles.prompts}>
-          <button onClick={()=>handleBtnPrompt(promptMsg1)}>
+          <button onClick={() => handleBtnPrompt(promptMsg1)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -57,7 +57,7 @@ export default function HeroChat() {
             </svg>
             NooN
           </button>
-          <button onClick={()=>handleBtnPrompt(promptMsg2)}>
+          <button onClick={() => handleBtnPrompt(promptMsg2)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"

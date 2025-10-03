@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { motion, type Transition } from 'motion/react';
+import * as React from "react";
+import { motion, type Transition } from "motion/react";
 
-import { cn } from '@/lib/utils';
+import { cn } from "@/lib/utils";
 import {
   Tooltip,
   TooltipContent,
@@ -11,7 +11,7 @@ import {
   TooltipTrigger,
   type TooltipProps,
   type TooltipContentProps,
-} from '@/components/animate-ui/components/tooltip';
+} from "@/components/animate-ui/components/tooltip";
 
 type AvatarProps = TooltipProps & {
   children: React.ReactNode;
@@ -59,22 +59,22 @@ function AvatarGroupTooltip(props: AvatarGroupTooltipProps) {
   return <TooltipContent {...props} />;
 }
 
-type AvatarGroupProps = Omit<React.ComponentProps<'div'>, 'translate'> & {
+type AvatarGroupProps = Omit<React.ComponentProps<"div">, "translate"> & {
   children: React.ReactElement[];
   transition?: Transition;
   invertOverlap?: boolean;
   translate?: string | number;
-  tooltipProps?: Omit<TooltipProps, 'children'>;
+  tooltipProps?: Omit<TooltipProps, "children">;
 };
 
 function AvatarGroup({
   ref,
   children,
   className,
-  transition = { type: 'spring', stiffness: 300, damping: 17 },
+  transition = { type: "spring", stiffness: 300, damping: 17 },
   invertOverlap = false,
-  translate = '-30%',
-  tooltipProps = { side: 'top', sideOffset: 24 },
+  translate = "-30%",
+  tooltipProps = { side: "top", sideOffset: 24 },
   ...props
 }: AvatarGroupProps) {
   return (
@@ -82,7 +82,7 @@ function AvatarGroup({
       <div
         ref={ref}
         data-slot="avatar-group"
-        className={cn('flex flex-row -space-x-2 items-center h-8', className)}
+        className={cn("flex flex-row -space-x-2 items-center h-8", className)}
         {...props}
       >
         {children?.map((child, index) => (

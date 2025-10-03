@@ -1,27 +1,29 @@
-import type React from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { Phone, MailOpen } from "lucide-react"
-import { FaInstagram, FaTiktok, FaFacebook } from "react-icons/fa"
-import { FaXTwitter } from "react-icons/fa6"
+import type React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { Phone, MailOpen } from "lucide-react";
+import { FaInstagram, FaTiktok, FaFacebook } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer: React.FC = () => {
   return (
     <footer className="text-gray-300 py-12 border-t border-[var(--secondary-border-color)] max-w-[2600px] mx-auto">
       <div className="w-full mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-5 border-b border-[var(--secondary-border-color)] pb-8 px-8 md:px-16">
-            
           {/* Column 1: Logo and description*/}
           <div className="flex flex-col justify-center space-y-4 sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="text-3xl font-extrabold text-white no-underline">
+            <Link
+              href="/"
+              className="text-3xl font-extrabold text-white no-underline"
+            >
               <div className="relative w-[90px] h-[28px] md:w-[152px] md:h-[35px]">
                 <Image
-                    src="/base/LOGO-NOON-WHITE.svg"
-                    alt="Logo"
-                    fill
-                    sizes="(max-width: 768px) 120px, 152px"
-                    priority
-                    className="object-contain"
+                  src="/base/LOGO-NOON-WHITE.svg"
+                  alt="Logo"
+                  fill
+                  sizes="(max-width: 768px) 120px, 152px"
+                  priority
+                  className="object-contain"
                 />
               </div>
             </Link>
@@ -32,7 +34,9 @@ const Footer: React.FC = () => {
 
           {/* Column 2: Accesses */}
           <div className="px-0 sm:px-6 lg:px-12 pt-4 pb-1 lg:col-span-1 sm:border-l-0 lg:border-l lg:border-[var(--secondary-border-color)]">
-            <h3 className="text-lg font-semibold text-white mb-4 Riosark">Accesses</h3>
+            <h3 className="text-lg font-semibold text-white mb-4 Riosark">
+              Accesses
+            </h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
@@ -75,7 +79,9 @@ const Footer: React.FC = () => {
 
           {/* Column 3: Legal */}
           <div className="px-0 sm:px-6 lg:px-12 pt-4 pb-1 lg:col-span-1 sm:border-l-0 lg:border-l lg:border-[var(--secondary-border-color)]">
-            <h3 className="text-lg font-semibold text-white mb-4 Riosark">Legal</h3>
+            <h3 className="text-lg font-semibold text-white mb-4 Riosark">
+              Legal
+            </h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
@@ -178,7 +184,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

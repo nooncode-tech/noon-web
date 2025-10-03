@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Copy, Check } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useTypewriter } from "react-simple-typewriter"
+import { useState } from "react";
+import { Copy, Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useTypewriter } from "react-simple-typewriter";
 
 interface CodeEditorWidgetProps {
-  title?: string
-  language?: string
-  code?: string
-  theme?: "dark"
-  files?: string[]
+  title?: string;
+  language?: string;
+  code?: string;
+  theme?: "dark";
+  files?: string[];
 }
 
 export default function CodeEditorWidget({
@@ -46,10 +46,10 @@ export default function LandingPage() {
     "useStore.ts",
     "api.ts",
     "README.md",
-    "styles.css"
-  ]
+    "styles.css",
+  ],
 }: CodeEditorWidgetProps) {
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState(false);
 
   // Typewriter hook
   const [text, { isDone }] = useTypewriter({
@@ -57,18 +57,18 @@ export default function LandingPage() {
     typeSpeed: Math.max(1, Math.floor(3000 / (code ? code.length : 1))),
     deleteSpeed: 99999,
     delaySpeed: 99999,
-    loop: 1
-  })
+    loop: 1,
+  });
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(code)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error("Error al copiar:", err)
+      console.error("Error al copiar:", err);
     }
-  }
+  };
 
   const highlightCode = (str: string) => {
     let highlighted = str
@@ -76,22 +76,28 @@ export default function LandingPage() {
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;")
+      .replace(/'/g, "&#39;");
     highlighted = highlighted
       .replace(/(\/\/.*$|#.*$)/gm, '<span style="color: #6b7280;">$1</span>')
       .replace(
         /\b(function|const|let|var|if|else|for|while|return|import|export|class|extends|def|print|from|as)\b/g,
         '<span style="color: #a855f7;">$1</span>',
       )
-      .replace(/\b(console|document|window)\b/g, '<span style="color: #3b82f6;">$1</span>')
-      .replace(/(&quot;[^&]*?&quot;|&#39;[^&]*?&#39;)/g, '<span style="color: #10b981;">$1</span>')
-      .replace(/\b(\d+)\b/g, '<span style="color: #f97316;">$1</span>')
-    return highlighted
-  }
+      .replace(
+        /\b(console|document|window)\b/g,
+        '<span style="color: #3b82f6;">$1</span>',
+      )
+      .replace(
+        /(&quot;[^&]*?&quot;|&#39;[^&]*?&#39;)/g,
+        '<span style="color: #10b981;">$1</span>',
+      )
+      .replace(/\b(\d+)\b/g, '<span style="color: #f97316;">$1</span>');
+    return highlighted;
+  };
 
-  const lines = code.split("\n")
-  const shownLines: string[] = (text ? text : "").split("\n")
-  const showCursor = !isDone
+  const lines = code.split("\n");
+  const shownLines: string[] = (text ? text : "").split("\n");
+  const showCursor = !isDone;
 
   return (
     <div
@@ -109,9 +115,10 @@ export default function LandingPage() {
         ${theme === "dark" ? "border-[var(--secondary-border-color)]" : "border-gray-200"}
       `}
       style={{
-        fontSize: '11px',
+        fontSize: "11px",
         lineHeight: 1.35,
-        boxShadow: '0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)',
+        boxShadow:
+          "0 6px 32px 0 rgba(59, 46, 185, 0.35), 0 1.5px 3px 0 rgba(255,255,255,0.12)",
       }}
     >
       {/* Barra de título de la ventana */}
@@ -121,8 +128,8 @@ export default function LandingPage() {
           ${theme === "dark" ? "bg-gray-800/30 border-b border-[var(--secondary-border-color)]" : "bg-gray-100 border-b border-gray-200"}
         `}
         style={{
-          fontSize: '11px',
-          minHeight: '26px'
+          fontSize: "11px",
+          minHeight: "26px",
         }}
       >
         <div className="flex items-center space-x-1">
@@ -131,7 +138,11 @@ export default function LandingPage() {
             <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
             <div className="w-2 h-2 bg-green-500 rounded-full"></div>
           </div>
-          <span className={`text-[10px] font-medium ${theme === "dark" ? "text-gray-200" : "text-gray-700"}`}>{title}</span>
+          <span
+            className={`text-[10px] font-medium ${theme === "dark" ? "text-gray-200" : "text-gray-700"}`}
+          >
+            {title}
+          </span>
         </div>
         <Button
           variant="ghost"
@@ -139,9 +150,10 @@ export default function LandingPage() {
           onClick={copyToClipboard}
           className={`
             h-6 px-1.5 text-[10px]
-            ${theme === "dark"
-              ? "text-gray-400 hover:text-gray-200 hover:bg-gray-700"
-              : "text-gray-600 hover:text-gray-800 hover:bg-gray-200"
+            ${
+              theme === "dark"
+                ? "text-gray-400 hover:text-gray-200 hover:bg-gray-700"
+                : "text-gray-600 hover:text-gray-800 hover:bg-gray-200"
             }
           `}
         >
@@ -160,9 +172,7 @@ export default function LandingPage() {
       </div>
 
       {/* Altura responsive con Tailwind */}
-      <div
-        className="flex h-[220px] xs:h-[260px] sm:h-[320px] md:h-[400px] lg:h-[500px] min-h-0"
-      >
+      <div className="flex h-[220px] xs:h-[260px] sm:h-[320px] md:h-[400px] lg:h-[500px] min-h-0">
         {/* Barra lateral de archivos */}
         <div
           className={`
@@ -170,7 +180,7 @@ export default function LandingPage() {
             ${theme === "dark" ? "border-[var(--secondary-border-color)]" : "border-gray-200"}
           `}
           style={{
-            fontSize: '10px'
+            fontSize: "10px",
           }}
         >
           <div className="text-[9px] text-gray-400 font-semibold mb-1 px-1 select-none tracking-wide">
@@ -182,13 +192,14 @@ export default function LandingPage() {
                 key={file}
                 className={`
                   px-1.5 py-0.5 rounded text-[10px] truncate font-mono cursor-default select-none
-                  ${file === title
-                    ? "bg-gray-700/90 text-blue-300 font-bold"
-                    : "text-gray-300 hover:bg-gray-800/70"
+                  ${
+                    file === title
+                      ? "bg-gray-700/90 text-blue-300 font-bold"
+                      : "text-gray-300 hover:bg-gray-800/70"
                   }
                 `}
                 style={{
-                  opacity: file === title ? 1 : 0.82
+                  opacity: file === title ? 1 : 0.82,
                 }}
               >
                 {file}
@@ -204,18 +215,24 @@ export default function LandingPage() {
             <div
               className={`
                 select-none py-3 px-1 text-right
-                ${theme === "dark"
-                  ? "bg-gray-800/30 text-gray-500 border-r border-[var(--secondary-border-color)]"
-                  : "bg-gray-800/30 text-gray-400 border-r border-gray-200"
+                ${
+                  theme === "dark"
+                    ? "bg-gray-800/30 text-gray-500 border-r border-[var(--secondary-border-color)]"
+                    : "bg-gray-800/30 text-gray-400 border-r border-gray-200"
                 }
               `}
-              style={{ minWidth: '27px' }}
+              style={{ minWidth: "27px" }}
             >
-              {Array.from({ length: Math.max(1, shownLines.length) }).map((_, index) => (
-                <div key={index} className="text-[9.5px] min-h-[1.10rem] font-mono">
-                  {index + 1}
-                </div>
-              ))}
+              {Array.from({ length: Math.max(1, shownLines.length) }).map(
+                (_, index) => (
+                  <div
+                    key={index}
+                    className="text-[9.5px] min-h-[1.10rem] font-mono"
+                  >
+                    {index + 1}
+                  </div>
+                ),
+              )}
             </div>
             {/* Contenido del código */}
             <div className="flex-1 py-2 px-2 overflow-hidden min-w-0">
@@ -246,5 +263,6 @@ export default function LandingPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
+
