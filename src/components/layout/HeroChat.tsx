@@ -68,8 +68,8 @@ export default function HeroChat() {
               <path
                 d="M3.9 11.89H10.09M3.9 11.89C2.38 10.88 1.38 9.16 1.38 7.2C1.38 4.09 3.89 1.58 6.99 1.58C10.09 1.58 12.61 4.1 12.61 7.2C12.61 9.16 11.61 10.88 10.09 11.89M3.9 11.89V13.74C3.9 14.0161 4.12386 14.24 4.4 14.24H9.59C9.86615 14.24 10.09 14.0161 10.09 13.74V11.89M9.26 14.23C9.26 15.48 8.25 16.49 7 16.49C5.75 16.49 4.74 15.48 4.74 14.23"
                 stroke="currentColor"
-                stroke-width="1.5"
-                stroke-miterlimit="10"
+                strokeWidth="1.5"
+                strokeMiterlimit="10"
               />
             </svg>
             Prototype
@@ -85,9 +85,9 @@ export default function HeroChat() {
           >
             <g transform="rotate(90 12 12)">
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
               ></path>
             </g>
