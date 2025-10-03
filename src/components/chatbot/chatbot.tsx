@@ -109,6 +109,11 @@ const ChatWidget = () => {
     const [isCoding, setIsCoding] = useState(false);
     const {contextMessage} = useContext(ChatContext);
 
+    useEffect(() => {
+      setOpen(true);
+      setUserMessage(contextMessage)
+    }, [contextMessage])
+
     const SUGGESTED_MESSAGE = "I need help";
 
     function parseJwt(token: string) {

@@ -6,6 +6,7 @@ import Footer from "@/components/layout/Footer";
 import UiGrapper from "@/components/layout/UiGrapper";
 import ChatWidget from "@/components/chatbot/chatbot";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import { ChatProvider } from "@/context/ChatContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -75,13 +76,16 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased relative h-dvh flex flex-col`}
       >
         <Navbar />
-        <UiGrapper>
-          {children}
-          <Footer />
-        </UiGrapper>
-        <GoogleOAuthProvider clientId="401626119144-kjh1sog47377958q8rsusv9393vib6b0.apps.googleusercontent.com">
-          <ChatWidget />
-        </GoogleOAuthProvider>
+
+        <ChatProvider>
+          <UiGrapper>
+            {children}
+            <Footer />
+          </UiGrapper>
+          <GoogleOAuthProvider clientId="401626119144-kjh1sog47377958q8rsusv9393vib6b0.apps.googleusercontent.com">
+            <ChatWidget />
+          </GoogleOAuthProvider>
+        </ChatProvider>
       </body>
     </html>
   );

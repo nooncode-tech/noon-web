@@ -1,0 +1,77 @@
+.form {
+  padding: 12px;
+  background-color: #0F0D2B;
+  border: 1px solid #4D4B7B;
+  border-radius: 24px;
+  overflow: hidden;
+
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
+  transition: box-shadow 0.5s ease;
+}
+
+.form:focus-within {
+  box-shadow: 0 1px 10px rgba(203, 179, 234, 0.20);
+}
+
+.textarea {
+  width: 100%;
+  color: #FFF;
+  outline: none;
+  resize: none;
+}
+
+.textarea::placeholder {
+  color: #B4B4B4;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.prompts {
+  display: flex;
+  gap: 8px;
+
+  & button {
+    padding: 7px 8px;
+
+    color: #5D5D5D;
+    font-weight: 400;
+    border-radius: 25px;
+    background-color: #FFF;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  & button:hover {
+    background-color: var(--principal-button-color);
+    color: #FFF;
+    transform: scale(0.98);
+  }
+}
+
+.send {
+  width: 36px;
+  height: 36px;
+
+  color: #FFF;
+  border-radius: 999px;
+  background-color: var(--principal-button-color);
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: transform 0.2s ease-in;
+}
+
+.send:hover {
+  transform: scale(1.1);
+}

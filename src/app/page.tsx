@@ -7,6 +7,7 @@ import CountUp from 'react-countup';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import { MotionEffect } from '@/components/animate-ui/effects/motion-effect';
+import HeroChat from "@/components/layout/HeroChat"
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -171,19 +172,21 @@ export default function Home() {
               We develop your tech idea into code
             </h1>
 
-            <p className="max-w-[600px] text-white text-start text-[14px] mt-6">
+            <p className="max-w-[600px] text-white text-start text-[14px] mt-6 mb-4">
               At Noon, we turn your idea into code with the highest quality, record-fast delivery, and the best pricing in the market. Whether it's a simple website or a full-scale professional AI solution—we've got you covered.
             </p>
 
-            <div className="relative mt-9" style={{ width: 'fit-content' }}>
-              <Link
-                href="/"
-                className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
-              >
-                <span className="text-[14px] sm:text-sm">Anyways</span>
+            <HeroChat/>
 
-              </Link>
-            </div>
+            {/* <div className="relative mt-9" style={{ width: 'fit-content' }}> */}
+            {/*   <Link */}
+            {/*     href="/" */}
+            {/*     className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!" */}
+            {/*   > */}
+            {/*     <span className="text-[14px] sm:text-sm">Anyways</span> */}
+            {/**/}
+            {/*   </Link> */}
+            {/* </div> */}
 
             <div className="mt-7">
               <AvatarGroup>
