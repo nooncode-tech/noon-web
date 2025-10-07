@@ -190,13 +190,13 @@ export default function Contact() {
                   {" "}
                   {/* Asegura alineación vertical */}
                   <Link
-                    href="mailto:Hello@noon.com"
+                    href="mailto:noon.message@gmail.com"
                     className="flex items-center gap-3 transition-colors duration-200 text-white text-[12px] md:text-[15px]" // Ajuste tamaño de fuente
                   >
                     <Mail className="size-6 md:size-7" />{" "}
                     {/* Cambié a Mail icon, Phone repetido no es correcto */}
                     <span className="Riosark">Email</span>
-                    <span>Hello@noon.com</span>
+                    <span>noon.message@gmail.com</span>
                   </Link>
                 </span>
 

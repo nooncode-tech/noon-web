@@ -44,29 +44,34 @@ function LazyNumberFlow({ targetValue }: LazyNumberFlowProps) {
 
 const AVATARS = [
   {
-    src: "https://pbs.twimg.com/profile_images/1909615404789506048/MTqvRsjo_400x400.jpg",
-    fallback: "SK",
-    tooltip: "Skyleen",
+    src: "/hero-section/1.png",
+    fallback: "MR",
+    tooltip: "Mel",
   },
   {
-    src: "https://pbs.twimg.com/profile_images/1593304942210478080/TUYae5z7_400x400.jpg",
-    fallback: "CN",
-    tooltip: "Shadcn",
+    src: "/hero-section/2.png",
+    fallback: "AV",
+    tooltip: "Andres",
   },
   {
-    src: "https://pbs.twimg.com/profile_images/1677042510839857154/Kq4tpySA_400x400.jpg",
-    fallback: "AW",
-    tooltip: "Adam Wathan",
+    src: "/hero-section/3.png",
+    fallback: "RJ",
+    tooltip: "Rafael",
   },
   {
-    src: "https://pbs.twimg.com/profile_images/1783856060249595904/8TfcCN0r_400x400.jpg",
-    fallback: "GR",
-    tooltip: "Guillermo Rauch",
+    src: "/hero-section/4.png",
+    fallback: "MR",
+    tooltip: "Mel Alejandro",
   },
   {
-    src: "https://pbs.twimg.com/profile_images/1534700564810018816/anAuSfkp_400x400.jpg",
-    fallback: "JH",
-    tooltip: "Jhey",
+    src: "/hero-section/5.png",
+    fallback: "JE",
+    tooltip: "Javier",
+  },
+  {
+    src: "/hero-section/6.png",
+    fallback: "JG",
+    tooltip: "José",
   },
 ];
 
@@ -238,7 +243,7 @@ export default function Home() {
                       key={index}
                       className="w-10 h-10 border-3 border-[var(--principal-button-color)]"
                     >
-                      <Link href="/about">
+                      <Link href="/about#team">
                         <AvatarImage src={avatar.src} />
                         <AvatarFallback>{avatar.fallback}</AvatarFallback>
                         <AvatarGroupTooltip>
@@ -577,16 +582,15 @@ export default function Home() {
               Contact us
             </h2>
             <p className="max-w-[480px] text-white text-left text-[14px] mt-10">
-              Lorem ipsum dolor sit amet consectetur. Aenean pharetra sagittis
-              sed est viverra vel feugiat morbi pellentesque. Aenean vel viverra
-              commodo ac turpis donec ut. Scelerisque amet venenatis nec lorem
-              egestas. Tincidunt volutpat feugiat tincidunt orci gravida pretium
-              ut scelerisque. Vulputate volutpat amet malesuada proin. Cras
-              tempor pellentesque viverra molestie diam gravida.
+              At NooN, we transform ambitious ideas into tangible realities. If
+              you are looking to elevate your project, solve a complex
+              challenge, or simply have a question, our expert team is ready to
+              listen. Tell us about your vision, and we will respond with clear,
+              customized solutions. Your success starts here.
             </p>
             <div className="relative mt-9" style={{ width: "fit-content" }}>
               <Link
-                href="/"
+                href="/contact"
                 className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
               >
                 <span className="text-base sm:text-sm md:text-base">

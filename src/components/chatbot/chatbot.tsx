@@ -29,16 +29,16 @@ const ContactAgent = () => {
       "
       >
         <Image
-          src="/base/LOGO-N-WHITE.svg"
-          className="w-10 h-auto text-white"
-          width={44}
-          height={46}
+          src="/team/3.png"
+          className="w-17 h-17 object-cover object-top rounded-full text-white"
+          width={50}
+          height={50}
           alt="Chatbot Icon"
         />
       </div>
 
       <p className="text-gray-300 text-center text-sm">
-        Laboris nisi ut aliquip ex ea commodo consequat.
+        Rafael Jiménez, your Expert Advisor at NooN. Ready to help you grow.
       </p>
 
       <div className="flex flex-col gap-3">
@@ -53,10 +53,9 @@ const ContactAgent = () => {
             hover:bg-[var(--principal-button-color)] 
             hover:text-white 
             transition-colors duration-150
+            justify-center
           "
-          href=""
-          target="_blank"
-          rel="noopener noreferrer"
+          href="sms:+17865576079"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +71,7 @@ const ContactAgent = () => {
               strokeLinejoin="round"
             />
           </svg>
-          I Message
+          Message
         </Link>
 
         <Link
@@ -87,7 +86,7 @@ const ContactAgent = () => {
             hover:text-[var(--principal-button-color)] 
             transition-colors duration-150
           "
-          href="https://wa.me/+17865576079"
+          href="https://wa.me/17865576079"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -146,11 +145,10 @@ const SatisfactionInline = ({
               aria-label={`Rate ${n} stars`}
               className={`
                                 text-lg px-1 transition-colors
-                                ${
-                                  selected === n
-                                    ? "text-yellow-400 scale-110"
-                                    : "text-gray-300 hover:text-yellow-400"
-                                }
+                                ${selected === n
+                  ? "text-yellow-400 scale-110"
+                  : "text-gray-300 hover:text-yellow-400"
+                }
                             `}
               key={n}
               onClick={() => handleVote(n)}
@@ -292,13 +290,13 @@ const ChatWidget = () => {
           const mapped =
             Array.isArray(msgs) && msgs.length > 0
               ? msgs.reduce<Message[]>((acc, cur) => {
-                  if (cur.role === "user") {
-                    acc.push({ question: cur.content, answer: "" });
-                  } else if (cur.role === "bot" && acc.length > 0) {
-                    acc[acc.length - 1].answer = cur.content;
-                  }
-                  return acc;
-                }, [])
+                if (cur.role === "user") {
+                  acc.push({ question: cur.content, answer: "" });
+                } else if (cur.role === "bot" && acc.length > 0) {
+                  acc[acc.length - 1].answer = cur.content;
+                }
+                return acc;
+              }, [])
               : [];
           setResponses(mapped);
           setConversationId(convId);
@@ -539,9 +537,9 @@ const ChatWidget = () => {
         prev.map((item, index) =>
           index === prev.length - 1
             ? {
-                ...item,
-                answer: "Lo siento, ocurrió un error. Inténtalo de nuevo.",
-              }
+              ...item,
+              answer: "Lo siento, ocurrió un error. Inténtalo de nuevo.",
+            }
             : item,
         ),
       );
@@ -579,8 +577,8 @@ const ChatWidget = () => {
     <div className="flex gap-2 items-start mt-3">
       <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--principal-button-color)] flex items-center justify-center shadow-sm">
         <Image
-          src="/base/LOGO-N-WHITE.svg"
-          className="w-4 h-auto text-white transition-transform duration-300 group-hover:scale-110"
+          src="/base/maxwell-face.png"
+          className="w-5 h-auto text-white transition-transform duration-300 group-hover:scale-110"
           width={20}
           height={20}
           alt="Chatbot Icon"
@@ -609,8 +607,8 @@ const ChatWidget = () => {
     <div className="flex gap-2 items-start mt-3">
       <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--principal-button-color)] flex items-center justify-center shadow-sm">
         <Image
-          src="/base/LOGO-N-WHITE.svg"
-          className="w-4 h-auto text-white transition-transform duration-300 group-hover:scale-110"
+          src="/base/maxwell-face.png"
+          className="w-5 h-auto text-white transition-transform duration-300 group-hover:scale-110"
           width={20}
           height={20}
           alt="Chatbot Icon"
@@ -666,8 +664,8 @@ const ChatWidget = () => {
           <div className="mb-2 animate-fade-in-out bg-white border border-gray-200 px-4 py-2 rounded-2xl shadow text-gray-700 text-sm flex items-center gap-2">
             <div className="w-8 h-8 rounded-full bg-[var(--principal-button-color)] flex items-center justify-center">
               <Image
-                src="/base/LOGO-N-WHITE.svg"
-                className="w-4 h-auto text-white transition-transform duration-300 group-hover:scale-110"
+                src="/base/maxwell-face.png"
+                className="w-5 h-auto text-white transition-transform duration-300 group-hover:scale-110"
                 width={20}
                 height={20}
                 alt="Chatbot Icon"
@@ -678,13 +676,13 @@ const ChatWidget = () => {
         )}
         {/* Botón de abrir chat */}
         <button
-          className="group relative bg-[var(--principal-button-color)] rounded-full w-20 h-20 flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-200"
+          className="group relative bg-[var(--principal-button-color)] rounded-sm w-18 h-18 flex items-center justify-center transition-all duration-300 ease-out hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-200"
           onClick={() => setOpen(true)}
           aria-label="Abrir chat de IA"
         >
           <div className="absolute inset-0 rounded-full"></div>
           <svg
-            className="w-10 h-10 text-white"
+            className="w-12 h-12 text-white"
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -694,7 +692,7 @@ const ChatWidget = () => {
               clipRule="evenodd"
             />
           </svg>
-          <div className="absolute inset-0 rounded-full bg-blue-400 animate-ping opacity-20"></div>
+          <div className="absolute inset-0 rounded-sm bg-blue-400 animate-ping opacity-20"></div>
         </button>
       </div>
     );
@@ -761,28 +759,27 @@ const ChatWidget = () => {
     <div
       className={`
             fixed z-50
-            ${
-              isMobile
-                ? "inset-0 w-full h-full max-w-full max-h-full"
-                : "bottom-6 right-6 max-w-sm w-full"
-            }
+            ${isMobile
+          ? "inset-0 w-full h-full max-w-full max-h-full"
+          : "bottom-6 right-6 max-w-sm w-full"
+        }
             `}
       style={
         isMobile
           ? {
-              padding: 0,
-              margin: 0,
-              width: "100vw",
-              height: "100dvh",
-              maxWidth: "100vw",
-              maxHeight: "100dvh",
-              left: 0,
-              top: 0,
-              right: 0,
-              bottom: 0,
-              overflow: "hidden",
-              background: "rgba(0,0,0,0.05)",
-            }
+            padding: 0,
+            margin: 0,
+            width: "100vw",
+            height: "100dvh",
+            maxWidth: "100vw",
+            maxHeight: "100dvh",
+            left: 0,
+            top: 0,
+            right: 0,
+            bottom: 0,
+            overflow: "hidden",
+            background: "rgba(0,0,0,0.05)",
+          }
           : {}
       }
     >
@@ -792,21 +789,20 @@ const ChatWidget = () => {
         <div
           className={`
                 flex flex-col shadow-2xl border border-[var(--secondary-border-color)] backdrop-blur-sm
-                ${
-                  isMobile
-                    ? "h-full w-full max-w-full max-h-full rounded-none"
-                    : "rounded-3xl"
-                }
+                ${isMobile
+              ? "h-full w-full max-w-full max-h-full rounded-none"
+              : "rounded-3xl"
+            }
                 `}
           style={
             isMobile
               ? {
-                  height: "100dvh",
-                  width: "100vw",
-                  maxHeight: "100dvh",
-                  maxWidth: "100vw",
-                  overflow: "hidden",
-                }
+                height: "100dvh",
+                width: "100vw",
+                maxHeight: "100dvh",
+                maxWidth: "100vw",
+                overflow: "hidden",
+              }
               : {}
           }
         >
@@ -845,10 +841,10 @@ const ChatWidget = () => {
               className={`absolute inset-0 bg-gray-800/30 ${isMobile ? "" : "rounded-t-3xl"}`}
             ></div>
             <div className="relative flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center items-center before:content-[''] before:bg-green-500 before:w-3 before:h-3 before:absolute before:bottom-0 before:right-0 before:rounded-full">
                 <Image
-                  src="/base/LOGO-N-WHITE.svg"
-                  className="w-5 h-auto text-white transition-transform duration-300 group-hover:scale-110"
+                  src="/base/maxwell-face.png"
+                  className="w-8 h-auto text-white transition-transform duration-300 group-hover:scale-110"
                   width={20}
                   height={20}
                   alt="Chatbot Icon"
@@ -889,11 +885,11 @@ const ChatWidget = () => {
                 style={
                   isMobile
                     ? {
-                        height: "1px",
-                        minHeight: 0,
-                        flexGrow: 1,
-                        overflowX: "hidden",
-                      }
+                      height: "1px",
+                      minHeight: 0,
+                      flexGrow: 1,
+                      overflowX: "hidden",
+                    }
                     : { minHeight: 200, overflowX: "hidden" }
                 }
               >
@@ -980,8 +976,8 @@ const ChatWidget = () => {
                       <div className="flex gap-3 items-start">
                         <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--principal-button-color)] flex items-center justify-center shadow-sm">
                           <Image
-                            src="/base/LOGO-N-WHITE.svg"
-                            className="w-4 h-auto text-white transition-transform duration-300 group-hover:scale-110"
+                            src="/base/maxwell-face.png"
+                            className="w-5 h-auto text-white transition-transform duration-300 group-hover:scale-110"
                             width={20}
                             height={20}
                             alt="Chatbot Icon"
@@ -1095,14 +1091,13 @@ const ChatWidget = () => {
                     }
                     className={`
                                             p-3 rounded-2xl font-medium transition-all duration-200 shadow-lg
-                                            ${
-                                              loading ||
-                                              isTyping ||
-                                              !userMessage.trim() ||
-                                              showSatisfactionInline
-                                                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                                                : "bg-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
-                                            }
+                                            ${loading ||
+                        isTyping ||
+                        !userMessage.trim() ||
+                        showSatisfactionInline
+                        ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                        : "bg-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
+                      }
                                             ${isMobile ? "text-base py-4 px-4" : ""}
                                         `}
                   >

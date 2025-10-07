@@ -2,7 +2,7 @@
   padding: 12px;
   background-color: #0F0D2B;
   border: 1px solid #4D4B7B;
-  border-radius: 24px;
+  border-radius: 0.625rem;
   overflow: hidden;
 
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
@@ -10,7 +10,8 @@
 }
 
 .form:focus-within {
-  box-shadow: 0 1px 10px rgba(203, 179, 234, 0.20);
+  /*box-shadow: 0 1px 10px rgba(203, 179, 234, 0.20);*/
+  box-shadow: rgba(59, 46, 185, 0.35) 0px 6px 32px 0px, rgba(255, 255, 255, 0.12) 0px 1.5px 3px 0px;
 }
 
 .textarea {
@@ -36,10 +37,10 @@
   & button {
     padding: 7px 8px;
 
-    color: #5D5D5D;
+    color: #FFF;
     font-weight: 400;
-    border-radius: 25px;
-    background-color: #FFF;
+    border-radius: 6px;
+    background-color: var(--principal-button-color);
 
     display: flex;
     align-items: center;
@@ -50,8 +51,8 @@
   }
 
   & button:hover {
-    background-color: var(--principal-button-color);
-    color: #FFF;
+    color: #5D5D5D;
+    background-color: #FFF;
     transform: scale(0.98);
   }
 }
@@ -61,7 +62,7 @@
   height: 36px;
 
   color: #FFF;
-  border-radius: 999px;
+  border-radius: 6px;
   background-color: var(--principal-button-color);
   cursor: pointer;
 
@@ -74,4 +75,6 @@
 
 .send:hover {
   transform: scale(1.1);
+  color: var(--principal-button-color);
+  background-color: #FFF;
 }

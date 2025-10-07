@@ -126,11 +126,13 @@ const Footer: React.FC = () => {
             </div>
             <div className="flex items-center space-x-3">
               <Link
-                href="mailto:Hello@noon.com"
+                href="mailto:noon.message@gmail.com"
                 className="flex items-center gap-3 hover:text-white transition-colors duration-200"
               >
                 <MailOpen className="size-5 text-gray-400" />
-                <span className="text-white text-sm">Hello@noon.com</span>
+                <span className="text-white text-sm">
+                  noon.message@gmail.com
+                </span>
               </Link>
             </div>
           </div>
