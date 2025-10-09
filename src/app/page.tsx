@@ -582,11 +582,11 @@ export default function Home() {
               Contact us
             </h2>
             <p className="max-w-[480px] text-white text-left text-[14px] mt-10">
-              At NooN, we transform ambitious ideas into tangible realities. If
+              At Noon, we transform ambitious ideas into tangible realities. If
               you are looking to elevate your project, solve a complex
               challenge, or simply have a question, our expert team is ready to
               listen. Tell us about your vision, and we will respond with clear,
-              customized solutions. Your success starts here.
+              customized solutions.
             </p>
             <div className="relative mt-9" style={{ width: "fit-content" }}>
               <Link

@@ -20,8 +20,9 @@ export default function HeroChat() {
     setMessage(message);
   }
 
-  const promptMsg1 = "NooN";
-  const promptMsg2 = "Proto";
+  const promptMsgNoon = "What is Noon and how can you help me?";
+  const promptMsgProto =
+    "I want a prototype of a [product/service] that is [web/mobile/desktop] and does [primary function]; with [feature 1] and [feature 2].";
 
   return (
     <div className={styles.form}>
@@ -29,12 +30,12 @@ export default function HeroChat() {
         className={styles.textarea}
         value={message}
         onChange={handleChange}
-        placeholder="Ask anything..."
+        placeholder="What do you need? e.g., &#34;An Airbnb-style booking app.&#34;"
       />
 
       <div className={styles.buttons}>
         <div className={styles.prompts}>
-          <button onClick={() => handleBtnPrompt(promptMsg1)}>
+          <button onClick={() => handleBtnPrompt(promptMsgNoon)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -55,9 +56,9 @@ export default function HeroChat() {
                 fill="currentColor"
               />
             </svg>
-            NooN
+            About Noon
           </button>
-          <button onClick={() => handleBtnPrompt(promptMsg2)}>
+          <button onClick={() => handleBtnPrompt(promptMsgProto)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"

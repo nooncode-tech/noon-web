@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { ChatContext } from "@/context/ChatContext";
 import Link from "next/link";
 import { ChevronRight, Plus, Minus } from "lucide-react";
 import Image from "next/image";
@@ -20,6 +21,8 @@ export default function Services() {
       ],
       icon: "/services_icons/web.svg",
       image: "/placeholder.png",
+      message:
+        "I’m looking for web development for my business. Can you guide me?",
     },
     {
       id: 2,
@@ -34,6 +37,7 @@ export default function Services() {
       ],
       icon: "/services_icons/mobile.svg",
       image: "/placeholder.png",
+      message: "I need a mobile app for my business. Can you guide me?",
     },
     {
       id: 3,
@@ -48,6 +52,8 @@ export default function Services() {
       ],
       icon: "/services_icons/ia.svg",
       image: "/placeholder.png",
+      message:
+        "I want to implement AI and automation in my business. Can you guide me?",
     },
     {
       id: 4,
@@ -62,6 +68,7 @@ export default function Services() {
       ],
       icon: "/services_icons/custom_software.svg",
       image: "/placeholder.png",
+      message: "I want custom software for my business. Can you guide me?",
     },
     {
       id: 5,
@@ -76,6 +83,8 @@ export default function Services() {
       ],
       icon: "/services_icons/desktop.svg",
       image: "/placeholder.png",
+      message:
+        "I want a desktop application for my business. Can you guide me?",
     },
     {
       id: 6,
@@ -90,6 +99,8 @@ export default function Services() {
       ],
       icon: "/services_icons/blockchain.svg",
       image: "/placeholder.png",
+      message:
+        "I’m looking for a blockchain solution for my company. Can you guide me?",
     },
     {
       id: 7,
@@ -104,6 +115,7 @@ export default function Services() {
       ],
       icon: "/services_icons/network.svg",
       image: "/placeholder.png",
+      message: "I want network solutions for my company. Can you guide me?",
     },
     {
       id: 8,
@@ -118,10 +130,16 @@ export default function Services() {
       ],
       icon: "/services_icons/game.svg",
       image: "/placeholder.png",
+      message: "I want to develop a video game. Can you guide me?",
     },
   ];
 
   const [openSolutionId, setOpenSolutionId] = useState<number | null>(null);
+  const { handleHeroChatSend } = useContext(ChatContext);
+
+  const handleClickLetstalk = (message: string): void => {
+    handleHeroChatSend(message);
+  };
 
   const handleToggle = (id: number) => {
     setOpenSolutionId(openSolutionId === id ? null : id);
@@ -199,14 +217,14 @@ export default function Services() {
                         ))}
                       </ul>
                       <div className="mt-4" style={{ width: "fit-content" }}>
-                        <Link
-                          href="/"
+                        <button
+                          onClick={() => handleClickLetstalk(solution.message)}
                           className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
                         >
                           <span className="text-base sm:text-sm md:text-base">
                             Let's talk
                           </span>
-                        </Link>
+                        </button>
                       </div>
                     </div>
 
@@ -260,4 +278,3 @@ export default function Services() {
     </main>
   );
 }
-
