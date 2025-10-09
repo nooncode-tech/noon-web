@@ -18,6 +18,8 @@ const companyPromptPath = path.join(
   "companyPrompt.txt",
 );
 
+// TODO: Refactorizar para eliminar la función getAllTxtContent que no se usa. Linea 32 y 83.
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -78,7 +80,7 @@ export async function POST(request: NextRequest) {
     // 5. Construir el contexto para el modelo
     let systemPrompt = companyPrompt;
     // Añade la información de los PDFs:
-    systemPrompt += `\n\nINFORMACIÓN DE LA EMPRESA (extraída de documentos oficiales):\n${txtInfoText}\n`;
+    // systemPrompt += `\n\nINFORMACIÓN DE LA EMPRESA (extraída de documentos oficiales):\n${txtInfoText}\n`;
     if (satisfactionExamples.length > 0) {
       systemPrompt +=
         "\n\nEjemplos de buenas conversaciones anteriores:\n" +
@@ -91,6 +93,8 @@ export async function POST(request: NextRequest) {
       ...(messages ?? []),
       { role: "user", content: prompt },
     ];
+
+    console.log(systemPrompt);
 
     // 7. Obtener respuesta de OpenAI
     const completion = await openai.chat.completions.create({

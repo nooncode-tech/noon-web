@@ -145,10 +145,11 @@ const SatisfactionInline = ({
               aria-label={`Rate ${n} stars`}
               className={`
                                 text-lg px-1 transition-colors
-                                ${selected === n
-                  ? "text-yellow-400 scale-110"
-                  : "text-gray-300 hover:text-yellow-400"
-                }
+                                ${
+                                  selected === n
+                                    ? "text-yellow-400 scale-110"
+                                    : "text-gray-300 hover:text-yellow-400"
+                                }
                             `}
               key={n}
               onClick={() => handleVote(n)}
@@ -290,13 +291,13 @@ const ChatWidget = () => {
           const mapped =
             Array.isArray(msgs) && msgs.length > 0
               ? msgs.reduce<Message[]>((acc, cur) => {
-                if (cur.role === "user") {
-                  acc.push({ question: cur.content, answer: "" });
-                } else if (cur.role === "bot" && acc.length > 0) {
-                  acc[acc.length - 1].answer = cur.content;
-                }
-                return acc;
-              }, [])
+                  if (cur.role === "user") {
+                    acc.push({ question: cur.content, answer: "" });
+                  } else if (cur.role === "bot" && acc.length > 0) {
+                    acc[acc.length - 1].answer = cur.content;
+                  }
+                  return acc;
+                }, [])
               : [];
           setResponses(mapped);
           setConversationId(convId);
@@ -381,12 +382,12 @@ const ChatWidget = () => {
       const isChatEnd = /\[END_CHAT\]/gi.test(data.reply);
       const isPrototype = /\[ADD_PROTOTYPE\]/gi.test(data.reply);
       const isAgent = /\[TALK_WITH_AGENT\]/gi.test(data.reply);
-      // console.log("Chat End:" + isChatEnd + "\nPrototype:" + isPrototype);
+      console.log("Chat End:" + isChatEnd + "\nPrototype:" + isPrototype);
 
       const prototypeMatch = /'''([\s\S]+?)'''/i.exec(data.reply);
       const prototypePrompt = prototypeMatch ? prototypeMatch[1].trim() : "";
 
-      // console.log("\n\n\nRespuesta real del chat:\n" + data.reply);
+      console.log("\n\n\nRespuesta real del chat:\n" + data.reply);
       let botAnswer = data.reply
         // Extrae el prompt y lo elimina de la respuesta
         .replace(/'''([\s\S]+?)'''/gi, "")
@@ -537,9 +538,9 @@ const ChatWidget = () => {
         prev.map((item, index) =>
           index === prev.length - 1
             ? {
-              ...item,
-              answer: "Lo siento, ocurrió un error. Inténtalo de nuevo.",
-            }
+                ...item,
+                answer: "Lo siento, ocurrió un error. Inténtalo de nuevo.",
+              }
             : item,
         ),
       );
@@ -759,27 +760,28 @@ const ChatWidget = () => {
     <div
       className={`
             fixed z-50
-            ${isMobile
-          ? "inset-0 w-full h-full max-w-full max-h-full"
-          : "bottom-6 right-6 max-w-sm w-full"
-        }
+            ${
+              isMobile
+                ? "inset-0 w-full h-full max-w-full max-h-full"
+                : "bottom-6 right-6 max-w-sm w-full"
+            }
             `}
       style={
         isMobile
           ? {
-            padding: 0,
-            margin: 0,
-            width: "100vw",
-            height: "100dvh",
-            maxWidth: "100vw",
-            maxHeight: "100dvh",
-            left: 0,
-            top: 0,
-            right: 0,
-            bottom: 0,
-            overflow: "hidden",
-            background: "rgba(0,0,0,0.05)",
-          }
+              padding: 0,
+              margin: 0,
+              width: "100vw",
+              height: "100dvh",
+              maxWidth: "100vw",
+              maxHeight: "100dvh",
+              left: 0,
+              top: 0,
+              right: 0,
+              bottom: 0,
+              overflow: "hidden",
+              background: "rgba(0,0,0,0.05)",
+            }
           : {}
       }
     >
@@ -789,20 +791,21 @@ const ChatWidget = () => {
         <div
           className={`
                 flex flex-col shadow-2xl border border-[var(--secondary-border-color)] backdrop-blur-sm
-                ${isMobile
-              ? "h-full w-full max-w-full max-h-full rounded-none"
-              : "rounded-3xl"
-            }
+                ${
+                  isMobile
+                    ? "h-full w-full max-w-full max-h-full rounded-none"
+                    : "rounded-3xl"
+                }
                 `}
           style={
             isMobile
               ? {
-                height: "100dvh",
-                width: "100vw",
-                maxHeight: "100dvh",
-                maxWidth: "100vw",
-                overflow: "hidden",
-              }
+                  height: "100dvh",
+                  width: "100vw",
+                  maxHeight: "100dvh",
+                  maxWidth: "100vw",
+                  overflow: "hidden",
+                }
               : {}
           }
         >
@@ -885,11 +888,11 @@ const ChatWidget = () => {
                 style={
                   isMobile
                     ? {
-                      height: "1px",
-                      minHeight: 0,
-                      flexGrow: 1,
-                      overflowX: "hidden",
-                    }
+                        height: "1px",
+                        minHeight: 0,
+                        flexGrow: 1,
+                        overflowX: "hidden",
+                      }
                     : { minHeight: 200, overflowX: "hidden" }
                 }
               >
@@ -1091,13 +1094,14 @@ const ChatWidget = () => {
                     }
                     className={`
                                             p-3 rounded-2xl font-medium transition-all duration-200 shadow-lg
-                                            ${loading ||
-                        isTyping ||
-                        !userMessage.trim() ||
-                        showSatisfactionInline
-                        ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                        : "bg-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
-                      }
+                                            ${
+                                              loading ||
+                                              isTyping ||
+                                              !userMessage.trim() ||
+                                              showSatisfactionInline
+                                                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                                                : "bg-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
+                                            }
                                             ${isMobile ? "text-base py-4 px-4" : ""}
                                         `}
                   >
