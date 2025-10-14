@@ -145,7 +145,7 @@ const technologies = [
 
 export default function Home() {
   {
-    /* Services Boxes */
+    /* Services Boxes  */
   }
   const solutions = [
     {
