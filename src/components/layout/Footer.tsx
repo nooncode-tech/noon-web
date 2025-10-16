@@ -5,6 +5,13 @@ import { Phone, MailOpen } from "lucide-react";
 import { FaInstagram, FaTiktok, FaFacebook } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
+function getEmail() {
+  return ["noon", ".", "message", "@", "gmail", ".", "com"].join("");
+}
+function getPhone() {
+  return "+1 (786) 557-6079";
+}
+
 const Footer: React.FC = () => {
   return (
     <footer className="text-gray-300 py-12 border-t border-[var(--secondary-border-color)] max-w-[2600px] mx-auto">
@@ -121,17 +128,17 @@ const Footer: React.FC = () => {
                 className="flex items-center gap-3 hover:text-white transition-colors duration-200"
               >
                 <Phone className="size-5 text-gray-400" />
-                <span className="text-white text-sm">+1 (786) 557-6079</span>
+                <span className="text-white text-sm">{getPhone()}</span>
               </Link>
             </div>
             <div className="flex items-center space-x-3">
               <Link
-                href="mailto:noon.message@gmail.com"
+                href={`mailto:${getEmail()}`}
                 className="flex items-center gap-3 hover:text-white transition-colors duration-200"
               >
                 <MailOpen className="size-5 text-gray-400" />
                 <span className="text-white text-sm">
-                  noon.message@gmail.com
+                  {getEmail()}
                 </span>
               </Link>
             </div>

@@ -217,10 +217,18 @@ const ChatWidget = () => {
   const [bubbleVisible, setBubbleVisible] = useState(false);
   const [isCoding, setIsCoding] = useState(false);
   const { contextMessage } = useContext(ChatContext);
+  const [screenWidth, setScreenWidth] = useState<number | undefined>(undefined);
 
   useEffect(() => {
-    setOpen(true);
-    setUserMessage(contextMessage);
+    if (typeof window !== "undefined") {
+      const width = window.innerWidth;
+      setScreenWidth(width);
+
+      if (width > 640) {
+        setOpen(true);
+        setUserMessage(contextMessage);
+      }
+    }
   }, [contextMessage]);
 
   const SUGGESTED_MESSAGE = "I need help";

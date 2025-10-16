@@ -57,6 +57,17 @@
   }
 }
 
+@media screen and (max-width: 600px) {
+  .prompts {
+    & button {
+      font-size: 12px;
+    }
+  }
+  .textarea {
+    font-size: 12px;
+  }
+}
+
 .send {
   width: 36px;
   height: 36px;
