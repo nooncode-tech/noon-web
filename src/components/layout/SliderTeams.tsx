@@ -102,7 +102,7 @@ export default function TeamSlider() {
             spaceBetween={24}
             loop={true}
             autoplay={{
-              delay: 3000,
+              delay: 30000,
               disableOnInteraction: false,
             }}
             pagination={{ clickable: true }}
@@ -136,8 +136,9 @@ export default function TeamSlider() {
                         {member.role}
                       </span>
                     </div>
-                    <div className="relative mb-6 mx-auto w-[90%] h-auto bg-gray-700/30 border border-gray-600/50 rounded-xl flex items-center justify-center ">
-                      <div className="relative flex items-center justify-center">
+                    <div className="relative mb-6 mx-auto w-[90%] h-auto bg-gray-700/30 rounded-xl flex items-center justify-center">
+                      
+                      <div className="relative flex items-center justify-center z-10">
                         <Image
                           src={member.image || "/placeholder.png"}
                           alt={member.name}
@@ -145,19 +146,13 @@ export default function TeamSlider() {
                           height={380}
                           className="w-[150%] h-[150%] object-cover rounded-lg transition-opacity duration-300 hover:opacity-100"
                         />
-                        <div className="absolute bottom-[-10px] left-3 flex items-center justify-center">
-                          <div className="relative flex flex-row items-center gap-2 bg-gray-800 backdrop-blur-sm border border-gray-700/50 rounded-full px-3 py-1 text-sm text-gray-300">
+                        <div className="absolute bottom-[-10px] left-3 flex items-center justify-center z-30">
+                          <div className="relative flex flex-row items-center gap-2 bg-gray-800 backdrop-blur-sm rounded-full px-3 py-1 text-sm text-gray-300">
                             <div
                               className={`w-4 h-4 rounded-full ${
-                                status === "online"
-                                  ? "bg-green-500 animate-pulse"
-                                  : "bg-gray-400"
+                                status === "online" ? "bg-green-500 animate-pulse" : "bg-gray-400"
                               }`}
-                              title={
-                                status === "online"
-                                  ? "Disponible"
-                                  : "No disponible"
-                              }
+                              title={status === "online" ? "Disponible" : "No disponible"}
                             ></div>
                             <div className="mt-0.5">
                               {status === "online" ? "Online" : "Offline"}
@@ -165,6 +160,9 @@ export default function TeamSlider() {
                           </div>
                         </div>
                       </div>
+
+
+                      
                     </div>
                     <div className="text-center">
                       <h3 className="text-xl font-bold text-white mb-4 Riosark">

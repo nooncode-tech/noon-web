@@ -183,13 +183,15 @@ const SatisfactionInline = ({
   );
 };
 
-const getLocalUser = () => {
-  if (typeof window === "undefined") return null;
-  try {
-    const data = localStorage.getItem("chat_profile");
-    return data ? JSON.parse(data) : null;
-  } catch {
-    return null;
+const getLocalUser = () => { 
+  if (typeof window === 'undefined') return null; 
+  const ls = window.localStorage; 
+  if (!ls || typeof ls.getItem !== 'function') 
+    return null; 
+  try { const data = ls.getItem('chat_profile'); 
+    return data ? JSON.parse(data) : null; 
+  } catch { 
+    return null; 
   }
 };
 
