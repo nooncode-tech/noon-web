@@ -4,7 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import UiGrapper from "@/components/layout/UiGrapper";
-import ChatWidget from "@/components/chatbot/chatbot";
+import ChatWidget from "@/components/chatbot/ChatWidget";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ChatProvider } from "@/context/ChatContext";
 
