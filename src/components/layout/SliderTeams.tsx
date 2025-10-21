@@ -102,7 +102,7 @@ export default function TeamSlider() {
             spaceBetween={24}
             loop={true}
             autoplay={{
-              delay: 30000,
+              delay: 2500,
               disableOnInteraction: false,
             }}
             pagination={{ clickable: true }}
