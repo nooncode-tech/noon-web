@@ -1,13 +1,21 @@
 // /app/api/v0/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
-import { supabase } from "@/lib/supabaseClient"; // Asegúrate que este cliente funciona en el servidor
+import { createClient } from '@supabase/supabase-js'; 
 import { v0 } from "v0-sdk";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+
+const MAX_PROTOTYPES_ITERATIONS = 3;
+const LIMIT_REACHED_MESSAGE = "You have reached the maximum number of prototype modifications (3) for this conversation. Please contact an agent to discuss further changes.";
 
 export async function POST(req: NextRequest) {
   try {
-    // ✨ Recibimos el conversationId del frontend (como lo hicimos en el paso anterior)
     const { prompt, email, name, conversationId } = await req.json();
+
     if (!prompt || !email || !name || !conversationId) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -15,15 +23,30 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const { data: existingProtos } = await supabase
+    const { data: existingProto, error: fetchError } = await supabase
       .from("prototypes")
-      .select("chat_id, id") // También seleccionamos el ID de la tabla
-      .eq("email", email)
-      .limit(1);
+      .select("id, chat_id, prototype_count")
+      .eq("conversation_id", conversationId)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .maybeSingle(); 
 
-    let v0ChatId = existingProtos?.[0]?.chat_id ?? undefined;
-    // ✨ Guardamos el ID de nuestra base de datos si existe
-    let prototypeId = existingProtos?.[0]?.id ?? undefined;
+    if (fetchError) {
+        console.error("Supabase fetch error:", fetchError);
+        throw new Error(`Supabase fetch error: ${fetchError.message}`); 
+    }
+
+    const currentCount = existingProto?.prototype_count ?? 0;
+    if (currentCount >= MAX_PROTOTYPES_ITERATIONS) {
+      return NextResponse.json({
+        limitReached: true,
+        message: LIMIT_REACHED_MESSAGE,
+      });
+    }
+
+    let v0ChatId = existingProto?.chat_id; 
+    let prototypeId = existingProto?.id;
+    let nextCount = currentCount + 1;
     let demoUrl = "";
 
     if (!v0ChatId) {
@@ -41,40 +64,52 @@ export async function POST(req: NextRequest) {
       demoUrl = result.latestVersion?.demoUrl || result.demo || "";
 
       // ✨ Al insertar, le pedimos a Supabase que nos devuelva el 'id' de la nueva fila
-      const { data: newPrototype, error } = await supabase
+      const { data: newPrototype, error: insertError } = await supabase
         .from("prototypes")
         .insert({
           name,
           email,
           preview_url: demoUrl,
           chat_id: v0ChatId,
+          conversation_id: conversationId,
+          prototype_count: nextCount,
         })
         .select("id")
         .single();
         
-      if (error) throw error;
-      prototypeId = newPrototype.id; // Guardamos el nuevo ID
+      if (insertError) {
+          console.error("Supabase insert error:", insertError);
+          throw new Error(`Supabase insert error: ${insertError.message}`);
+      }
+      prototypeId = newPrototype.id;
 
     } else {
-      // Chat existente
       const reply = await v0.chats.sendMessage({ chatId: v0ChatId, message: prompt });
       demoUrl = reply.latestVersion?.demoUrl || reply.demo || "";
-      
-      await supabase
+
+      const { error: updateError } = await supabase
         .from("prototypes")
-        .update({ preview_url: demoUrl })
-        .eq("chat_id", v0ChatId);
+        .update({ 
+            preview_url: demoUrl,
+            prototype_count: nextCount,
+        })
+        .eq("id", prototypeId);
+
+      if (updateError) {
+          console.error("Supabase update error:", updateError);
+          throw new Error(`Supabase update error: ${updateError.message}`);
+      }
     }
 
-    // ✨ Devolvemos el ID de nuestra tabla 'prototypes'
     return NextResponse.json({
       success: true,
-      prototype_id: prototypeId, // <-- La clave que el frontend necesita
+      prototype_id: prototypeId,  
+      prototype_count: nextCount, 
     });
 
   } catch (e: any) {
     return NextResponse.json(
-      { error: e.message || String(e) },
+      { error: e.message || "An internal server error occurred processing the prototype request." },
       { status: 500 },
     );
   }

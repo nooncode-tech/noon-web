@@ -9,7 +9,6 @@ export default function HeroChat() {
     const { setContextMessage } = useChatContext();
     const [message, setMessage] = useState("");
 
-    console.log(message);
 
     function handleChange(e: any) {
         setMessage(e.target.value);

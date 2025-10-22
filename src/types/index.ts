@@ -1,6 +1,7 @@
 export type Message = {
     question: string;
     answer: string;
+    questionImageUrl?: string;
 };
 
 export type Profile = {

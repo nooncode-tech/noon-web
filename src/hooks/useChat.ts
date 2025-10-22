@@ -22,6 +22,9 @@ export const useChat = () => {
     const { contextMessage } = useChatContext();
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
+    const [fileToUpload, setFileToUpload] = useState<File | null>(null);
+    const [imagePreview, setImagePreview] = useState<string | null>(null);
+
     useEffect(() => {
         const existingSession = session.getChatSession();
         if (existingSession) {
@@ -51,7 +54,7 @@ export const useChat = () => {
             setLoading(true);
             const msgs = await chatService.fetchMessages(conversationId);
             const mapped = msgs.reduce<Message[]>((acc, cur) => {
-                if (cur.role === "user") acc.push({ question: cur.content, answer: "" });
+                if (cur.role === "user") acc.push({ question: cur.content, answer: "", questionImageUrl: cur.image_url ?? undefined });
                 else if (cur.role === "bot" && acc.length > 0) acc[acc.length - 1].answer = cur.content;
                 return acc;
             }, []);
@@ -80,17 +83,52 @@ export const useChat = () => {
 
     const handleSend = async () => {
 
-        if (!profile || !conversationId || !userMessage.trim()) return;
+        if (!userMessage.trim() && !fileToUpload) return;
+        if (!profile || !conversationId) return;
 
         setLoading(true);
-        setResponses(prev => [...prev, { question: userMessage, answer: "" }]);
-        await chatService.saveMessage(conversationId, 'user', userMessage);
 
-        setIsTyping(true);
-        setLoading(false);
+        const messageToSend = userMessage;
+        const fileToSend = fileToUpload;
+
+        setUserMessage("");
+        setFileToUpload(null);
+        setImagePreview(null);
+
+        let imageUrl: string | null = null;
         
         try {
-            const data = await chatService.getBotResponse(userMessage, conversationId);
+            if (fileToSend) {
+                const response = await fetch(
+                    `/api/upload?filename=${fileToSend.name}`,
+                    {
+                        method: 'POST',
+                        body: fileToSend,
+                    },
+                );
+
+                if (!response.ok) {
+                    throw new Error('Failed to upload file.');
+                }
+                const newBlob = await response.json();
+                imageUrl = newBlob.url;
+            }
+
+            setResponses(prev => [
+                ...prev, 
+                { 
+                    question: messageToSend, 
+                    answer: "", 
+                    questionImageUrl: imageUrl ?? undefined 
+                }
+            ]);
+
+            await chatService.saveMessage(conversationId, 'user', messageToSend, imageUrl);
+
+            setIsTyping(true);
+            setLoading(false);
+
+            const data = await chatService.getBotResponse(messageToSend, conversationId, imageUrl);
 
             const botAnswer = data.reply
                 .replace(/(?:'''|```)([\s\S]+?)(?:'''|```)/gi, "")
@@ -105,7 +143,19 @@ export const useChat = () => {
 
             // Manejar comandos especiales
             if (/\[TALK_WITH_AGENT\]/gi.test(data.reply)) setShowContactAgent(true);
-            if (/\[END_CHAT\]/gi.test(data.reply)) setShowSatisfactionInline(true);
+
+            if (/\[END_CHAT\]/gi.test(data.reply)) {
+                setShowSatisfactionInline(true);
+                
+                setTimeout(() => {
+                        session.clearChatSession();
+                        setProfile(null);
+                        setConversationId(null);
+                        setResponses([]);
+                        setOpen(false);
+                }, 3000);
+            }
+
             if (/\[ADD_PROTOTYPE\]/gi.test(data.reply)) {
                 const match = /(?:'''|```)([\s\S]+?)(?:'''|```)/i.exec(data.reply);
                 if (match?.[1]) handlePrototypeSave(match[1].trim());
@@ -113,9 +163,16 @@ export const useChat = () => {
 
         } catch (error) {
             console.error(error);
-            const errorMessage = "Lo siento, ocurrió un error. Inténtalo de nuevo.";
-            setResponses(prev => prev.map((item, i) => i === prev.length - 1 ? { ...item, answer: errorMessage } : item));
+            setUserMessage(messageToSend);
+            setResponses(prev => [
+                ...prev, 
+                { 
+                    question: "", 
+                    answer: "Lo siento, ocurrió un error al enviar tu mensaje. Por favor, inténtalo de nuevo."
+                }
+            ]);
             setIsTyping(false);
+            setLoading(false);
         }
     };
     
@@ -169,6 +226,9 @@ export const useChat = () => {
         contextMessage,
         messagesEndRef,
         showSuggested,
+        imagePreview,
+        setImagePreview,
+        setFileToUpload,
         // Funciones
         setOpen,
         handleClose,

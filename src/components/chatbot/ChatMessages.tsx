@@ -92,15 +92,24 @@ export const ChatMessages = ({ responses, isTyping, isCoding, conversationId, sh
                 </div>
             )}
 
-            {responses.map((res, index) => (
+            {responses.map((res, index) => {
+
+                return (
                 <div key={index} className="space-y-3">
-                    {res.question && (
+                    {res.question || res.questionImageUrl ? (
                         <div className="flex justify-end">
                             <div className="rounded-2xl bg-[var(--principal-button-color)] px-4 py-3 text-white max-w-[80%] text-sm">
-                                {res.question}
+                                {res.questionImageUrl && (
+                                    <img 
+                                        src={res.questionImageUrl} 
+                                        alt="User attachment" 
+                                        className="w-full rounded-md mb-2 max-w-xs"
+                                    />
+                                )}
+                                {res.question && <span>{res.question}</span>}
                             </div>
                         </div>
-                    )}
+                    ): null}
                     {res.answer && (
                         <div className="flex justify-start">
                             <div className="rounded-2xl bg-white px-4 py-3 text-gray-800 max-w-[80%] text-sm">
@@ -109,7 +118,8 @@ export const ChatMessages = ({ responses, isTyping, isCoding, conversationId, sh
                         </div>
                     )}
                 </div>
-            ))}
+                )}
+            )}
 
             {isTyping && <TypingIndicator />}
 

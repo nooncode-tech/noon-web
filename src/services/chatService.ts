@@ -30,25 +30,49 @@ export const updateConversationSatisfaction = async (id: string, satisfaction: n
 };
 
 export const fetchMessages = async (conversationId: string) => {
-    const { data } = await supabase
+    const { data, error } = await supabase
         .from("messages")
-        .select("role, content")
+        .select("role, content, image_url")
         .eq("conversation_id", conversationId)
         .order("created_at", { ascending: true });
+
+    if (error) {
+        console.error("Error fetching messages:", error);
+        return [];
+    }
+
     return data || [];
 };
 
-export const saveMessage = async (conversationId: string, role: 'user' | 'bot' | 'system', content: string) => {
+export const saveMessage = async (
+    conversationId: string,
+    role: 'user' | 'bot' | 'system',
+    content: string,
+    imageUrl: string | null = null
+) => {
     return await supabase
         .from("messages")
-        .insert([{ conversation_id: conversationId, role, content }]);
+        .insert([{
+            conversation_id: conversationId,
+            role,
+            content,
+            image_url: imageUrl
+        }]);
 };
 
-export const getBotResponse = async (prompt: string, conversationId: string) => {
+export const getBotResponse = async (
+    prompt: string,
+    conversationId: string,
+    imageUrl: string | null = null // <-- 1. AÑADE EL NUEVO ARGUMENTO AQUÍ
+) => {
     const response = await fetch("/api/openai", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt, conversationId }),
+        body: JSON.stringify({
+            prompt,
+            conversationId,
+            imageUrl // <-- 2. AÑADE EL CAMPO AQUÍ
+        }),
     });
     if (!response.ok) {
         throw new Error("Failed to get response from OpenAI");

@@ -1,15 +1,14 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { OpenAI } from "openai";
 import fs from "fs";
 import path from "path";
-import { getAllTxtContent } from "@/utils/pdfTXT";
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! });
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
 const companyPromptPath = path.join(
@@ -18,101 +17,86 @@ const companyPromptPath = path.join(
   "companyPrompt.txt",
 );
 
-// TODO: Refactorizar para eliminar la función getAllTxtContent que no se usa. Linea 32 y 83.
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { prompt, conversationId } = body;
 
-    // 1. Prompt de la empresa
+    const { prompt, conversationId, imageUrl } = body; 
+
+    if (!prompt && !imageUrl) {
+        return NextResponse.json({ error: "No prompt or image URL provided" }, { status: 400 });
+    }
+
     const companyPrompt = fs.readFileSync(companyPromptPath, "utf8");
 
-    // 2. Contenido de los PDFs (info de la empresa)
-    const txtInfoText = getAllTxtContent();
-
-    // 3. Historial de la conversación actual (igual que antes)
-    let messages: Array<{ role: "user" | "assistant"; content: string }> = [];
+    let messages: Array<{ role: "user" | "assistant"; content: any }> = [];
     if (conversationId) {
-      const { data: msgs } = await supabase
+      const { data: msgs, error: historyError } = await supabase
         .from("messages")
-        .select("role, content")
+        .select("role, content, image_url")
         .eq("conversation_id", conversationId)
         .order("created_at", { ascending: true });
+
+      if (historyError) {
+        console.error("Supabase history error:", historyError);
+      }
+
       if (Array.isArray(msgs)) {
         for (const m of msgs) {
-          if (m.role === "user")
-            messages.push({ role: "user", content: m.content });
-          if (m.role === "bot")
+          let content: any;
+          if (m.role === "user") {
+            if (m.image_url && m.content) {
+              content = [
+                { type: "text", text: m.content },
+                { type: "image_url", image_url: { url: m.image_url } },
+              ];
+            } else if (m.image_url) {
+              content = [{ type: "image_url", image_url: { url: m.image_url } }];
+            } else {
+              content = m.content;
+            }
+            messages.push({ role: "user", content: content });
+          } else if (m.role === "bot") {
             messages.push({ role: "assistant", content: m.content });
+          }
         }
       }
     }
 
-    // 4. Ejemplos de buenas conversaciones (igual que antes)
-    const { data: satConvs } = await supabase
-      .from("conversations")
-      .select("id")
-      .gte("satisfaction", 4)
-      .order("created_at", { ascending: false })
-      .limit(3);
-
-    let satisfactionExamples: string[] = [];
-    if (satConvs && satConvs.length > 0) {
-      for (const conv of satConvs) {
-        const { data: msgs } = await supabase
-          .from("messages")
-          .select("role, content")
-          .eq("conversation_id", conv.id)
-          .order("created_at", { ascending: true });
-        if (msgs && msgs.length) {
-          satisfactionExamples.push(
-            msgs
-              .map(
-                (m) => `${m.role === "user" ? "Usuario" : "Bot"}: ${m.content}`,
-              )
-              .join("\n"),
-          );
-        }
-      }
-    }
-
-    // 5. Construir el contexto para el modelo
     let systemPrompt = companyPrompt;
-    // Añade la información de los PDFs:
-    // systemPrompt += `\n\nINFORMACIÓN DE LA EMPRESA (extraída de documentos oficiales):\n${txtInfoText}\n`;
-    if (satisfactionExamples.length > 0) {
-      systemPrompt +=
-        "\n\nEjemplos de buenas conversaciones anteriores:\n" +
-        satisfactionExamples.join("\n---\n");
+
+    let finalUserContent: any;
+    if (imageUrl && prompt) {
+      finalUserContent = [
+        { type: "text", text: prompt },
+        { type: "image_url", image_url: { url: imageUrl } },
+      ];
+    } else if (imageUrl) {
+      finalUserContent = [{ type: "image_url", image_url: { url: imageUrl } }];
+    } else {
+      finalUserContent = prompt;
     }
 
-    // 6. Armar el array de mensajes para OpenAI (igual)
-    const openaiMessages: any[] = [
+    const openaiMessages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
       { role: "system", content: systemPrompt },
-      ...(messages ?? []),
-      { role: "user", content: prompt },
+      ...messages,
+      { role: "user", content: finalUserContent },
     ];
 
-    console.log(systemPrompt);
-
-    // 7. Obtener respuesta de OpenAI
     const completion = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo", // o "gpt-4"
+      model: "gpt-4o",
       messages: openaiMessages,
+      // Optional: Increase max_tokens if you expect longer descriptions of images
+      // max_tokens: 1000 
     });
 
-    const reply = completion.choices[0]?.message?.content || "No response";
+    const reply = completion.choices[0]?.message?.content || "Sorry, I could not process that.";
 
-    return new Response(JSON.stringify({ reply }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    return NextResponse.json({ reply });
+
   } catch (error) {
-    console.error(error);
-    return new Response(
-      JSON.stringify({ error: "Error al generar respuesta" }),
-      { status: 500, headers: { "Content-Type": "application/json" } },
-    );
+    console.error("OpenAI API error:", error);
+    const errorMessage = error instanceof Error ? error.message : "Error generating response";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

@@ -21,6 +21,7 @@
     "@react-oauth/google": "^0.12.2",
     "@supabase/supabase-js": "^2.50.3",
     "@types/pdf-parse": "^1.1.5",
+    "@vercel/blob": "^2.0.0",
     "ai": "^4.3.19",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

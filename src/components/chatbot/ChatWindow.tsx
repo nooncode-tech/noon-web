@@ -27,6 +27,9 @@ export const ChatWindow = ({ onClose, chatState }: ChatWindowProps) => {
         handleSend,
         userMessage,
         setUserMessage,
+        imagePreview,
+        setImagePreview,
+        setFileToUpload,
         handleGoogleSuccess,
         conversationId,
         messagesEndRef,
@@ -87,6 +90,9 @@ export const ChatWindow = ({ onClose, chatState }: ChatWindowProps) => {
                                 disabled={showSatisfactionInline}
                                 isMobile={isMobile}
                                 profile={profile}
+                                imagePreview={imagePreview}
+                                setImagePreview={setImagePreview}
+                                setFileToUpload={setFileToUpload}
                                 showSuggested={showSuggested}
                                 onHideSuggested={() => setShowSuggested(false)}
                             />
