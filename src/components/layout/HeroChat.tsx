@@ -27,7 +27,7 @@ export default function HeroChat() {
     }
 
     const promptMsgNoon = "What is Noon and how can you help me?";
-    const promptMsgProto = "I want a prototype of an Airbnb-style booking app.";
+    const promptMsgProto = "I want a prototype of a [product/service] that is [web/mobile/desktop] and does [primary function]; with [feature 1] and [feature 2].";
 
     return (
         <div className={styles.form}>
