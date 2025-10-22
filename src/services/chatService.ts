@@ -96,3 +96,25 @@ export const createPrototype = async (prompt: string, profile: Profile, conversa
     }
     return await response.json();
 };
+
+export const getPrototypeCount = async (conversationId: string): Promise<number> => {
+    if (!conversationId) return 0;
+
+    try {
+        const { data, error, count } = await supabase
+            .from("prototypes")
+            .select("prototype_count", { count: 'exact', head: true })
+            .eq("conversation_id", conversationId);
+
+        if (error) {
+            console.error("Error fetching prototype count:", error);
+            return 0; 
+        }
+
+        return count ?? 0;
+
+    } catch (err) {
+        console.error("Unexpected error fetching prototype count:", err);
+        return 0;
+    }
+};

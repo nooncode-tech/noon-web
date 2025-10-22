@@ -4,6 +4,10 @@ import { Message, Profile } from '@/types';
 import * as session from '@/utils/auth';
 import * as chatService from '@/services/chatService';
 
+
+const MAX_PROTOTYPES_ITERATIONS = 3;
+const LIMIT_REACHED_MESSAGE = "You have reached the maximum number of prototype modifications (3) for this conversation. Please contact an agent to discuss further changes.";
+
 export const useChat = () => {
     const [open, setOpen] = useState(false);
     const [profile, setProfile] = useState<Profile | null>(null);
@@ -158,7 +162,21 @@ export const useChat = () => {
 
             if (/\[ADD_PROTOTYPE\]/gi.test(data.reply)) {
                 const match = /(?:'''|```)([\s\S]+?)(?:'''|```)/i.exec(data.reply);
-                if (match?.[1]) handlePrototypeSave(match[1].trim());
+                const designPrompt = match?.[1]?.trim();
+
+                if (designPrompt) {
+                    // 2. ANTES de generar, verifica el conteo actual
+                    const currentCount = await chatService.getPrototypeCount(conversationId!); 
+                    
+                    if (currentCount >= MAX_PROTOTYPES_ITERATIONS) {
+                        setResponses(prev => [...prev, { question: "", answer: LIMIT_REACHED_MESSAGE }]);
+                        await chatService.saveMessage(conversationId!, 'bot', LIMIT_REACHED_MESSAGE);
+                    } else {
+                        handlePrototypeSave(designPrompt); // Llama a la función que contacta a /api/v0
+                    }
+                } else {
+                    console.error("[ADD_PROTOTYPE] tag found, but no design prompt block extracted from bot reply.");
+                }
             }
 
         } catch (error) {
