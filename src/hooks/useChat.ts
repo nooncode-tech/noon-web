@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useContext } from 'react';
-import { ChatContext } from "@/context/ChatContext";
+import { useChatContext } from "@/context/ChatContext";
 import { Message, Profile } from '@/types';
 import * as session from '@/utils/auth';
 import * as chatService from '@/services/chatService';
@@ -18,7 +18,8 @@ export const useChat = () => {
     const [showSatisfactionInline, setShowSatisfactionInline] = useState(false);
     const [showSuggested, setShowSuggested] = useState(true);
 
-    const { contextMessage } = useContext(ChatContext);
+    const [userMessage, setUserMessage] = useState("");
+    const { contextMessage } = useChatContext();
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -32,6 +33,13 @@ export const useChat = () => {
     useEffect(() => {
         if (contextMessage && window.innerWidth > 640) {
             setOpen(true);
+        }
+    }, [contextMessage]);
+
+    useEffect(() => {
+        if (contextMessage) {
+            setOpen(true);
+            setUserMessage(contextMessage);
         }
     }, [contextMessage]);
 
@@ -70,19 +78,19 @@ export const useChat = () => {
         }
     };
 
-    const handleSend = async (message: string) => {
+    const handleSend = async () => {
 
-        if (!profile || !conversationId || !message.trim()) return;
+        if (!profile || !conversationId || !userMessage.trim()) return;
 
         setLoading(true);
-        setResponses(prev => [...prev, { question: message, answer: "" }]);
-        await chatService.saveMessage(conversationId, 'user', message);
+        setResponses(prev => [...prev, { question: userMessage, answer: "" }]);
+        await chatService.saveMessage(conversationId, 'user', userMessage);
 
         setIsTyping(true);
         setLoading(false);
         
         try {
-            const data = await chatService.getBotResponse(message, conversationId);
+            const data = await chatService.getBotResponse(userMessage, conversationId);
 
             const botAnswer = data.reply
                 .replace(/(?:'''|```)([\s\S]+?)(?:'''|```)/gi, "")
@@ -166,6 +174,8 @@ export const useChat = () => {
         handleClose,
         handleGoogleSuccess,
         handleSend,
+        userMessage,
+        setUserMessage,
         setShowSatisfactionInline,
         setShowSuggested,
     };

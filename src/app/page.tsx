@@ -9,6 +9,7 @@ import { Autoplay } from "swiper/modules";
 import { MotionEffect } from "@/components/animate-ui/effects/motion-effect";
 import HeroChat from "@/components/layout/HeroChat";
 
+
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";

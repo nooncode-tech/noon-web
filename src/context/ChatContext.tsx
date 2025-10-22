@@ -1,35 +1,29 @@
+// /context/ChatContext.tsx
 "use client";
 
-import { ReactNode, createContext, useState } from "react";
+import { createContext, useState, ReactNode, useContext, Dispatch, SetStateAction } from 'react';
+
 export interface ChatContextType {
-  /**
-   * Envía un mensaje inicial o de "héroe" al chat.
-   * @param message El contenido del mensaje a enviar.
-   */
-  handleHeroChatSend: (message: string) => void;
   contextMessage: string;
+  setContextMessage: Dispatch<SetStateAction<string>>;
 }
 
-// creamos el contexto con un valor inicial
-const ChatContext = createContext<ChatContextType>({
-  contextMessage: "",
-  handleHeroChatSend: () => {},
-});
+export const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
-function ChatProvider({ children }: Readonly<{ children: ReactNode }>) {
-  const [contextMessage, setContextMessage] = useState("");
-  function handleHeroChatSend(message: string) {
-    setContextMessage(message);
-  }
-
-  const contextValue: ChatContextType = {
-    handleHeroChatSend,
-    contextMessage,
-  };
+export const ChatProvider = ({ children }: { children: ReactNode }) => {
+  const [contextMessage, setContextMessage] = useState<string>("");
 
   return (
-    <ChatContext.Provider value={contextValue}>{children}</ChatContext.Provider>
+    <ChatContext.Provider value={{ contextMessage, setContextMessage }}>
+      {children}
+    </ChatContext.Provider>
   );
-}
+};
 
-export { ChatContext, ChatProvider };
+export const useChatContext = () => {
+  const context = useContext(ChatContext);
+  if (context === undefined) {
+    throw new Error('useChatContext debe usarse dentro de un ChatProvider');
+  }
+  return context;
+};

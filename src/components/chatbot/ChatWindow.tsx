@@ -25,6 +25,8 @@ export const ChatWindow = ({ onClose, chatState }: ChatWindowProps) => {
         showSuggested,
         setShowSuggested,
         handleSend,
+        userMessage,
+        setUserMessage,
         handleGoogleSuccess,
         conversationId,
         messagesEndRef,
@@ -79,6 +81,8 @@ export const ChatWindow = ({ onClose, chatState }: ChatWindowProps) => {
                             />
                             <ChatInput
                                 onSend={handleSend}
+                                userMessage={userMessage}
+                                setUserMessage={setUserMessage}
                                 loading={loading || isTyping || isCoding}
                                 disabled={showSatisfactionInline}
                                 isMobile={isMobile}

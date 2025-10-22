@@ -1,40 +1,39 @@
-// /components/chatbot/ChatInput.tsx
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 // Definimos todas las props que el componente necesita desde el exterior
 interface ChatInputProps {
-    onSend: (message: string) => void;
+    onSend: () => void;
+    userMessage: string;
+    setUserMessage: (message: string) => void;
     disabled: boolean;
     loading: boolean;
     isMobile: boolean;
-    profile: object | null; // Usamos profile para saber si mostrar el mensaje sugerido
+    profile: object | null;
     showSuggested: boolean;
-    onHideSuggested: () => void; // Función para ocultar el mensaje sugerido en el padre
+    onHideSuggested: () => void;
 }
 
 const SUGGESTED_MESSAGE = "I need help";
 
-export const ChatInput = ({ onSend, disabled, loading, isMobile, profile, showSuggested, onHideSuggested }: ChatInputProps) => {
-    const [message, setMessage] = useState('');
-
+export const ChatInput = ({ onSend, userMessage, setUserMessage, disabled, loading, isMobile, profile, showSuggested, onHideSuggested }: ChatInputProps) => {
+    
     const handleSendClick = () => {
-        if (message.trim() && !disabled && !loading) {
-            onSend(message.trim());
-            setMessage('');
+        if (userMessage.trim() && !disabled && !loading) {
+        onSend();
         }
     };
 
     const handleSuggestedClick = () => {
-        setMessage(SUGGESTED_MESSAGE);
-        onHideSuggested(); // Llama a la función del padre para que actualice su estado
+        setUserMessage(SUGGESTED_MESSAGE);
+        onHideSuggested();
     };
 
     return (
         <div
             className={`
-        px-5 py-4 border-t border-[var(--secondary-border-color)] bg-[var(--principal-background-color)]
-        ${isMobile ? "rounded-none sticky bottom-0 w-full flex-shrink-0" : "rounded-b-3xl"} 
-        `}
+            px-5 py-4 border-t border-[var(--secondary-border-color)] bg-[var(--principal-background-color)]
+            ${isMobile ? "rounded-none sticky bottom-0 w-full flex-shrink-0" : "rounded-b-3xl"} 
+            `}
         >
             {/* Botón de Mensaje Sugerido */}
             {profile && showSuggested && (
@@ -55,8 +54,8 @@ export const ChatInput = ({ onSend, disabled, loading, isMobile, profile, showSu
                     <input
                         type="text"
                         placeholder="Type your question here..."
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
+                        value={userMessage}
+                        onChange={(e) => setUserMessage(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handleSendClick()}
                         disabled={disabled || loading}
                         autoFocus={!isMobile}
@@ -68,9 +67,9 @@ export const ChatInput = ({ onSend, disabled, loading, isMobile, profile, showSu
                         `}
                     />
                     {/* Botón para limpiar el input */}
-                    {message.trim() && (
+                    {userMessage.trim() && (
                         <button
-                            onClick={() => setMessage('')}
+                            onClick={() => setUserMessage('')}
                             className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                             aria-label="Clear input"
                         >
@@ -84,13 +83,13 @@ export const ChatInput = ({ onSend, disabled, loading, isMobile, profile, showSu
                 {/* Botón de Enviar (con estado de carga) */}
                 <button
                     onClick={handleSendClick}
-                    disabled={disabled || loading || !message.trim()}
+                    disabled={disabled || loading || !userMessage.trim()}
                     className={`
                             p-3 rounded-2xl font-medium transition-all duration-200 shadow-lg
-                            ${disabled || loading || !message.trim()
-                                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                                : "bg-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
-                            }
+                            ${disabled || loading || !userMessage.trim()
+                            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+                            : "bg-[var(--principal-button-color)] text-white hover:shadow-xl hover:scale-105 active:scale-95"
+                        }
                                 ${isMobile ? "py-4 px-4" : ""}
                             `}
                 >
