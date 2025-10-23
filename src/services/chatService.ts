@@ -2,22 +2,19 @@ import { supabase } from "@/lib/supabaseClient";
 import { Profile } from "@/types";
 
 export const fetchOrCreateConversation = async (profile: Profile) => {
-    const { data: existing } = await supabase
+    const { data: inserted, error } = await supabase
         .from("conversations")
-        .select("id")
-        .eq("email", profile.email)
-        .order("created_at", { ascending: false })
-        .limit(1);
-
-    if (existing && existing.length > 0) {
-        return existing[0].id;
-    }
-
-    const { data: inserted } = await supabase
-        .from("conversations")
-        .insert([{ name: profile.name, email: profile.email }])
+        .insert([{ 
+            name: profile.name, 
+            email: profile.email 
+        }])
         .select("id")
         .single();
+
+    if (error) {
+        console.error("Error creating new conversation:", error);
+        return null;
+    }
 
     return inserted?.id || null;
 };

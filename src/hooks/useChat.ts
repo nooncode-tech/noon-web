@@ -157,7 +157,7 @@ export const useChat = () => {
                         setConversationId(null);
                         setResponses([]);
                         setOpen(false);
-                }, 3000);
+                }, 100000);
             }
 
             if (/\[ADD_PROTOTYPE\]/gi.test(data.reply)) {
