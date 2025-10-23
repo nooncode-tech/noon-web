@@ -101,11 +101,11 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  href="/legal-terms"
+                  href="/terms-and-conditions"
                   className="hover:text-white text-gray-400 transition-colors duration-200 flex items-center"
                 >
                   <span className="w-2 h-2 bg-gray-400 rounded-full mr-3"></span>
-                  Legal Terms
+                  Terms and Conditions
                 </Link>
               </li>
               <li>
