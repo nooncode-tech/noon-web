@@ -45,19 +45,27 @@ export const fetchMessages = async (conversationId: string) => {
 };
 
 export const saveMessage = async (
-    conversationId: string,
-    role: 'user' | 'bot' | 'system',
-    content: string,
-    imageUrl: string | null = null
-) => {
-    return await supabase
+        conversationId: string,
+        role: 'user' | 'bot' | 'system',
+        content: string,
+        imageUrl: string | null = null
+    ) => {
+    const { data, error } = await supabase
         .from("messages")
         .insert([{
             conversation_id: conversationId,
             role,
             content,
             image_url: imageUrl
-        }]);
+        }])
+        .select();
+
+    if (error) {
+        console.error("Supabase error saving message:", error);
+        throw new Error(error.message);
+    }
+
+    return data;
 };
 
 export const getBotResponse = async (
@@ -108,7 +116,7 @@ export const getPrototypeCount = async (conversationId: string): Promise<number>
 
         if (error) {
             console.error("Error fetching prototype count:", error);
-            return 0; 
+            return 0;
         }
 
         return count ?? 0;
