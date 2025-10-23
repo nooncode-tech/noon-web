@@ -3,6 +3,7 @@ import { Message } from '@/types';
 import { formatBotResponse } from '@/utils/textUtils';
 import { TypingIndicator } from './TypingIndicator';
 import { CodingIndicator } from './CodingIndicator';
+import { ContactAgent } from './ContactAgent';
 import { SatisfactionInline } from './SatisfactionInline';
 import { useIsMobile } from '@/hooks/useIsMobile';
 import Image from 'next/image';
@@ -18,7 +19,7 @@ interface ChatMessagesProps {
     messagesEndRef: RefObject<HTMLDivElement | null>;
 }
 
-export const ChatMessages = ({ responses, isTyping, isCoding, conversationId, showSatisfactionInline, onSatisfactionDone, messagesEndRef }: ChatMessagesProps) => {
+export const ChatMessages = ({ responses, isTyping, isCoding, showContactAgent, conversationId, showSatisfactionInline, onSatisfactionDone, messagesEndRef }: ChatMessagesProps) => {
     const isMobile = useIsMobile();
 
     return (
@@ -124,6 +125,8 @@ export const ChatMessages = ({ responses, isTyping, isCoding, conversationId, sh
             {isTyping && <TypingIndicator />}
 
             {isCoding && <CodingIndicator />}
+
+            {showContactAgent && <ContactAgent />}
 
             {showSatisfactionInline && conversationId && (
                 <SatisfactionInline
