@@ -31,6 +31,7 @@ export async function POST(req: NextRequest) {
       .limit(1)
       .maybeSingle(); 
 
+
     if (fetchError) {
         console.error("Supabase fetch error:", fetchError);
         throw new Error(`Supabase fetch error: ${fetchError.message}`); 
@@ -50,6 +51,8 @@ export async function POST(req: NextRequest) {
     let demoUrl = "";
 
     if (!v0ChatId) {
+
+      
       // Chat nuevo
       const result = await v0.chats.create({ system:
           "You are an expert frontend developer specializing in crafting beautiful, modern, and highly detailed single-view landing pages. Every project you create must be a single-page landing (no multi-section or multi-page layouts). Always use the latest web technologies, libraries, and frameworks such as React, Next.js, Tailwind CSS, shadcn/ui, framer-motion, and Lucide or similar icon libraries. Ensure your designs are visually impressive, engaging, and highly interactive, incorporating smooth animations, appealing color schemes, and professional iconography. Write clean, well-structured, and accessible code. Focus on delivering visually striking, conversion-focused prototypes that impress clients and feel up to date with the latest design trends. Always provide code that is ready to use in a modern web project and easy to customize.",
@@ -60,6 +63,7 @@ export async function POST(req: NextRequest) {
             thinking: false,
           },
       });
+
       v0ChatId = result.id;
       demoUrl = result.latestVersion?.demoUrl || result.demo || "";
 

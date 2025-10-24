@@ -86,6 +86,7 @@ export const getBotResponse = async (
 };
 
 export const createPrototype = async (prompt: string, profile: Profile, conversationId: string) => {
+
     const response = await fetch("/api/v0", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -96,6 +97,7 @@ export const createPrototype = async (prompt: string, profile: Profile, conversa
             conversationId,
         }),
     });
+
     if (!response.ok) {
         throw new Error("Failed to create prototype");
     }
