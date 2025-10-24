@@ -25,41 +25,68 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "NOON",
+  
+  title: {
+    template: '%s | NOON',
+    default: 'NOON | We Turn Your Idea Into Code',
+  },
+
   description:
-    "At Noon, we turn your idea into code with the highest quality, record-fast delivery, and the best pricing in the market. Whether it's a simple website or a full-scale professional Al solution—we've got you covered.",
+    'At Noon, we turn your idea into code with top quality, record-fast delivery, and great pricing. From simple websites to full-scale professional AI solutions.',
+
+  metadataBase: new URL('https://nooncode.dev/'),
+
+  keywords: [
+    'web development',
+    'software development',
+    'AI solutions',
+    'programming',
+    'code',
+    'web design',
+    'Next.js',
+  ],
+
+  // --- Open Graph (Para Facebook, LinkedIn, Discord, etc.) ---
   openGraph: {
-    title: "NOON",
+    title: 'NOON | We Turn Your Idea Into Code',
     description:
-      "At Noon, we turn your idea into code with the highest quality, record-fast delivery, and the best pricing in the market.",
-    url: "https://yourdomain.com",
-    siteName: "NOON",
+      'At Noon, we turn your idea into code with top quality, record-fast delivery, and great pricing. From simple websites to full-scale professional AI solutions.',
+    url: 'https://nooncode.dev',
+    siteName: 'NOON',
     images: [
       {
-        url: "https://yourdomain.com/og-image.png", // Cambia por la URL real de tu imagen
+        url: '/og-image.png', // Ruta relativa a /public
         width: 1200,
         height: 630,
-        alt: "NOON - We turn your idea into code",
+        alt: 'NOON - We turn your idea into code',
       },
     ],
-    locale: "en_US",
-    type: "website",
+    locale: 'en_US',
+    type: 'website',
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "NOON",
-    description:
-      "At Noon, we turn your idea into code with top quality and record-fast delivery.",
-    images: ["https://yourdomain.com/og-image.png"], // Cambia por la URL real de tu imagen
-    creator: "@YourTwitterHandle", // Opcional, si tienes Twitter
-  },
+
+  // --- Iconos (Favicon, etc.) ---
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: '/metadata-img/favicon.ico',
+    shortcut: '/metadata-img/favicon.ico',
+    apple: '/metadata-img/apple-touch-icon.png',
   },
-  manifest: "/site.webmanifest",
-  metadataBase: new URL("https://yourdomain.com"),
+
+  // --- Archivo Manifest (para PWA) ---
+  manifest: '/metadata-img/site.webmanifest',
+
+  // --- Robots y Canónicos ---
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  alternates: {
+    canonical: '/',
+  },
 };
 
 export default function RootLayout({
