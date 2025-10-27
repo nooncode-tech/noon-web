@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     siteName: 'NOON',
     images: [
       {
-        url: '/og-image.png', // Ruta relativa a /public
+        url: '/logometadata.png', // Ruta relativa a /public
         width: 1200,
         height: 630,
         alt: 'NOON - We turn your idea into code',
