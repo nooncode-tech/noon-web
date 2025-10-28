@@ -86,12 +86,19 @@ export const useChat = () => {
         }
     };
 
+    const AGENT_TAG = '[TALK_WITH_AGENT]';
+    const END_CHAT_TAG = '[END_CHAT]';
+    const PROTOTYPE_TAG = '[ADD_PROTOTYPE]';
+
     const handleSend = async () => {
 
         if (!userMessage.trim() && !fileToUpload) return;
         if (!profile || !conversationId) return;
 
         setLoading(true);
+
+        setShowContactAgent(false);
+        setShowSatisfactionInline(false);
 
         const messageToSend = userMessage;
         const fileToSend = fileToUpload;
@@ -135,9 +142,14 @@ export const useChat = () => {
 
             const data = await chatService.getBotResponse(messageToSend, conversationId, imageUrl);
 
-            const botAnswer = data.reply
-                .replace(/(?:'''|```)([\s\S]+?)(?:'''|```)/gi, "")
-                .replace(/\[(END_CHAT|ADD_PROTOTYPE|TALK_WITH_AGENT)\]/gi, "")
+            const fullReply = data.reply;
+
+            let botAnswer = fullReply.replace(/(?:'''|```)([\s\S]+?)(?:'''|```)/gi, "").trim();
+            
+            botAnswer = botAnswer
+                .replace(new RegExp(`\\${AGENT_TAG}`, 'gi'), "")
+                .replace(new RegExp(`\\${END_CHAT_TAG}`, 'gi'), "")
+                .replace(new RegExp(`\\${PROTOTYPE_TAG}`, 'gi'), "")
                 .trim();
             
             await chatService.saveMessage(conversationId, 'bot', botAnswer);
@@ -147,22 +159,24 @@ export const useChat = () => {
             setResponses(prev => prev.map((item, i) => i === prev.length - 1 ? { ...item, answer: botAnswer } : item));
 
             // Manejar comandos especiales
-            if (/\[TALK_WITH_AGENT\]/gi.test(data.reply)) setShowContactAgent(true);
+            if (fullReply.includes(AGENT_TAG)) {
+                setShowContactAgent(true);
+            }
 
-            if (/\[END_CHAT\]/gi.test(data.reply)) {
+            if (fullReply.includes(END_CHAT_TAG)) {
                 setShowSatisfactionInline(true);
-                
+
                 setTimeout(() => {
-                        session.clearChatSession();
-                        setProfile(null);
-                        setConversationId(null);
-                        setResponses([]);
-                        setOpen(false);
+                    session.clearChatSession();
+                    setProfile(null);
+                    setConversationId(null);
+                    setResponses([]);
+                    setOpen(false);
                 }, 100000);
             }
 
-            if (/\[ADD_PROTOTYPE\]/gi.test(data.reply)) {
-                const match = /(?:'''|```)([\s\S]+?)(?:'''|```)/i.exec(data.reply);
+            if (fullReply.includes(PROTOTYPE_TAG)) {
+                const match = /(?:'''|```)([\s\S]+?)(?:'''|```)/i.exec(fullReply);
                 const designPrompt = match?.[1]?.trim();
 
                 if (designPrompt) {

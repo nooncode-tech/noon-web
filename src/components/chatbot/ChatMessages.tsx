@@ -99,7 +99,7 @@ export const ChatMessages = ({ responses, isTyping, isCoding, showContactAgent, 
                 <div key={index} className="space-y-3">
                     {res.question || res.questionImageUrl ? (
                         <div className="flex justify-end">
-                            <div className="rounded-2xl bg-[var(--principal-button-color)] px-4 py-3 text-white max-w-[80%] text-sm">
+                            <div className="rounded-2xl bg-[var(--principal-button-color)] px-4 py-3 text-white max-w-[90%] text-[12px]">
                                 {res.questionImageUrl && (
                                     <img 
                                         src={res.questionImageUrl} 
@@ -113,7 +113,7 @@ export const ChatMessages = ({ responses, isTyping, isCoding, showContactAgent, 
                     ): null}
                     {res.answer && (
                         <div className="flex justify-start">
-                            <div className="rounded-2xl bg-white px-4 py-3 text-gray-800 max-w-[80%] text-sm">
+                            <div className="rounded-2xl bg-white px-4 py-3 text-gray-800 max-w-[90%] text-[12px]">
                                 {formatBotResponse(res.answer)}
                             </div>
                         </div>
