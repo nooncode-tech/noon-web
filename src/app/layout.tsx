@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   
   title: {
     template: '%s | NOON',
-    default: 'NOON | We Turn Your Idea Into Code',
+    default: 'Noon | Technology Development Company',
   },
 
   description:
@@ -48,17 +48,17 @@ export const metadata: Metadata = {
 
   // --- Open Graph (Para Facebook, LinkedIn, Discord, etc.) ---
   openGraph: {
-    title: 'NOON | We Turn Your Idea Into Code',
+    title: 'Noon | Technology Development Company',
     description:
       'At Noon, we turn your idea into code with top quality, record-fast delivery, and great pricing. From simple websites to full-scale professional AI solutions.',
     url: 'https://nooncode.dev',
-    siteName: 'NOON',
+    siteName: 'Noon',
     images: [
       {
         url: '/logometadata.png', // Ruta relativa a /public
         width: 1200,
         height: 630,
-        alt: 'NOON - We turn your idea into code',
+        alt: 'Noon | Technology Development Company',
       },
     ],
     locale: 'en_US',
