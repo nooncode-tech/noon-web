@@ -9,7 +9,8 @@ const MAX_PROTOTYPES_ITERATIONS = 3;
 const LIMIT_REACHED_MESSAGE = "You have reached the maximum number of prototype modifications (3) for this conversation. Please contact an agent to discuss further changes.";
 
 export const useChat = () => {
-    const [open, setOpen] = useState(false);
+    //const [open, setOpen] = useState(false);
+    const { open, setOpen } = useChatContext();
     const [profile, setProfile] = useState<Profile | null>(null);
     const [conversationId, setConversationId] = useState<string | null>(null);
     const [responses, setResponses] = useState<Message[]>([]);

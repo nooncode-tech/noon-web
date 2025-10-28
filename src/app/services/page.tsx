@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useChatContext } from "@/context/ChatContext";
 import Link from "next/link";
 import { ChevronRight, Plus, Minus } from "lucide-react";
@@ -135,10 +135,11 @@ export default function Services() {
   ];
 
   const [openSolutionId, setOpenSolutionId] = useState<number | null>(null);
-  const { setContextMessage } = useChatContext();
+  const { setContextMessage, setOpen } = useChatContext();
 
   const handleClickLetstalk = (message: string): void => {
     setContextMessage(message); // 3. Llama a la función correcta
+    setOpen(true);
   };
 
   const handleToggle = (id: number) => {

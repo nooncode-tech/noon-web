@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { useChatContext } from "@/context/ChatContext";
 import Link from "next/link";
 import { ChevronRight, Plus, Minus } from "lucide-react";
 import Image from "next/image";
@@ -29,6 +30,8 @@ const solutions = [
     ],
     icon: "/services_icons/web.svg",
     image: "/placeholder.png",
+    message:
+      "I’m looking for web development for my business. Can you guide me?",
   },
   {
     id: 2,
@@ -43,6 +46,7 @@ const solutions = [
     ],
     icon: "/services_icons/mobile.svg",
     image: "/placeholder.png",
+    message: "I need a mobile app for my business. Can you guide me?",
   },
   {
     id: 3,
@@ -57,6 +61,8 @@ const solutions = [
     ],
     icon: "/services_icons/ia.svg",
     image: "/placeholder.png",
+    message:
+      "I want to implement AI and automation in my business. Can you guide me?",
   },
   {
     id: 4,
@@ -71,6 +77,7 @@ const solutions = [
     ],
     icon: "/services_icons/custom_software.svg",
     image: "/placeholder.png",
+    message: "I want custom software for my business. Can you guide me?",
   },
   {
     id: 5,
@@ -85,6 +92,8 @@ const solutions = [
     ],
     icon: "/services_icons/desktop.svg",
     image: "/placeholder.png",
+    message:
+      "I want a desktop application for my business. Can you guide me?",
   },
   {
     id: 6,
@@ -99,6 +108,8 @@ const solutions = [
     ],
     icon: "/services_icons/blockchain.svg",
     image: "/placeholder.png",
+    message:
+      "I’m looking for a blockchain solution for my company. Can you guide me?",
   },
   {
     id: 7,
@@ -113,6 +124,7 @@ const solutions = [
     ],
     icon: "/services_icons/network.svg",
     image: "/placeholder.png",
+    message: "I want network solutions for my company. Can you guide me?",
   },
   {
     id: 8,
@@ -127,6 +139,7 @@ const solutions = [
     ],
     icon: "/services_icons/game.svg",
     image: "/placeholder.png",
+    message: "I want to develop a video game. Can you guide me?",
   },
 ];
 
@@ -169,6 +182,8 @@ export default function ServicesPage() {
     }
   }, [slug, openSolutionId]); // openSolutionId asegura que la sección esté expandida
 
+  const { setContextMessage, setOpen } = useChatContext();
+
   // Toggle con cambio de URL
   const handleToggle = (id: number, slug: string) => {
     if (openSolutionId === id) {
@@ -178,6 +193,11 @@ export default function ServicesPage() {
       setOpenSolutionId(id);
       router.push(`/services/${slug}`);
     }
+  };
+
+  const handleClickLetstalk = (message: string): void => {
+    setContextMessage(message); // 3. Llama a la función correcta
+    setOpen(true);
   };
 
   return (
@@ -257,14 +277,14 @@ export default function ServicesPage() {
                         ))}
                       </ul>
                       <div className="mt-4" style={{ width: "fit-content" }}>
-                        <Link
-                          href="/"
+                        <button
+                          onClick={() => handleClickLetstalk(solution.message)}
                           className="principal-button flex gap-3 justify-center items-center text-white hover:text-[var(--principal-background-color)]!"
                         >
                           <span className="text-base sm:text-sm md:text-base">
                             Let's talk
                           </span>
-                        </Link>
+                        </button>
                       </div>
                     </div>
                     <div className="w-full md:w-[55%] flex justify-center items-center relative">
