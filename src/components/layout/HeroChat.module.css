@@ -60,7 +60,7 @@
 @media screen and (max-width: 600px) {
   .prompts {
     & button {
-      font-size: 12px;
+      font-size: 10px;
     }
   }
   .textarea {
@@ -88,4 +88,29 @@
   transform: scale(1.1);
   color: var(--principal-button-color);
   background-color: #FFF;
+}
+
+.imagePreview {
+  position: relative;
+  display: inline-block;
+  padding: 2px;
+  display: flex;
+  width: fit-content;
+  margin-bottom: 6px;
+}
+
+.imagePreviewDelete {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background-color: var(--color-red-500);
+  border: none;
+  border-radius: 50%;
+  color: #FFF;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }

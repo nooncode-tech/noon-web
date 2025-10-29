@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useContext } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useChatContext } from "@/context/ChatContext";
 import { Message, Profile } from '@/types';
 import * as session from '@/utils/auth';
@@ -10,7 +10,7 @@ const LIMIT_REACHED_MESSAGE = "You have reached the maximum number of prototype 
 
 export const useChat = () => {
     //const [open, setOpen] = useState(false);
-    const { open, setOpen } = useChatContext();
+    const { open, setOpen, contextMessage, imagePreview, setImagePreview, fileToUpload, setFileToUpload } = useChatContext();
     const [profile, setProfile] = useState<Profile | null>(null);
     const [conversationId, setConversationId] = useState<string | null>(null);
     const [responses, setResponses] = useState<Message[]>([]);
@@ -24,11 +24,8 @@ export const useChat = () => {
     const [showSuggested, setShowSuggested] = useState(true);
 
     const [userMessage, setUserMessage] = useState("");
-    const { contextMessage } = useChatContext();
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    const [fileToUpload, setFileToUpload] = useState<File | null>(null);
-    const [imagePreview, setImagePreview] = useState<string | null>(null);
 
     useEffect(() => {
         const existingSession = session.getChatSession();

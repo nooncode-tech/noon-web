@@ -1,29 +1,74 @@
-// /components/HeroChat.tsx
 "use client";
-import { useState } from "react";
+import { useState, useRef, ChangeEvent } from "react";
 import { useChatContext } from "@/context/ChatContext";
 import styles from "./HeroChat.module.css";
-import { m } from "framer-motion";
 
 export default function HeroChat() {
-    const { setContextMessage } = useChatContext();
+    const { setContextMessage, setOpen, setFileToUpload, setImagePreview: setGlobalImagePreview } = useChatContext();
     const [message, setMessage] = useState("");
+    const [localImagePreview, setLocalImagePreview] = useState<string | null>(null);
+    const [localFileToUpload, setLocalFileToUpload] = useState<File | null>(null);
 
-
-    function handleChange(e: any) {
+    function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
         setMessage(e.target.value);
     }
 
     function handleSend() {
-        if (!message.trim()) return;
-        setContextMessage(message);
+        if (!message.trim() && !localFileToUpload) return;
+        
+        setGlobalImagePreview(localImagePreview);
+        setFileToUpload(localFileToUpload);
+        
+        setOpen(true); 
+
+        if (message.trim()) {
+            setContextMessage(message);
+        } else if (localFileToUpload) {
+            setContextMessage(""); 
+        }
+        
         setMessage("");
+        setLocalImagePreview(null);
+        setLocalFileToUpload(null);
+
+        if (fileInputRef.current) {
+            fileInputRef.current.value = "";
+        }
     }
 
+
     function handlePromptClick(promptMessage: string) {
+        if (localImagePreview) removeImage();
         setContextMessage(promptMessage);
         setMessage(promptMessage);
     }
+
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            setLocalFileToUpload(file);
+            if (localImagePreview) URL.revokeObjectURL(localImagePreview);
+            setLocalImagePreview(URL.createObjectURL(file));
+        }
+    };
+
+    const handleUploadAndChatClick = () => {
+        fileInputRef.current?.click();
+    };
+
+    const removeImage = () => {
+        if (localImagePreview) {
+            URL.revokeObjectURL(localImagePreview);
+        }
+        setLocalImagePreview(null);
+        setLocalFileToUpload(null);
+
+        if (fileInputRef.current) {
+            fileInputRef.current.value = "";
+        }
+    };
 
     const promptMsgNoon = "What is Noon and how can you help me?";
     const promptMsgProto = "I want a prototype of a [product/service] that is [web/mobile/desktop] and does [primary function]; with [feature 1] and [feature 2].";
@@ -36,6 +81,20 @@ export default function HeroChat() {
                 onChange={handleChange}
                 placeholder="What do you need? e.g., &#34;An Airbnb-style booking app.&#34;"
             />
+
+            {localImagePreview && (
+                <div className={styles.imagePreview}>
+                    <img src={localImagePreview} alt="Preview" className="h-20 w-auto rounded-md border border-gray-300" />
+                    <button
+                        onClick={removeImage}
+                        className={styles.imagePreviewDelete}
+                        aria-label="Remove image"
+                        title="Remove image"
+                    >
+                        &times;
+                    </button>
+                </div>
+            )}
 
             <div className={styles.buttons}>
                 <div className={styles.prompts}>
@@ -78,6 +137,29 @@ export default function HeroChat() {
                         />
                         </svg>
                         Prototype
+                    </button>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        ref={fileInputRef}
+                        onChange={handleFileChange}
+                        className="hidden" 
+                    />
+                    <button
+                        onClick={handleUploadAndChatClick}
+                        type="button"
+                        aria-label="Attach image"
+                        title="Attach image"
+                        className={`
+                        p-2 rounded-lg
+                        flex items-center justify-center
+                        transition-colors duration-150
+                        bg-transparent text-white
+                        `}
+                    >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                        </svg>
                     </button>
                 </div>
 
