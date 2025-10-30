@@ -119,7 +119,6 @@ export default function HeroChat() {
                                 fill="currentColor"
                             />
                         </svg>
-                        About Noon
                     </button>
                     <button onClick={() => handlePromptClick(promptMsgProto)}>
                         <svg
@@ -136,7 +135,6 @@ export default function HeroChat() {
                             strokeMiterlimit="10"
                         />
                         </svg>
-                        Prototype
                     </button>
                     <input
                         type="file"
