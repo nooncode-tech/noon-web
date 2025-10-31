@@ -54,14 +54,28 @@ export const useChat = () => {
 
         const loadMessages = async () => {
             setLoading(true);
-            const msgs = await chatService.fetchMessages(conversationId);
-            const mapped = msgs.reduce<Message[]>((acc, cur) => {
-                if (cur.role === "user") acc.push({ question: cur.content, answer: "", questionImageUrl: cur.image_url ?? undefined });
-                else if (cur.role === "bot" && acc.length > 0) acc[acc.length - 1].answer = cur.content;
-                return acc;
-            }, []);
-            setResponses(mapped);
-            setLoading(false);
+            try { 
+                const msgs = await chatService.fetchMessages(conversationId);
+                
+                const mapped = msgs.reduce<Message[]>((acc, cur) => {
+                    if (cur.role === "user") acc.push({ question: cur.content, answer: "", questionImageUrl: cur.image_url ?? undefined });
+                    else if (cur.role === "bot" && acc.length > 0) acc[acc.length - 1].answer = cur.content;
+                    return acc;
+                }, []);
+                setResponses(mapped);
+                
+            } catch (error) {
+                session.clearChatSession();
+                
+                setProfile(null);
+                setConversationId(null);
+                setResponses([]);
+                
+                // Opcional: Podrías cerrarlo o forzar a que el login se muestre.
+                // setOpen(false); 
+            } finally {
+                setLoading(false);
+            }
         };
         
         loadMessages();

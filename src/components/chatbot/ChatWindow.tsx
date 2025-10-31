@@ -1,4 +1,3 @@
-// /components/chatbot/ChatWindow.tsx
 import { useChat } from '@/hooks/useChat';
 import { ChatHeader } from './ChatHeader';
 import { LoginView } from './LoginView';

@@ -20,8 +20,6 @@ export const ChatProvider = ({ children }: { children: ReactNode }) => {
   const [contextMessage, setContextMessage] = useState<string>("");
   const [open, setOpen] = useState(false);
 
-  // Global state for image preview and file to upload so different components (HeroChat, ChatInput, etc.)
-  // can share the selection/preview.
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [fileToUpload, setFileToUpload] = useState<File | null>(null);
 
