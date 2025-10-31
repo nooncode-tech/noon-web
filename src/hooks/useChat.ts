@@ -54,7 +54,14 @@ export const useChat = () => {
 
         const loadMessages = async () => {
             setLoading(true);
-            try { 
+            
+            try {
+                const exists = await chatService.checkConversationExistence(conversationId);
+                
+                if (!exists) {
+                    throw new Error("Conversation not found/deleted by cleanup.");
+                }
+
                 const msgs = await chatService.fetchMessages(conversationId);
                 
                 const mapped = msgs.reduce<Message[]>((acc, cur) => {
@@ -65,14 +72,14 @@ export const useChat = () => {
                 setResponses(mapped);
                 
             } catch (error) {
+                console.error("Error o conversación eliminada. Limpiando sesión:", error);
+                
                 session.clearChatSession();
                 
                 setProfile(null);
                 setConversationId(null);
                 setResponses([]);
                 
-                // Opcional: Podrías cerrarlo o forzar a que el login se muestre.
-                // setOpen(false); 
             } finally {
                 setLoading(false);
             }

@@ -35,7 +35,7 @@ export const fetchMessages = async (conversationId: string) => {
 
     if (error) {
         console.error("Error fetching messages:", error);
-        return [];
+        throw new Error(`Supabase error: ${error.message}`);
     }
 
     return data || [];
@@ -124,4 +124,18 @@ export const getPrototypeCount = async (conversationId: string): Promise<number>
         console.error("Unexpected error fetching prototype count:", err);
         return 0;
     }
+};
+
+export const checkConversationExistence = async (conversationId: string): Promise<boolean> => {
+    const { count, error } = await supabase
+        .from("conversations")
+        .select("id", { count: 'exact', head: true })
+        .eq("id", conversationId);
+        
+    if (error) {
+        console.error("Error checking conversation existence:", error);
+        throw new Error(error.message); 
+    }
+    
+    return (count ?? 0) > 0;
 };
