@@ -95,6 +95,7 @@ export default function Contact() {
                     placeholder="Your Name"
                     value={form.name}
                     onChange={handleChange}
+                    required
                     className="p-3 md:p-4 rounded-md border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500" // Añadí estilos para bg y text
                   />
 
@@ -105,6 +106,7 @@ export default function Contact() {
                     placeholder="Your Email"
                     value={form.email}
                     onChange={handleChange}
+                    required
                     className="p-3 md:p-4 rounded-md border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
 
@@ -115,6 +117,7 @@ export default function Contact() {
                     rows={5} // Establecí un número de filas por defecto
                     value={form.message}
                     onChange={handleChange}
+                    required
                     className="p-3 md:p-4 rounded-md border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500"
                   ></textarea>
 
@@ -126,6 +129,7 @@ export default function Contact() {
                       id="accepted"
                       checked={form.accepted}
                       onChange={handleChange}
+                      required
                       className="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
                     />{" "}
                     {/* ID para checkbox y estilos básicos */}
