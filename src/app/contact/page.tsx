@@ -150,12 +150,12 @@ export default function Contact() {
 
                   {status === "success" && (
                     <p className="text-green-500 mt-2">
-                      ¡Mensaje enviado correctamente!
+                      Message sent successfully!
                     </p>
                   )}
                   {status === "error" && (
                     <p className="text-red-500 mt-2">
-                      Hubo un error al enviar el mensaje.
+                      There was an error sending the message.
                     </p>
                   )}
                 </div>
@@ -231,7 +231,7 @@ export default function Contact() {
                   >
                     <FaInstagram className="size-6" />
                   </Link>
-                  <Link href="#" aria-label="X (Twitter)">
+                  <Link href="https://x.com/home" aria-label="X (Twitter)">
                     <FaXTwitter className="size-6" />
                   </Link>
                 </div>

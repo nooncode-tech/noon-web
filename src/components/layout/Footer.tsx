@@ -69,7 +69,7 @@ const Footer: React.FC = () => {
                   className="hover:text-white text-gray-400 transition-colors duration-200 flex items-center"
                 >
                   <span className="w-2 h-2 bg-gray-400 rounded-full mr-3"></span>
-                  About
+                  About Us
                 </Link>
               </li>
               <li>

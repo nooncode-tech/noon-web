@@ -71,7 +71,7 @@ const teamMembers = [
     name: "Mel Alejandro Rodríguez",
     role: "Business Development Executive (BDE)",
     description:
-      "“Builds relationships and negotiates deals that help Noon grow”",
+      "Builds relationships and negotiates deals that help Noon grow",
     image: "/team/4.png",
   },
   {
@@ -130,7 +130,7 @@ export default function TeamSlider() {
               const status = getOnlineStatus(member.id);
               return (
                 <SwiperSlide key={member.id}>
-                  <div id="team" className="team-member-card bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 h-full flex flex-col items-center justify-between transition-all duration-300 hover:bg-gray-800/50 hover:border-gray-600/50">
+                  <div id="team" className="team-member-card min-h-[625px] bg-gray-800/30 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-6 h-full flex flex-col items-center justify-between transition-all duration-300 hover:bg-gray-800/50 hover:border-gray-600/50">
                     <div className="flex justify-center mb-6">
                       <span className="text-center px-4 py-2 bg-gray-700/50 border border-gray-600/50 rounded-full text-sm text-gray-300 font-medium Riosark">
                         {member.role}

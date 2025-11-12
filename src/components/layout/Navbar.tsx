@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
@@ -27,6 +28,16 @@ const menuItems = [
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Detecta si el item del menú está activo. Para '/' exige coincidencia exacta;
+  // para otras rutas usa startsWith para que '/services' también resalte cuando
+  // el usuario esté en '/services/[slug]'.
+  const isActivePath = (itemPath: string | undefined) => {
+    if (!pathname || !itemPath) return false;
+    if (itemPath === "/") return pathname === "/";
+    return pathname.startsWith(itemPath);
+  };
 
   return (
     <div className="flex align-center justify-center sticky top-0 z-50 w-full px-8 md:px-16 border-b border-[var(--secondary-border-color)] bg-[var(--principal-background-color)] max-w-[2600px] mx-auto">
@@ -49,16 +60,22 @@ const Navbar = () => {
 
         {/* Menú de Navegación Desktop */}
         <ul className="hidden md:flex items-center space-x-6 list-none m-0 p-0">
-          {menuItems.map((item) => (
-            <li key={item.path}>
-              <Link
-                href={item.path}
-                className={`text-white hover:text-gray-200 no-underline transition-colors duration-200 font-medium ${item.className}`}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
+          {menuItems.map((item) => {
+            const active = isActivePath(item.path);
+            return (
+              <li key={item.path}>
+                <Link
+                  href={item.path}
+                  aria-current={active ? "page" : undefined}
+                  className={`text-white hover:text-gray-200 no-underline transition-colors duration-200 font-medium ${item.className ?? ""} ${
+                    active ? "underline underline-offset-4 font-semibold" : ""
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Menú Mobile */}
@@ -110,16 +127,22 @@ const Navbar = () => {
               </div>
 
               <nav className="flex flex-col space-y-2 px-6 py-2">
-                {menuItems.map((item) => (
-                  <Link
-                    key={item.path}
-                    href={item.path}
-                    className="text-white hover:text-gray-200 no-underline py-1 rounded-md hover:bg-gray-700 transition-colors duration-200 font-medium"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+                {menuItems.map((item) => {
+                  const active = isActivePath(item.path);
+                  return (
+                    <Link
+                      key={item.path}
+                      href={item.path}
+                      aria-current={active ? "page" : undefined}
+                      className={`text-white hover:text-gray-200 no-underline py-1 rounded-md hover:bg-gray-700 transition-colors duration-200 font-medium ${
+                        active ? "underline underline-offset-4 font-semibold" : ""
+                      }`}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  );
+                })}
               </nav>
             </div>
           </SheetContent>
