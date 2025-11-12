@@ -53,15 +53,15 @@ export const ChatInput = ({ onSend, userMessage, setUserMessage, imagePreview, s
     return (
         <div
             className={`
-            px-5 py-4 border-t border-[var(--secondary-border-color)] bg-[var(--principal-background-color)]
+            px-5 pt-2 pb-4 border-t border-[var(--secondary-border-color)] bg-[var(--principal-background-color)]
             ${isMobile ? "rounded-none sticky bottom-0 w-full flex-shrink-0" : "rounded-b-3xl"} 
             `}
         >
             {/* Botón de Mensaje Sugerido */}
             {profile && showSuggested && (
-                <div className="flex items-center gap-2 mb-3">
+                <div className="flex items-center gap-1 mb-1">
                     <button
-                        className="bg-white/80 border border-gray-200 text-[var(--principal-button-color)] font-semibold px-4 py-2 rounded-2xl shadow hover:bg-white transition-colors duration-150"
+                        className="bg-white/80 text-sm border border-gray-200 text-[var(--principal-button-color)] font-semibold px-3 py-1 rounded-2xl shadow hover:bg-white transition-colors duration-150"
                         onClick={handleSuggestedClick}
                         type="button"
                     >
