@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, ChangeEvent } from "react";
+import { useState, useRef, ChangeEvent, useEffect, KeyboardEvent } from "react";
 import { useChatContext } from "@/context/ChatContext";
 import styles from "./HeroChat.module.css";
 
@@ -9,41 +9,66 @@ export default function HeroChat() {
     const [localImagePreview, setLocalImagePreview] = useState<string | null>(null);
     const [localFileToUpload, setLocalFileToUpload] = useState<File | null>(null);
 
+    // Referencias
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    // Efecto para auto-ajustar la altura del textarea
+    useEffect(() => {
+        if (textareaRef.current) {
+            // Reseteamos la altura para calcular correctamente al borrar
+            textareaRef.current.style.height = 'auto';
+            // Ajustamos a la altura del contenido
+            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+        }
+    }, [message]);
+
     function handleChange(e: ChangeEvent<HTMLTextAreaElement>) {
         setMessage(e.target.value);
     }
 
+    // Manejar Enter para enviar (sin Shift)
+    function handleKeyDown(e: KeyboardEvent<HTMLTextAreaElement>) {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault(); // Evitar salto de línea
+            handleSend();
+        }
+    }
+
     function handleSend() {
         if (!message.trim() && !localFileToUpload) return;
-        
+
         setGlobalImagePreview(localImagePreview);
         setFileToUpload(localFileToUpload);
-        
-        setOpen(true); 
+
+        setOpen(true);
 
         if (message.trim()) {
             setContextMessage(message);
         } else if (localFileToUpload) {
-            setContextMessage(""); 
+            setContextMessage("");
         }
-        
+
         setMessage("");
         setLocalImagePreview(null);
         setLocalFileToUpload(null);
 
+        // Reseteamos inputs y altura
         if (fileInputRef.current) {
             fileInputRef.current.value = "";
         }
+        if (textareaRef.current) {
+            textareaRef.current.style.height = 'auto';
+        }
     }
-
 
     function handlePromptClick(promptMessage: string) {
         if (localImagePreview) removeImage();
         setContextMessage(promptMessage);
         setMessage(promptMessage);
+        // Al hacer click en un prompt, queremos ir directo al chat o solo llenar el input?
+        // Si solo llena el input, el useEffect ajustará la altura automáticamente.
     }
-
-    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -76,10 +101,22 @@ export default function HeroChat() {
     return (
         <div className={styles.form}>
             <textarea
+                ref={textareaRef}
                 className={styles.textarea}
                 value={message}
                 onChange={handleChange}
+                onKeyDown={handleKeyDown}
                 placeholder="What do you need? e.g., &#34;An Airbnb-style booking app.&#34;"
+                rows={1}
+                // Estilos en línea para asegurar el comportamiento deseado sin modificar el CSS Module ahora mismo
+                style={{
+                    resize: 'none',
+                    overflow: 'hidden', // Oculta scrollbar mientras crece automáticamente
+                    minHeight: '50px', // Ajusta esto según tu diseño base
+                    maxHeight: '200px', // Límite para que no crezca infinitamente
+                    overflowY: 'auto', // Scroll si pasa el maxHeight
+                    fontSize: '16px' // CRUCIAL: 16px evita el zoom en iOS
+                }}
             />
 
             {localImagePreview && (
@@ -128,12 +165,12 @@ export default function HeroChat() {
                             viewBox="0 0 14 18"
                             fill="none"
                         >
-                        <path
-                            d="M3.9 11.89H10.09M3.9 11.89C2.38 10.88 1.38 9.16 1.38 7.2C1.38 4.09 3.89 1.58 6.99 1.58C10.09 1.58 12.61 4.1 12.61 7.2C12.61 9.16 11.61 10.88 10.09 11.89M3.9 11.89V13.74C3.9 14.0161 4.12386 14.24 4.4 14.24H9.59C9.86615 14.24 10.09 14.0161 10.09 13.74V11.89M9.26 14.23C9.26 15.48 8.25 16.49 7 16.49C5.75 16.49 4.74 15.48 4.74 14.23"
-                            stroke="currentColor"
-                            strokeWidth="1.5"
-                            strokeMiterlimit="10"
-                        />
+                            <path
+                                d="M3.9 11.89H10.09M3.9 11.89C2.38 10.88 1.38 9.16 1.38 7.2C1.38 4.09 3.89 1.58 6.99 1.58C10.09 1.58 12.61 4.1 12.61 7.2C12.61 9.16 11.61 10.88 10.09 11.89M3.9 11.89V13.74C3.9 14.0161 4.12386 14.24 4.4 14.24H9.59C9.86615 14.24 10.09 14.0161 10.09 13.74V11.89M9.26 14.23C9.26 15.48 8.25 16.49 7 16.49C5.75 16.49 4.74 15.48 4.74 14.23"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeMiterlimit="10"
+                            />
                         </svg>
                     </button>
                     <input
@@ -141,7 +178,7 @@ export default function HeroChat() {
                         accept="image/*"
                         ref={fileInputRef}
                         onChange={handleFileChange}
-                        className="hidden" 
+                        className="hidden"
                     />
                     <button
                         onClick={handleUploadAndChatClick}
@@ -169,12 +206,12 @@ export default function HeroChat() {
                         stroke="currentColor"
                     >
                         <g transform="rotate(90 12 12)">
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
-                        ></path>
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+                            ></path>
                         </g>
                     </svg>
                 </button>
