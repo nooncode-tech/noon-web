@@ -25,7 +25,7 @@ function getOnlineStatus(memberId: number, date = new Date()) {
     24,
   );
 
-  // Un “offset” único por miembro y por día
+  // Un “offset” único por miembro y por día 
   const startHour = (memberId * 13 + dayOfYear * 7) % totalHours; // 13 y 7 son primos para mejor dispersión
 
   const endHour = (startHour + hoursOnline) % totalHours;
