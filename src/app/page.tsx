@@ -147,11 +147,11 @@ const technologies = [
 
 export default function Home() {
   const [form, setForm] = useState({
-      name: "",
-      email: "",
-      message: "",
-      accepted: false,
-    });
+    name: "",
+    email: "",
+    message: "",
+    accepted: false,
+  });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<null | "success" | "error">(null);
 
@@ -208,21 +208,21 @@ export default function Home() {
   ];
 
   const handleChange = (
-      e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    ) => {
-      const { id, value, type } = e.target;
-      if (type === "checkbox") {
-        setForm((prev) => ({
-          ...prev,
-          [id]: (e.target as HTMLInputElement).checked,
-        }));
-      } else {
-        setForm((prev) => ({
-          ...prev,
-          [id]: value,
-        }));
-      }
-    };
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { id, value, type } = e.target;
+    if (type === "checkbox") {
+      setForm((prev) => ({
+        ...prev,
+        [id]: (e.target as HTMLInputElement).checked,
+      }));
+    } else {
+      setForm((prev) => ({
+        ...prev,
+        [id]: value,
+      }));
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -296,25 +296,6 @@ export default function Home() {
               {/**/}
               {/*   </Link> */}
               {/* </div> */}
-
-              <div className="mt-7">
-                <AvatarGroup>
-                  {AVATARS.map((avatar, index) => (
-                    <Avatar
-                      key={index}
-                      className="w-10 h-10 border-3 border-[var(--principal-button-color)]"
-                    >
-                      <Link href="/about#team">
-                        <AvatarImage src={avatar.src} />
-                        <AvatarFallback>{avatar.fallback}</AvatarFallback>
-                        <AvatarGroupTooltip>
-                          <p>{avatar.tooltip}</p>
-                        </AvatarGroupTooltip>
-                      </Link>
-                    </Avatar>
-                  ))}
-                </AvatarGroup>
-              </div>
 
               <p className="max-w-[600px] text-white text-start text-[12px] mt-6">
                 Backed by 500+ expert developers and a team fully committed to
@@ -662,83 +643,83 @@ export default function Home() {
           </div>
           <div className="w-[100%] md:w-[70%] max-w-[700px] border border-[var(--secondary-border-color)] rounded-xl overflow-hidden p-10">
             <form className="w-full" onSubmit={handleSubmit}>
-                <h1 className="text-2xl md:text-[30px] font-bold Riosark text-white mb-6 md:mb-10 text-center text-start!">
-                  Contact us
-                </h1>{" "}
-                {/* Ajuste de tamaño de fuente y alineación */}
-                <div className="flex flex-col gap-4 text-white">
-                  <label htmlFor="name">Name</label>
+              <h1 className="text-2xl md:text-[30px] font-bold Riosark text-white mb-6 md:mb-10 text-center text-start!">
+                Contact us
+              </h1>{" "}
+              {/* Ajuste de tamaño de fuente y alineación */}
+              <div className="flex flex-col gap-4 text-white">
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  id="name" // Añadí id para el label
+                  placeholder="Your Name"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                  className="p-3 md:p-4 rounded-md border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500" // Añadí estilos para bg y text
+                />
+
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email" // Añadí id para el label
+                  placeholder="Your Email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                  className="p-3 md:p-4 rounded-md border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+
+                <label htmlFor="message">Message</label>
+                <textarea
+                  id="message" // Añadí id para el label
+                  placeholder="Your Message"
+                  rows={5} // Establecí un número de filas por defecto
+                  value={form.message}
+                  onChange={handleChange}
+                  required
+                  className="p-3 md:p-4 rounded-md border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500"
+                ></textarea>
+
+                <span className="flex items-center gap-2 text-sm md:text-base">
+                  {" "}
+                  {/* Alineación y ajuste de tamaño de fuente */}
                   <input
-                    type="text"
-                    id="name" // Añadí id para el label
-                    placeholder="Your Name"
-                    value={form.name}
+                    type="checkbox"
+                    id="accepted"
+                    checked={form.accepted}
                     onChange={handleChange}
                     required
-                    className="p-3 md:p-4 rounded-md border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500" // Añadí estilos para bg y text
-                  />
+                    className="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
+                  />{" "}
+                  {/* ID para checkbox y estilos básicos */}
+                  <label htmlFor="accepted">
+                    I have read and accept the privacy policies
+                  </label>
+                </span>
 
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    id="email" // Añadí id para el label
-                    placeholder="Your Email"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                    className="p-3 md:p-4 rounded-md border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-
-                  <label htmlFor="message">Message</label>
-                  <textarea
-                    id="message" // Añadí id para el label
-                    placeholder="Your Message"
-                    rows={5} // Establecí un número de filas por defecto
-                    value={form.message}
-                    onChange={handleChange}
-                    required
-                    className="p-3 md:p-4 rounded-md border border-[var(--secondary-border-color)] focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  ></textarea>
-
-                  <span className="flex items-center gap-2 text-sm md:text-base">
-                    {" "}
-                    {/* Alineación y ajuste de tamaño de fuente */}
-                    <input
-                      type="checkbox"
-                      id="accepted"
-                      checked={form.accepted}
-                      onChange={handleChange}
-                      required
-                      className="w-4 h-4 text-blue-600 bg-gray-700 border-gray-600 rounded focus:ring-blue-500 focus:ring-2"
-                    />{" "}
-                    {/* ID para checkbox y estilos básicos */}
-                    <label htmlFor="accepted">
-                      I have read and accept the privacy policies
-                    </label>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="principal-button flex gap-3 justify-center items-center mt-4 text-white hover:text-[var(--principal-background-color)]!" // Añadí margin-top al botón
+                >
+                  <span className="text-base">
+                    {loading ? "Enviando..." : "Send Message"}
                   </span>
+                </button>
 
-                  <button
-                    type="submit"
-                    disabled={loading}
-                    className="principal-button flex gap-3 justify-center items-center mt-4 text-white hover:text-[var(--principal-background-color)]!" // Añadí margin-top al botón
-                  >
-                    <span className="text-base">
-                      {loading ? "Enviando..." : "Send Message"}
-                    </span>
-                  </button>
-
-                  {status === "success" && (
-                    <p className="text-green-500 mt-2">
-                      Message sent successfully!
-                    </p>
-                  )}
-                  {status === "error" && (
-                    <p className="text-red-500 mt-2">
-                      There was an error sending the message.
-                    </p>
-                  )}
-                </div>
-              </form>
+                {status === "success" && (
+                  <p className="text-green-500 mt-2">
+                    Message sent successfully!
+                  </p>
+                )}
+                {status === "error" && (
+                  <p className="text-red-500 mt-2">
+                    There was an error sending the message.
+                  </p>
+                )}
+              </div>
+            </form>
           </div>
         </div>
       </section>
